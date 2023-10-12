@@ -2,6 +2,10 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+<<<<<<< HEAD
+      <profile default="true" name="Default" enabled="true" />
+=======
+>>>>>>> 78c8db006851f2cf322f227baea538e4c5ba504f
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -9,9 +13,12 @@
         <module name="TelaLogin" />
       </profile>
     </annotationProcessing>
+<<<<<<< HEAD
+=======
     <bytecodeTargetLevel>
       <module name="TelaLogin" target="17" />
     </bytecodeTargetLevel>
+>>>>>>> 78c8db006851f2cf322f227baea538e4c5ba504f
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
