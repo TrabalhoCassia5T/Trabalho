@@ -1,13 +1,13 @@
-package com.example.TelaLogin;
+package com.example.UnoLibrary;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TelaLoginApplication {
+public class UnoLibraryApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TelaLoginApplication.class, args);
+		SpringApplication.run(UnoLibraryApplication.class, args);
 	}
-
+	
 }

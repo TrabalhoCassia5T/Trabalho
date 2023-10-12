@@ -1,6 +1,6 @@
-package com.example.TelaLogin.BD;
+package com.example.UnoLibrary.BD;
 
-import com.example.TelaLogin.User.User;
+import com.example.UnoLibrary.User.User;
 
 public class Inserir
 {
