@@ -2,11 +2,8 @@ package com.example.TelaLogin.Controllers;
 
 import com.example.TelaLogin.User.User;
 import com.example.TelaLogin.User.UserRepository;
-import com.example.TelaLogin.User.UserRequestDTO;
 import com.example.TelaLogin.User.UserResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
