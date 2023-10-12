@@ -1,4 +1,4 @@
-package com.example.TelaLogin.User;
+package com.example.UnoLibrary.User;
 
 public record UserResponseDTO(Long id, String login,String nomeempresa,String cnpj,String razaosocial,String inscricaoestadual,String email,String site,String cep,String cidade,String uf,String rua,
                               String bairro,String numero,String complemento,String senha,String senhaconfirmada,String logotipoG,String logotipoP)

@@ -1,4 +1,4 @@
-package com.example.TelaLogin.User;
+package com.example.UnoLibrary.User;
 
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
