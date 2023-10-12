@@ -1,9 +1,9 @@
-<<<<<<< HEAD
-package com.example.TelaLogin.Controllers;
+package com.example.UnoLibrary.Controllers;
 
-import com.example.TelaLogin.User.User;
-import com.example.TelaLogin.User.UserRepository;
-import com.example.TelaLogin.User.UserResponseDTO;
+import com.example.UnoLibrary.User.User;
+import com.example.UnoLibrary.User.UserRepository;
+import com.example.UnoLibrary.User.UserResponseDTO;
+import com.example.UnoLibrary.User.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -12,17 +12,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Objects;
-=======
-package com.example.UnoLibrary.Controllers;
 
-import com.example.UnoLibrary.User.User;
-import com.example.UnoLibrary.User.UserRepository;
-import com.example.UnoLibrary.User.UserResponseDTO;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
->>>>>>> 54c8baa97fd34678135dbafd6f8cdbe293aa75c5
 
 @RequestMapping(value = "/api")
 @RestController
@@ -32,19 +23,40 @@ public class UserController
 
     @Autowired
     private UserRepository repository;
+    @Autowired
+    private UserService repo;
+
+    /*@PostMapping(value = "/cadastro")
+    public String saveUser(@RequestParam ("bairro") String bairro, @RequestParam ("cep") String cep,
+                           @RequestParam ("cidade") String cidade,@RequestParam ("cnpj") String cnpj,
+                           @RequestParam ("complemento") String complemento,@RequestParam ("email") String email,
+                           @RequestParam ("inscricaoestadual") String inscricaoestadual, @RequestParam ("login") String login,
+                           @RequestParam ("logotipog") String logotipog,@RequestParam ("logotipop") String logotipop,
+                           @RequestParam ("nomeempresa") String nomeempresa,@RequestParam ("numero") String numero,
+                           @RequestParam ("razaosocial") String razaosocial,@RequestParam ("rua") String rua,
+                           @RequestParam ("senha") String senha,@RequestParam ("senhaconfirmada") String senhaconfirmada,
+                           @RequestParam ("site") String site,@RequestParam ("uf") String uf)
+    {
+        User dados = new User(0,bairro,cep,cidade,cnpj,complemento,email,
+                inscricaoestadual,login,logotipog,logotipop,nomeempresa,numero,razaosocial,rua,senha,senhaconfirmada,site,uf);
+        repo.save(dados);
+        return "Adicionado com sucesso";
+    }*/
 
     @PostMapping(value = "/cadastro")
-<<<<<<< HEAD
+
     public String saveUser(User dados,BindingResult result, RedirectAttributes redirect)
     {
+        this.repo.save(dados);
 
         return "Adicionado com sucesso";
-=======
+    }
+
     public String saveUser(@RequestBody User dados)
     {
 
         return "Cadastrou com Sucesso";
->>>>>>> 54c8baa97fd34678135dbafd6f8cdbe293aa75c5
+
     }
 
     @PostMapping(value = "/verificar-login")
@@ -71,5 +83,6 @@ public class UserController
 
 
 }
+
 
 

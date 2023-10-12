@@ -33,6 +33,28 @@ public class User
     private String logotipog;
     private String logotipop;
 
+    public User(long id, String login, String nomeempresa, String cnpj, String razaosocial, String inscricaoestadual, String email, String site, String cep, String cidade, String uf, String rua, String bairro, String numero, String complemento, String senha, String senhaconfirmada, String logotipog, String logotipop) {
+        this.id = id;
+        this.login = login;
+        this.nomeempresa = nomeempresa;
+        this.cnpj = cnpj;
+        this.razaosocial = razaosocial;
+        this.inscricaoestadual = inscricaoestadual;
+        this.email = email;
+        this.site = site;
+        this.cep = cep;
+        this.cidade = cidade;
+        this.uf = uf;
+        this.rua = rua;
+        this.bairro = bairro;
+        this.numero = numero;
+        this.complemento = complemento;
+        this.senha = senha;
+        this.senhaconfirmada = senhaconfirmada;
+        this.logotipog = logotipog;
+        this.logotipop = logotipop;
+    }
+
     public User (UserRequestDTO data)
     {
         this.login = data.login();
