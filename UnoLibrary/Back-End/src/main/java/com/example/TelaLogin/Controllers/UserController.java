@@ -19,7 +19,7 @@ public class UserController
     @Autowired
     private UserRepository repository;
 
-    @PostMapping(value = "/cadastro")
+    @ModelAttribute(value = "/cadastro")
     public ResponseEntity<Object> saveUser(@RequestBody User dados)
     {
 
