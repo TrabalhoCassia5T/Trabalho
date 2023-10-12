@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 package com.example.UnoLibrary.User;
 
 import com.example.UnoLibrary.User.User;
@@ -5,12 +6,19 @@ import com.example.UnoLibrary.User.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
+=======
+package com.example.TelaLogin.User;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+>>>>>>> Stashed changes
 
 @Service
 public class UserService
 {
     @Autowired
     private UserRepository repository;
+<<<<<<< Updated upstream
     public void save(User user)
     {
         this.repository.save(user);
@@ -31,4 +39,11 @@ public class UserService
     }
 
      */
+=======
+    public void save(User dados)
+    {
+        this.repository.save(dados);
+
+    }
+>>>>>>> Stashed changes
 }

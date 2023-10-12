@@ -1,4 +1,4 @@
-package com.example.UnoLibrary.User;
+package com.example.TelaLogin.User;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
