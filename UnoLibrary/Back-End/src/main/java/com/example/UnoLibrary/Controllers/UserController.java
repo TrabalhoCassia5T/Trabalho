@@ -5,7 +5,9 @@ import com.example.TelaLogin.User.UserRepository;
 import com.example.TelaLogin.User.UserResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Objects;
@@ -19,11 +21,11 @@ public class UserController
     @Autowired
     private UserRepository repository;
 
-    @ModelAttribute(value = "/cadastro")
-    public ResponseEntity<Object> saveUser(@RequestBody User dados)
+    @PostMapping(value = "/cadastro")
+    public String saveUser(User dados,BindingResult result, RedirectAttributes redirect)
     {
 
-        return ResponseEntity.ok(repository.save(dados));
+        return "Adicionado com sucesso";
     }
 
     @PostMapping(value = "/verificar-login")
