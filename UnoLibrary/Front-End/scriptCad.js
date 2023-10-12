@@ -9,9 +9,10 @@ function gravar1() {
                 alert("Cadastrou com Sucesso"); // Exibe o alerta com a mensagem
             }
             else {
-                alert(mens); // Mensagem de sucesso
+                alert(mens); 
+                console(mens);// Mensagem de sucesso
             }
         })
-        .catch(error => document.getElementById("feedback").innerHTML = error);
+        .catch(error => error);
 
 }

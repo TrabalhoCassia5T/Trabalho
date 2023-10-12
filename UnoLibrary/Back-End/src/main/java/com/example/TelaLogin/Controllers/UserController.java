@@ -4,9 +4,11 @@ import com.example.TelaLogin.User.User;
 import com.example.TelaLogin.User.UserRepository;
 import com.example.TelaLogin.User.UserResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RequestMapping(value = "/api")
 @RestController
@@ -18,10 +20,10 @@ public class UserController
     private UserRepository repository;
 
     @PostMapping(value = "/cadastro")
-    public String saveUser(@RequestBody User dados)
+    public ResponseEntity<Object> saveUser(@RequestBody User dados)
     {
 
-        return "Cadastrou com Sucesso";
+        return ResponseEntity.ok(repository.save(dados));
     }
 
     @PostMapping(value = "/verificar-login")
