@@ -2,6 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
+=======
+      <module fileurl="file://$PROJECT_DIR$/UnoLibrary/Back-End/TelaLogin.iml" filepath="$PROJECT_DIR$/UnoLibrary/Back-End/TelaLogin.iml" />
+>>>>>>> 78c8db006851f2cf322f227baea538e4c5ba504f
       <module fileurl="file://$PROJECT_DIR$/.idea/Trabalho.iml" filepath="$PROJECT_DIR$/.idea/Trabalho.iml" />
     </modules>
   </component>
