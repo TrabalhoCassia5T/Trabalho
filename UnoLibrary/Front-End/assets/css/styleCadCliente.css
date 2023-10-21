@@ -134,8 +134,20 @@ input {
 }
 
 .footerLibrary {
-    margin-top: 30px;
+    bottom: 0;
+    left: 0;
+    position: fixed;
     width: 100%;
-    height: 70%;
+    height: 7%;
+    text-align: center;
     background: #A4A4A4;
+}
+
+p {
+    color: #000;
+    font-family: "Inter";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
