@@ -1,28 +1,14 @@
-package com.example.TelaLogin.Controllers;
+package com.example.UnoLibrary.Controllers;
 
-<<<<<<< Updated upstream
-import com.example.UnoLibrary.User.User;
-import com.example.UnoLibrary.User.UserRepository;
-import com.example.UnoLibrary.User.UserResponseDTO;
-import com.example.UnoLibrary.User.UserService;
-=======
-import com.example.TelaLogin.User.User;
-import com.example.TelaLogin.User.UserRepository;
-import com.example.TelaLogin.User.UserResponseDTO;
->>>>>>> Stashed changes
+import com.example.UnoLibrary.Model.User.User;
+import com.example.UnoLibrary.Model.User.UserRepository;
+import com.example.UnoLibrary.Model.User.UserService;
+import com.example.UnoLibrary.Model.User.UserResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import java.util.List;
-import java.util.Objects;
-<<<<<<< Updated upstream
-
-
-=======
->>>>>>> Stashed changes
 
 @RequestMapping(value = "/api")
 @RestController
@@ -52,28 +38,24 @@ public class UserController
         return "Adicionado com sucesso";
     }*/
 
-    @PostMapping(value = "/cadastro")
-<<<<<<< Updated upstream
-
-    public String saveUser(User dados,BindingResult result, RedirectAttributes redirect)
-    {
-        this.repo.save(dados);
-
-        return "Adicionado com sucesso";
-    }
-
-    public String saveUser(@RequestBody User dados)
-    {
-
-        return "Cadastrou com Sucesso";
-
-=======
-    public String saveUser(User dados,BindingResult result, RedirectAttributes redirect)
-    {
-
-        return "Adicionado com sucesso";
->>>>>>> Stashed changes
-    }
+//    @PostMapping(value = "/cadastro")
+//    public String saveUser(User dados,BindingResult result, RedirectAttributes redirect)
+//    {
+//        this.repo.save(dados);
+//
+//        return "Adicionado com sucesso";
+//    }
+//
+//    public String saveUser(@RequestBody User dados) {
+//
+//        return "Cadastrou com Sucesso";
+//    }
+//
+//    public String saveUser(User dados,BindingResult result, RedirectAttributes redirect)
+//    {
+//
+//        return "Adicionado com sucesso";
+//    }
 
     @PostMapping(value = "/verificar-login")
     public String verificalogin(@RequestParam("login")String login,@RequestParam("senha")String senha)

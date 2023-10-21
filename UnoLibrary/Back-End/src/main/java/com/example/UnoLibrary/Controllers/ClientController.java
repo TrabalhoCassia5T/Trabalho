@@ -1,7 +1,7 @@
 package com.example.UnoLibrary.Controllers;
 
-import com.example.UnoLibrary.Client.Client;
-import com.example.UnoLibrary.Client.ClientRepository;
+import com.example.UnoLibrary.Model.Client.Client;
+import com.example.UnoLibrary.Model.Client.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
