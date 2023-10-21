@@ -50,6 +50,10 @@ a:hover {
     color: #6B11C5;
 }
 
+a:active{
+    color: #6B11C5;
+}
+
 .client {
     color: #6B11C5;
 }
