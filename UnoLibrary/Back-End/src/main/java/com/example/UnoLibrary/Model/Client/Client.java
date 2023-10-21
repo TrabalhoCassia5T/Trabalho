@@ -6,23 +6,31 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 
+@Entity
 @Table(name = "clientes")
-@Entity(name = "clientes")
-@Getter
-@NoArgsConstructor
-@EqualsAndHashCode(of = "id")
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  long id;
+    @Column(name = "nome")
     private String nome;
+    @Column(name = "sobrenome")
     private String sobrenome;
+    @Column(name = "telefone")
     private String telefone;
+    @Column(name = "cpf")
     private String cpf;
+    @Column(name = "endereco")
     private String endereco;
+    @Column(name = "cidade")
     private String cidade;
+    @Column(name = "dataNasc")
     private String dataNasc;
+    @Column(name = "email")
     private String email;
+
+    public Client() {
+    }
 
     public Client (ClientRequestDTO data)
     {

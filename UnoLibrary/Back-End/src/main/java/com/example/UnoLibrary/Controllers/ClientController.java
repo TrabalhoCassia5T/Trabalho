@@ -14,10 +14,11 @@ public class ClientController {
     @Autowired
     private ClientRepository repository;
 
-    @PostMapping(value = "/cadastro-cliente")
+        @PostMapping(value = "/cadastro-cliente")
     public ResponseEntity<Object> saveUser(@RequestBody Client dados)
     {
-        // cadastro do usuario
+        //System.out.println(dados.getCpf());
+        repository.save(dados);
         return ResponseEntity.ok().body("ok");
     }
 }
