@@ -4,14 +4,14 @@
 
 CREATE TABLE IF NOT EXISTS public.clientes
 (
-    id integer NOT NULL,
+    id integer NOT NULL DEFAULT nextval('clientes_id_seq'::regclass),
     nome character varying(30) COLLATE pg_catalog."default",
     sobrenome character varying(30) COLLATE pg_catalog."default",
     telefone character varying(30) COLLATE pg_catalog."default",
     cpf character varying(30) COLLATE pg_catalog."default",
     endereco character varying(30) COLLATE pg_catalog."default",
     cidade character varying(30) COLLATE pg_catalog."default",
-    "dataNasc" character varying(30) COLLATE pg_catalog."default",
+    data_nasc character varying(30) COLLATE pg_catalog."default",
     email character varying(30) COLLATE pg_catalog."default",
     CONSTRAINT clientes_pkey1 PRIMARY KEY (id)
 )
