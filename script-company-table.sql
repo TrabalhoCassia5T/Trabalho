@@ -4,7 +4,7 @@
 
 CREATE TABLE IF NOT EXISTS public.empresas
 (
-    id integer NOT NULL,
+    id integer NOT NULL DEFAULT nextval('empresas_id_seq'::regclass),
     login character varying(30) COLLATE pg_catalog."default",
     nomeempresa character varying(30) COLLATE pg_catalog."default",
     cnpj character varying(30) COLLATE pg_catalog."default",

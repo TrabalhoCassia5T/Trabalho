@@ -1,28 +1,34 @@
 package com.example.UnoLibrary.Model.Client;
 
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 
+@Entity
 @Table(name = "clientes")
-@Entity(name = "clientes")
-@Getter
-@NoArgsConstructor
-@EqualsAndHashCode(of = "id")
 public class Client {
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  long id;
+    private Long id;
+    @Column(name = "nome")
     private String nome;
+    @Column(name = "sobrenome")
     private String sobrenome;
+    @Column(name = "telefone")
     private String telefone;
+    @Column(name = "cpf")
     private String cpf;
+    @Column(name = "endereco")
     private String endereco;
+    @Column(name = "cidade")
     private String cidade;
-    private String dataNasc;
+    @Column(name = "data_nasc")
+    private String data_nasc;
+    @Column(name = "email")
     private String email;
+
+    public Client() {
+    }
 
     public Client (ClientRequestDTO data)
     {
@@ -32,15 +38,15 @@ public class Client {
         this.cpf = data.telefone();
         this.endereco = data.endereco();
         this.cidade = data.cidade();
-        this.dataNasc = data.dataNasc();
+        this.data_nasc = data.data_nasc();
         this.email = data.email();
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -92,12 +98,12 @@ public class Client {
         this.cidade = cidade;
     }
 
-    public String getDataNasc() {
-        return dataNasc;
+    public String getdata_nasc() {
+        return data_nasc;
     }
 
-    public void setDataNasc(String dataNasc) {
-        this.dataNasc = dataNasc;
+    public void setdata_nasc(String dataNasc) {
+        this.data_nasc = data_nasc;
     }
 
     public String getEmail() {
