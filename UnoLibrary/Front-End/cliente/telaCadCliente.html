@@ -3,6 +3,7 @@
 
 <head>
     <script src="../scripts/scriptClient.js" type="text/javascript"></script>
+    <script src="../scripts/mascaras.js" type="text/javascript"></script>
     <link rel="stylesheet" href="../assets/css/styleCadCliente.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,42 +38,42 @@
                             <input type="text" id="nome" name="nome" required placeholder="Maria">
                         </div>
                         <div class="containerInput">
-                            <label for="telefone">Telefone:</label>
-                            <input type="text" id="telefone" name="telefone" required placeholder="(xx) xxxxx-xxxx">
+                            <label for="sobrenome">Sobrenome:</label>
+                            <input type="text" id="sobrenome" name="sobrenome" required placeholder="Silva">
                         </div>
                         <div class="containerInput">
                             <label for="endereco">Endereço:</label>
                             <input type="text" id="endereco" name="endereco" placeholder="Rua, Avenida...">
                         </div>
                         <div class="containerInput">
-                            <label for="dataNasc">Data de Nascimento:</label>
-                            <input type="text" id="dataNasc" name="dataNasc" placeholder="01/01/2001">
+                            <label for="cidade">Cidade:</label>
+                            <input type="text" id="cidade" name="cidade" placeholder="Digite sua cidade">
                         </div>
                     </div>
                     <div class="divContent">
                         <div class="containerInput">
-                            <label for="sobrenome">Sobrenome:</label>
-                            <input type="text" id="sobrenome" name="sobrenome" required placeholder="Silva">
+                            <label for="telefone">Telefone:</label>
+                            <input type="text" id="telefone" name="telefone" required placeholder="(xx) xxxxx-xxxx"
+                                onkeypress="mTel()" maxlength="13">
                         </div>
-
                         <div class="containerInput">
                             <label for="cpf">CPF:</label>
-                            <input type="text" id="cpf" name="cpf" placeholder="123.456.789-01">
+                            <input type="text" id="cpf" name="cpf" placeholder="123.456.789-01" onkeypress="mCpf(this)"
+                                maxlength="14" onblur="validarCPF(this)">
                         </div>
-
                         <div class="containerInput">
-                            <label for="cidade">Cidade:</label>
-                            <input type="text" id="cidade" name="cidade" placeholder="Digite sua cidade">
+                            <label for="dataNasc">Data de Nascimento:</label>
+                            <input type="text" id="dataNasc" name="dataNasc" placeholder="01/01/2001">
                         </div>
                         <div class="containerInput">
                             <label for="email">Email:</label>
                             <input type="text" id="email" name="email" placeholder="meu@email.com">
                         </div>
-                    </div>
+                    </div>  
                 </div>
                 <div class="buttons">
                     <button type="button" class="btnCancelar">Cancelar</button>
-                    <input type="submit" value="Confirmar" class="btnConfirmar">
+                    <input type="submit" value="Confirmar" class="btnConfirmar" onclick="gravar()">
                 </div>
             </form>
         </div>

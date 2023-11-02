@@ -2,9 +2,11 @@ package com.example.UnoLibrary.Controllers;
 
 import com.example.UnoLibrary.Model.Client.Client;
 import com.example.UnoLibrary.Model.Client.ClientRepository;
+import com.example.UnoLibrary.Model.Client.ClientRequestDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Optional;
 
@@ -17,9 +19,18 @@ public class ClientController {
     private ClientRepository repository;
 
     @PostMapping(value = "/cadastro-cliente")
-    public ResponseEntity<Object> saveClient(@RequestBody Client dados)
+    public ResponseEntity<Object> saveClient(@RequestParam("nome") String nome,
+                                             @RequestParam("sobrenome") String sobrenome,
+                                             @RequestParam("endereco") String endereco,
+                                             @RequestParam("cidade") String cidade,
+                                             @RequestParam("telefone") String telefone,
+                                             @RequestParam("cpf") String cpf,
+                                             @RequestParam("dataNasc") String dataNasc,
+                                             @RequestParam("email") String email)
     {
-        repository.save(dados);
+        ClientRequestDTO dados = new ClientRequestDTO(nome, sobrenome, telefone, cpf, endereco, cidade, dataNasc, email);
+        Client data = new Client(dados);
+        repository.save(data);
         return ResponseEntity.ok().body("ok");
     }
 
@@ -35,15 +46,10 @@ public class ClientController {
         return ResponseEntity.ok(repository.findAll());
     }
 
-    @GetMapping(value = "/busca-cliente-id/{id}")
-    public ResponseEntity<Object> findById(@PathVariable("id") Long id)
+    @GetMapping(value = "/busca-cliente-nome/{nome}")
+    public ResponseEntity<Object> findById(@PathVariable("nome") String nome)
     {
-        Optional<Client> cliente = repository.findById(id);
-        if(cliente.isEmpty())
-        {
-            return ResponseEntity.badRequest().body("Cliente não encontrado");
-        }
-        return ResponseEntity.ok(cliente.get());
+        return ResponseEntity.ok(repository.findByNome(nome));
     }
 
     @PostMapping("/alterar-cliente")

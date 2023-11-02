@@ -2,10 +2,11 @@ function gravar() {
 
     event.preventDefault();
     const dados = new FormData(document.getElementById("formCadCliente"));
+    dados.append("id", 0);
     fetch("http://localhost:8080/api/cadastro-cliente", { method: 'post', body: dados })
         .then(response => response.text())
         .then(mens => {
-            if (mens === "Cadastrou com Sucesso") {
+            if (mens === "ok") {
                 alert("Cliente cadastrado com sucesso !");
             }
             else {
