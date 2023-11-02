@@ -5,7 +5,7 @@ function gravar1() {
     fetch("http://localhost:8080/api/cadastro", { method: 'post', body: dados })
         .then(response => response.text())
         .then(mens => {
-            if (mens === "Cadastrou com Sucesso") {
+            if (mens === "ok") {
                 alert("Cadastrou com Sucesso"); // Exibe o alerta com a mensagem
             }
             else {
