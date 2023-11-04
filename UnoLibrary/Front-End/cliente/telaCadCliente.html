@@ -11,12 +11,10 @@
 </head>
 
 <body>
-    <!-- INTEGRAR MENU COM OUTRAS TELAS !!!!! -->
     <header>
         <img src="../img/img_software.png" class="imgLogo" />
         <div class="menu">
             <a href="#">HOME</a>
-            <!-- TIRAR A ESTILIZAÇÃO DO CLIENTE !! -->
             <a href="#" class="client">CLIENTE</a>
             <a href="#">EXEMPLARES</a>
             <a href="#">EMPRÉSTIMO</a>
@@ -42,12 +40,18 @@
                             <input type="text" id="sobrenome" name="sobrenome" required placeholder="Silva">
                         </div>
                         <div class="containerInput">
-                            <label for="endereco">Endereço:</label>
-                            <input type="text" id="endereco" name="endereco" placeholder="Rua, Avenida...">
+                            <label for="cpf">CPF:</label>
+                            <input type="text" id="cpf" name="cpf" required placeholder="123.456.789-01"
+                                onkeypress="mCpf(this)" maxlength="14" onblur="validarCPF(this)">
                         </div>
                         <div class="containerInput">
-                            <label for="cidade">Cidade:</label>
-                            <input type="text" id="cidade" name="cidade" placeholder="Digite sua cidade">
+                            <label for="dataNasc">Data de Nascimento:</label>
+                            <input type="text" id="dataNasc" name="dataNasc" placeholder="01/01/2001" maxlength="10"
+                                onkeypress="mascaraData( this, event )">
+                        </div>
+                        <div class="containerInput">
+                            <label for="email">Email:</label>
+                            <input type="text" id="email" name="email" placeholder="meu@email.com">
                         </div>
                     </div>
                     <div class="divContent">
@@ -57,19 +61,23 @@
                                 onkeypress="mTel()" maxlength="13">
                         </div>
                         <div class="containerInput">
-                            <label for="cpf">CPF:</label>
-                            <input type="text" id="cpf" name="cpf" placeholder="123.456.789-01" onkeypress="mCpf(this)"
-                                maxlength="14" onblur="validarCPF(this)">
+                            <label for="endereco">Endereço:</label>
+                            <input type="text" id="endereco" name="endereco" placeholder="Rua, Avenida...">
                         </div>
                         <div class="containerInput">
-                            <label for="dataNasc">Data de Nascimento:</label>
-                            <input type="text" id="dataNasc" name="dataNasc" placeholder="01/01/2001">
+                            <label for="uf">Estado:</label>
+                            <input type="text" id="uf" name="uf" placeholder="SP">
                         </div>
                         <div class="containerInput">
-                            <label for="email">Email:</label>
-                            <input type="text" id="email" name="email" placeholder="meu@email.com">
+                            <label for="cep">CEP:</label>
+                            <input type="text" id="cep" name="cep" placeholder="19500-000" onkeypress="mCEP()"
+                                maxlength="9">
                         </div>
-                    </div>  
+                        <div class="containerInput">
+                            <label for="cidade">Cidade:</label>
+                            <input type="text" id="cidade" name="cidade" placeholder="Digite sua cidade">
+                        </div>
+                    </div>
                 </div>
                 <div class="buttons">
                     <button type="button" class="btnCancelar">Cancelar</button>

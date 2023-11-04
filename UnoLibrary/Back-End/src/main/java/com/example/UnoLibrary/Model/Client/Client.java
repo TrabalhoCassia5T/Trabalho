@@ -103,7 +103,7 @@ public class Client {
     }
 
     public void setdata_nasc(String dataNasc) {
-        this.data_nasc = data_nasc;
+        this.data_nasc = dataNasc;
     }
 
     public String getEmail() {

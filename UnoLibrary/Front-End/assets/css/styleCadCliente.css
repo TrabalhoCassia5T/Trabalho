@@ -160,3 +160,8 @@ p {
     font-weight: 400;
     line-height: normal;
 }
+
+.requiredField {
+    display: flex;
+    flex-direction: row;
+}
