@@ -26,6 +26,11 @@ public class Client {
     private String data_nasc;
     @Column(name = "email")
     private String email;
+    @Column(name = "estado")
+    private String estado;
+    @Column(name = "cep")
+    private String cep;
+
 
     public Client() {
     }
@@ -35,11 +40,13 @@ public class Client {
         this.nome = data.nome();
         this.sobrenome = data.sobrenome();
         this.telefone = data.telefone();
-        this.cpf = data.telefone();
+        this.cpf = data.cpf();
         this.endereco = data.endereco();
         this.cidade = data.cidade();
         this.data_nasc = data.data_nasc();
         this.email = data.email();
+        this.cep = data.cep();
+        this.estado = data.estado();
     }
 
     public Long getId() {
@@ -103,7 +110,7 @@ public class Client {
     }
 
     public void setdata_nasc(String dataNasc) {
-        this.data_nasc = data_nasc;
+        this.data_nasc = dataNasc;
     }
 
     public String getEmail() {

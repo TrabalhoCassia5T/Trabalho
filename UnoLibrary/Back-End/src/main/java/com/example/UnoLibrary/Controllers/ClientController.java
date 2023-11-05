@@ -6,9 +6,7 @@ import com.example.UnoLibrary.Model.Client.ClientRequestDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Optional;
 
 @RequestMapping(value = "/api")
 @RestController
@@ -21,21 +19,24 @@ public class ClientController {
     @PostMapping(value = "/cadastro-cliente")
     public ResponseEntity<Object> saveClient(@RequestParam("nome") String nome,
                                              @RequestParam("sobrenome") String sobrenome,
-                                             @RequestParam("endereco") String endereco,
-                                             @RequestParam("cidade") String cidade,
-                                             @RequestParam("telefone") String telefone,
                                              @RequestParam("cpf") String cpf,
                                              @RequestParam("dataNasc") String dataNasc,
-                                             @RequestParam("email") String email)
+                                             @RequestParam("email") String email,
+                                             @RequestParam("telefone") String telefone,
+                                             @RequestParam("endereco") String endereco,
+                                             @RequestParam("uf") String estado,
+                                             @RequestParam("cep") String cep,
+                                             @RequestParam("cidade") String cidade)
     {
-        ClientRequestDTO dados = new ClientRequestDTO(nome, sobrenome, telefone, cpf, endereco, cidade, dataNasc, email);
+        System.out.println(cpf);
+        ClientRequestDTO dados = new ClientRequestDTO(nome, sobrenome, telefone, cpf, endereco, cidade, dataNasc, email, cep, estado);
         Client data = new Client(dados);
         repository.save(data);
         return ResponseEntity.ok().body("ok");
     }
 
-    @GetMapping(value = "/busca-cliente-cpf/{cpf}")
-    public ResponseEntity<Object> findByCpf(@PathVariable("cpf") String cpf)
+    @GetMapping(value = "/busca-cliente-cpf")
+    public ResponseEntity<Object> findByCpf(@RequestParam("cpf") String cpf)
     {
         return ResponseEntity.ok(repository.findByCpf(cpf));
     }
@@ -46,8 +47,8 @@ public class ClientController {
         return ResponseEntity.ok(repository.findAll());
     }
 
-    @GetMapping(value = "/busca-cliente-nome/{nome}")
-    public ResponseEntity<Object> findById(@PathVariable("nome") String nome)
+    @GetMapping(value = "/busca-cliente-nome")
+    public ResponseEntity<Object> findById(@RequestParam("nome") String nome)
     {
         return ResponseEntity.ok(repository.findByNome(nome));
     }
