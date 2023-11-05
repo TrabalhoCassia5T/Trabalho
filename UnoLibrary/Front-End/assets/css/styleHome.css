@@ -25,10 +25,44 @@ header {
 }
 
 .menu {
-    width: 80%;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-around;
+    list-style: none;
+}
+
+.menu li {
+    position: relative;
+}
+
+.menu li a {
+    color: #333;
+    text-decoration: none;
+    padding: 5px 10px;
+    display: block;
+}
+
+.menu li a:hover {
+    color: #6B11C5;
+}
+
+.menu li ul {
+    position: absolute;
+    top: 25px;
+    left: 0;
+    background-color: #D9D9D9;
+    display: none;
+}
+
+.menu li:hover ul,
+.menu li.over ul {
+    display: block;
+}
+
+.menu li ul li {
+    display: block;
+    width: 150px;
 }
 
 .profile {
