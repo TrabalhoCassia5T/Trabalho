@@ -1,15 +1,21 @@
+CREATE TABLE IF NOT EXISTS Endereco (
+	"end_id" SERIAL PRIMARY KEY,
+	"end_rua" VARCHAR(45) NOT NULL,
+	"end_numero" VARCHAR(45) NOT NULL,
+	"end_bairro" VARCHAR(45) NOT NULL,
+	"end_cep" VARCHAR(45) NOT NULL,
+	"end_cidade" VARCHAR(45) NOT NULL,
+	"end_uf" VARCHAR(45) NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS Pessoa (
   "pes_id" SERIAL PRIMARY KEY,
+  "end_id" INT NOT NULL,
   "pes_nome" VARCHAR(45) NOT NULL,
-  "pes_cidade" VARCHAR(45) NOT NULL,
-  "pes_estado" VARCHAR(45) NOT NULL,
-  "pes_endereco" VARCHAR(45) NOT NULL,
   "pes_telefone" VARCHAR(45) NOT NULL,
-  "pes_bairro" VARCHAR(45) NOT NULL,
-  "pes_cep" VARCHAR(45) NOT NULL,
-  "pes_uf" VARCHAR(45) NOT NULL,
   "pes_email" VARCHAR(45) NOT NULL,
-  "pes_url" VARCHAR(45) NOT NULL
+  "pes_url" VARCHAR(45) NOT NULL,
+  FOREIGN KEY ("end_id") REFERENCES Endereco ("end_id")
 );
 
 CREATE TABLE IF NOT EXISTS Fisica (
@@ -46,14 +52,6 @@ CREATE TABLE IF NOT EXISTS Funcionario (
   FOREIGN KEY ("Fisica_fis_id") REFERENCES Fisica ("fis_id")
 );
 
-CREATE TABLE IF NOT EXISTS Contato (
-  "cont_id" SERIAL PRIMARY KEY,
-  "Pessoa_pes_id" INT NOT NULL,
-  "cont_telefone" VARCHAR(45) NOT NULL,
-  "cont_email" VARCHAR(45) NOT NULL,
-  FOREIGN KEY ("Pessoa_pes_id") REFERENCES Pessoa ("pes_id")
-);
-
 CREATE TABLE IF NOT EXISTS Titulo (
   "tit_id" SERIAL PRIMARY KEY,
   "tit_nome" VARCHAR(45) NOT NULL,
@@ -71,10 +69,11 @@ CREATE TABLE IF NOT EXISTS Autor (
 
 CREATE TABLE IF NOT EXISTS Editora (
   "edit_id" SERIAL PRIMARY KEY,
+	"end_id" INT NOT NULL,
   "edit_telefone" VARCHAR(45) NOT NULL,
   "edit_email" VARCHAR(45) NOT NULL,
   "edit_qtdeLivros" INT NOT NULL,
-  "edit_end" VARCHAR(45) NOT NULL
+	FOREIGN KEY ("end_id") REFERENCES Endereco ("end_id")
 );
 
 CREATE TABLE IF NOT EXISTS Titulo_Autor (
@@ -250,4 +249,51 @@ CREATE TABLE IF NOT EXISTS Encomenda_Titulo (
 );
 
 CREATE TABLE IF NOT EXISTS Parametrizacao (
+	"pam_id" SERIAL PRIMARY KEY,
+	"end_id" INT NOT NULL,
+	"pam_nomeFantasia" VARCHAR(45) NOT NULL,
+  	"pam_razaoSocial" VARCHAR(45) NOT NULL,
+	"pam_site" VARCHAR(45) NOT NULL,
+	"pam_email" VARCHAR(45) NOT NULL,
+	"pam_cnpj" VARCHAR(45) NOT NULL,
+	"pam_inscEstadual" VARCHAR(45) NOT NULL,
+	"pam_logotipoGrande" VARCHAR(45) NOT NULL,
+	"pam_logotipoPeq" VARCHAR(45) NOT NULL,
+	"pam_login" VARCHAR(45) NOT NULL,
+	"pam_senha" VARCHAR(45) NOT NULL,
+	FOREIGN KEY ("end_id") REFERENCES Endereco ("end_id")
 );
+
+
+-------------------------- Só para caso queiramos reiniciar o banco ---------------------------------
+/*
+DROP TABLE IF EXISTS Fisica CASCADE;
+DROP TABLE IF EXISTS autor CASCADE;
+DROP TABLE IF EXISTS editora CASCADE;
+DROP TABLE IF EXISTS pessoa CASCADE;
+DROP TABLE IF EXISTS titulo CASCADE;
+DROP TABLE IF EXISTS Juridica CASCADE;
+DROP TABLE IF EXISTS Cliente CASCADE;
+DROP TABLE IF EXISTS Funcionario CASCADE;
+DROP TABLE IF EXISTS Contato CASCADE;
+DROP TABLE IF EXISTS Titulo_Autor CASCADE;
+DROP TABLE IF EXISTS Titulo_Editora CASCADE;
+DROP TABLE IF EXISTS Exemplar CASCADE;
+DROP TABLE IF EXISTS Usuario CASCADE;
+DROP TABLE IF EXISTS Empréstimo CASCADE;
+DROP TABLE IF EXISTS Emprestimo_Exemplar CASCADE;
+DROP TABLE IF EXISTS Recebimento CASCADE;
+DROP TABLE IF EXISTS Renovação CASCADE;
+DROP TABLE IF EXISTS Baixa CASCADE;
+DROP TABLE IF EXISTS Selecao CASCADE;
+DROP TABLE IF EXISTS Reserva CASCADE;
+DROP TABLE IF EXISTS SolicitarTitulo CASCADE;
+DROP TABLE IF EXISTS Item_Solicitacao CASCADE;
+DROP TABLE IF EXISTS Pedido CASCADE;
+DROP TABLE IF EXISTS Comprar CASCADE;
+DROP TABLE IF EXISTS Item_Pedido CASCADE;
+DROP TABLE IF EXISTS Item_Compra CASCADE;
+DROP TABLE IF EXISTS Encomenda_Titulo CASCADE;
+DROP TABLE IF EXISTS Parametrizacao CASCADE;
+DROP TABLE IF EXISTS Endereco CASCADE;
+*/
