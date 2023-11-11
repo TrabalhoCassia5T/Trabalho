@@ -25,29 +25,29 @@ CREATE TABLE IF NOT EXISTS Fisica (
   "fis_est_civil" VARCHAR(45) NOT NULL,
   "fis_sexo" VARCHAR(45) NOT NULL,
   "pessoa_pes_id" INT NOT NULL,
-  FOREIGN KEY ("Pessoa_pes_id") REFERENCES Pessoa ("pes_id")
+  FOREIGN KEY ("pessoa_pes_id") REFERENCES Pessoa ("pes_id")
 );
 
 CREATE TABLE IF NOT EXISTS Juridica (
   "jur_id" SERIAL PRIMARY KEY,
   "jur_cnpj" VARCHAR(45) NOT NULL,
   "jur_razaoSocial" VARCHAR(45) NOT NULL,
-  "Pessoa_pes_id" INT NOT NULL,
-  FOREIGN KEY ("Pessoa_pes_id") REFERENCES Pessoa ("pes_id")
+  "pessoa_pes_id" INT NOT NULL,
+  FOREIGN KEY ("pessoa_pes_id") REFERENCES Pessoa ("pes_id")
 );
 
 CREATE TABLE IF NOT EXISTS Cliente (
   "cli_id" SERIAL PRIMARY KEY,
   "cli_data" DATE NOT NULL,
   "fisica_fis_id" INT,
-  FOREIGN KEY ("Fisica_fis_id") REFERENCES Fisica ("fis_id"),
+  FOREIGN KEY ("fisica_fis_id") REFERENCES Fisica ("fis_id")
 );
 
 CREATE TABLE IF NOT EXISTS Funcionario (
   "func_id" SERIAL PRIMARY KEY,
   "func_cargo" VARCHAR(45) NOT NULL,
-  "Fisica_fis_id" INT NOT NULL,
-  FOREIGN KEY ("Fisica_fis_id") REFERENCES Fisica ("fis_id")
+  "fisica_fis_id" INT NOT NULL,
+  FOREIGN KEY ("fisica_fis_id") REFERENCES Fisica ("fis_id")
 );
 
 CREATE TABLE IF NOT EXISTS Titulo (
