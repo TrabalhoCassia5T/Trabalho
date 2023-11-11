@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <script src="../scripts/scriptClient.js" type="text/javascript"></script>
+    <script src="../scripts/mascaras.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="../assets/css/styleAltCliente.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alteração de Cliente</title>
+</head>
+
+<body>
+    <header>
+        <img src="../img/img_software.png" class="imgLogo" />
+        <nav>
+            <ul class="menu">
+                <li><a href="../home/index.html">HOME</a></li>
+                <li><a href="#" class="client">CLIENTE</a>
+                    <ul>
+                        <li><a href="../cliente/telaCadCliente.html">Cadastrar Cliente</a></li>
+                        <li><a href="../cliente/telaBuscaCliente.html">Buscar Cliente</a></li>
+                        <li><a href="../cliente/telaAlterarCliente.html">Alterar Cliente</a></li>
+                        <li><a href="../cliente/telaExcluirCliente.html">Excluir Cliente</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">EXEMPLARES</a></li>
+                <li><a href="#">EMPRÉSTIMO</a></li>
+                <li><a href="#">BAIXA</a></li>
+                <li><a href="#">EFETUAR ENTRADA</a></li>
+                <li><a href="#">RELATÓRIOS</a></li>
+            </ul>
+        </nav>
+        <div class="profile"><a href="#"><img src="../img/Edit Profile.png" /></a></div>
+    </header>
+
+    <div class="container">
+        <p class="tittle">Alterar Cliente</p>
+        <div class="containerForm">
+            <form method="post" id="formBuscaCliente" enctype="multipart/form-data" class="formBusca">
+                <h3>Pesquisa:</h3>
+                <div class="filtros">
+                    <div class="containerInput">
+                        <label for="cpf">CPF: </label>
+                        <input type="text" id="cpf" name="cpf" required placeholder="123.456.789-01"
+                            onkeypress="mCpf(this)" maxlength="14" onblur="validarCPF(this)">
+                    </div>
+                    <div>
+                        <button class="buttonWrapper" onclick="BuscaAlteracao()">Buscar</button>
+                    </div>
+                </div>
+            </form>
+            <div class="tableWrapper">
+                <form method="post" id="formAltCliente" enctype="multipart/form-data" onsubmit="" class="formAlt">
+                    <div class="formContent">
+                        <div class="divContent">
+                            <div class="containerInputAlt">
+                                <label for="nome">Nome:</label>
+                                <input type="text" id="nome" name="nome" required placeholder="Maria">
+                            </div>
+                            <div class="containerInputAlt">
+                                <label for="sobrenome">Sobrenome:</label>
+                                <input type="text" id="sobrenome" name="sobrenome" required placeholder="Silva">
+                            </div>
+                            <div class="containerInputAlt">
+                                <label for="cpf">CPF:</label>
+                                <input type="text" id="cpf" name="cpf" required placeholder="123.456.789-01"
+                                    onkeypress="mCpf(this)" maxlength="14" onblur="validarCPF(this)">
+                            </div>
+                            <div class="containerInputAlt">
+                                <label for="dataNasc">Data de Nascimento:</label>
+                                <input type="text" id="dataNasc" name="dataNasc" placeholder="01/01/2001" maxlength="10"
+                                    onkeypress="mascaraData( this, event )">
+                            </div>
+                            <div class="containerInputAlt">
+                                <label for="email">Email:</label>
+                                <input type="text" id="email" name="email" placeholder="meu@email.com">
+                            </div>
+                        </div>
+                        <div class="divContent">
+                            <div class="containerInputAlt">
+                                <label for="telefone">Telefone:</label>
+                                <input type="text" id="telefone" name="telefone" required placeholder="(xx) xxxxx-xxxx"
+                                    onkeypress="mTel()" maxlength="14">
+                            </div>
+                            <div class="containerInputAlt">
+                                <label for="endereco">Endereço:</label>
+                                <input type="text" id="endereco" name="endereco" placeholder="Rua, Avenida...">
+                            </div>
+                            <div class="containerInputAlt">
+                                <label for="uf">Estado:</label>
+                                <input type="text" id="uf" name="uf" placeholder="SP">
+                            </div>
+                            <div class="containerInputAlt">
+                                <label for="cep">CEP:</label>
+                                <input type="text" id="cep" name="cep" placeholder="19500-000" onkeypress="mCEP()"
+                                    maxlength="9">
+                            </div>
+                            <div class="containerInputAlt">
+                                <label for="cidade">Cidade:</label>
+                                <input type="text" id="cidade" name="cidade" placeholder="Digite sua cidade">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <button type="button" class="btnCancelar">Cancelar</button>
+                        <input type="submit" value="Confirmar" class="btnConfirmar" onclick="gravar()">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="footerLibrary">
+        <p>@UNOLIBRARY</p>
+    </div>
+</body>
+
+</html>
