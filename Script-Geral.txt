@@ -21,10 +21,10 @@ CREATE TABLE IF NOT EXISTS Pessoa (
 CREATE TABLE IF NOT EXISTS Fisica (
   "fis_id" SERIAL PRIMARY KEY,
   "fis_cpf" VARCHAR(45) NOT NULL,
-  "fis_dataNasc" DATE NOT NULL,
-  "fis_estCivil" VARCHAR(45) NOT NULL,
+  "fis_data_nasc" DATE NOT NULL,
+  "fis_est_civil" VARCHAR(45) NOT NULL,
   "fis_sexo" VARCHAR(45) NOT NULL,
-  "Pessoa_pes_id" INT NOT NULL,
+  "pessoa_pes_id" INT NOT NULL,
   FOREIGN KEY ("Pessoa_pes_id") REFERENCES Pessoa ("pes_id")
 );
 
@@ -39,10 +39,8 @@ CREATE TABLE IF NOT EXISTS Juridica (
 CREATE TABLE IF NOT EXISTS Cliente (
   "cli_id" SERIAL PRIMARY KEY,
   "cli_data" DATE NOT NULL,
-  "Fisica_fis_id" INT,
-  "Juridica_jur_id" INT,
+  "fisica_fis_id" INT,
   FOREIGN KEY ("Fisica_fis_id") REFERENCES Fisica ("fis_id"),
-  FOREIGN KEY ("Juridica_jur_id") REFERENCES Juridica ("jur_id")
 );
 
 CREATE TABLE IF NOT EXISTS Funcionario (
