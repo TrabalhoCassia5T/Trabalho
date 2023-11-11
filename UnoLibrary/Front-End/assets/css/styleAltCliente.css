@@ -138,7 +138,7 @@ label {
     line-height: normal;
 }
 
-input {
+input, select {
     flex-basis: calc(33.33% - 10px);
     border: 1px solid #000;
     background: #FFF;
@@ -234,6 +234,7 @@ button:hover {
 
 .divContent {
     width: 50%;
+    margin-right: 2rem;
 }
 
 .buttons {

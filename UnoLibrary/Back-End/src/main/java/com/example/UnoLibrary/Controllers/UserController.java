@@ -1,6 +1,10 @@
 package com.example.UnoLibrary.Controllers;
 
+import com.example.UnoLibrary.Model.DTOs.UserRequestDTO;
+import com.example.UnoLibrary.Model.DTOs.UserResponseDTO;
 import com.example.UnoLibrary.Model.User.*;
+import com.example.UnoLibrary.Model.entity.User;
+import com.example.UnoLibrary.Model.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

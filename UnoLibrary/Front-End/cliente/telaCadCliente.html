@@ -41,12 +41,21 @@
                 <div class="formContent">
                     <div class="divContent">
                         <div class="containerInput">
-                            <label for="nome">Nome:</label>
+                            <label for="nome">Nome Completo:</label>
                             <input type="text" id="nome" name="nome" required placeholder="Maria">
                         </div>
                         <div class="containerInput">
-                            <label for="sobrenome">Sobrenome:</label>
-                            <input type="text" id="sobrenome" name="sobrenome" required placeholder="Silva">
+                            <label for="telefone">Telefone:</label>
+                            <input type="text" id="telefone" name="telefone" required placeholder="(xx) xxxxx-xxxx"
+                                onkeypress="mTel()" maxlength="14">
+                        </div>
+                        <div class="containerInput">
+                            <label for="email">Email:</label>
+                            <input type="text" id="email" name="email" placeholder="meu@email.com">
+                        </div>
+                        <div class="containerInput">
+                            <label for="url">Url:</label>
+                            <input type="text" id="url" name="url" placeholder="linkdln.com/MariaSilva">
                         </div>
                         <div class="containerInput">
                             <label for="cpf">CPF:</label>
@@ -59,19 +68,36 @@
                                 onkeypress="mascaraData( this, event )">
                         </div>
                         <div class="containerInput">
-                            <label for="email">Email:</label>
-                            <input type="text" id="email" name="email" placeholder="meu@email.com">
+                            <label for="estCivil">Estado Civil:</label>
+                            <select id="estCivil" name="estCivil">
+                                <option value="Solteiro">Solteiro</option>
+                                <option value="Casado">Casado</option>
+                                <option value="Divorciado">Divorciado</option>
+                                <option value="Viúvo">Viúvo</option>
+                                <option value="Outro">Outro</option>
+                            </select>
                         </div>
                     </div>
                     <div class="divContent">
                         <div class="containerInput">
-                            <label for="telefone">Telefone:</label>
-                            <input type="text" id="telefone" name="telefone" required placeholder="(xx) xxxxx-xxxx"
-                                onkeypress="mTel()" maxlength="14">
+                            <label for="sexo">Sexo:</label>
+                            <select id="sexo" name="sexo">
+                                <option value="Masculino">Masculino</option>
+                                <option value="Feminino">Feminino</option>
+                                <option value="Prefiro não identificar">Prefiro não identificar</option>
+                            </select>
                         </div>
                         <div class="containerInput">
-                            <label for="endereco">Endereço:</label>
-                            <input type="text" id="endereco" name="endereco" placeholder="Rua, Avenida...">
+                            <label for="rua">Rua:</label>
+                            <input type="text" id="rua" name="rua" placeholder="Rua, Avenida...">
+                        </div>
+                        <div class="containerInput">
+                            <label for="numero">Numero:</label>
+                            <input type="text" id="numero" name="numero" placeholder="10">
+                        </div>
+                        <div class="containerInput">
+                            <label for="bairro">Bairro:</label>
+                            <input type="text" id="bairro" name="bairro" placeholder="Centro">
                         </div>
                         <div class="containerInput">
                             <label for="uf">Estado:</label>

@@ -2,7 +2,7 @@ function gravar() {
 
     event.preventDefault();
     const dados = new FormData(document.getElementById("formCadCliente"));
-    dados.append("id", 0);
+    // dados.append("id", 0);
     fetch("http://localhost:8080/api/cadastro-cliente", { method: 'post', body: dados })
         .then(response => response.text())
         .then(mens => {
@@ -20,13 +20,15 @@ function gravar() {
 
 function limparForm() {
     document.getElementById("nome").value = "";
-    document.getElementById("sobrenome").value = "";
+    document.getElementById("url").value = "";
     document.getElementById("cpfForm").value = "";
     document.getElementById("cpf").value = "";
     document.getElementById("dataNasc").value = "";
     document.getElementById("email").value = "";
     document.getElementById("telefone").value = "";
-    document.getElementById("endereco").value = "";
+    document.getElementById("rua").value = "";
+    document.getElementById("bairro").value = "";
+    document.getElementById("numero").value = "";
     document.getElementById("uf").value = "";
     document.getElementById("cep").value = "";
     document.getElementById("cidade").value = "";
@@ -65,10 +67,12 @@ function buscar() {
                 console.log('Resultado da busca por nome:', data);
                 let ac = "";
                 for (let res of data) {
-                    ac += `<tr><td>${res.id}</td> <td>${res.nome + " " + res.sobrenome}</td>
+                    ac += `<tr><td>${res.id}</td> <td>${res.nome}</td>
                     <td>${res.cpf}</td> <td>${res.email}</td>
+                    <td>${res.url}</td>
+                    <td>${res.estado_civil}</td>
                     <td>${res.telefone}</td>
-                    <td>${res.endereco + "-" + res.cidade}</td></tr>`
+                    <td>${res.rua+ ","+ res.numero+"-"+res.cidade}</td></tr>`
                 }
                 var TableBody = document.getElementById("tb");
                 TableBody.innerHTML = ac;
@@ -83,12 +87,12 @@ function buscar() {
                 .then(data => {
                     console.log('Resultado da busca por cpf:', data);
                     let ac = "";
-                    for (let res of data) {
-                        ac += `<tr><td>${res.id}</td> <td>${res.nome + " " + res.sobrenome}</td>
-                    <td>${res.cpf}</td> <td>${res.email}</td>
-                    <td>${res.telefone}</td>
-                    <td>${res.endereco + "-" + res.cidade}</td></tr>`
-                    }
+                        ac += `<tr><td>${data.id}</td> <td>${data.nome}</td>
+                        <td>${data.cpf}</td> <td>${data.email}</td>
+                        <td>${data.url}</td>
+                        <td>${data.estado_civil}</td>
+                        <td>${data.telefone}</td>
+                        <td>${data.rua+ ","+ data.numero+"-"+data.cidade}</td></tr>`
                     var TableBody = document.getElementById("tb");
                     TableBody.innerHTML = ac;
                 })
@@ -102,10 +106,12 @@ function buscar() {
                     console.log('Resultado da busca de todos:', data);
                     let ac = "";
                     for (let res of data) {
-                        ac += `<tr><td>${res.id}</td> <td>${res.nome + " " + res.sobrenome}</td>
-                    <td>${res.cpf}</td> <td>${res.email}</td>
-                    <td>${res.telefone}</td>
-                    <td>${res.endereco + "-" + res.cidade}</td></tr>`
+                        ac += `<tr><td>${res.id}</td> <td>${res.nome}</td>
+                        <td>${res.cpf}</td> <td>${res.email}</td>
+                        <td>${res.url}</td>
+                        <td>${res.estado_civil}</td>
+                        <td>${res.telefone}</td>
+                        <td>${res.rua+ ","+ res.numero+"-"+res.cidade}</td></tr>`
                     }
                     var TableBody = document.getElementById("tb");
                     TableBody.innerHTML = ac;
@@ -207,22 +213,40 @@ function exibirAlerta(mensagem) {
     document.body.appendChild(alertDiv);
 }
 
+function transformDateFormat(inputDate) {
+    // Split the input date into an array [yyyy, mm, dd]
+    var dateArray = inputDate.split("-");
+    
+    // Rearrange the array elements to [dd, mm, yyyy]
+    var transformedDateArray = [dateArray[2], dateArray[1], dateArray[0]];
+    
+    // Join the array elements with '/' to get the desired format
+    var transformedDate = transformedDateArray.join("/");
+    
+    return transformedDate;
+}
+
 function BuscaAlteracao() {
     event.preventDefault();
-    const cpf = document.getElementById("cpf").value;
+    const cpf = document.getElementById("cpfForm").value;
     buscaCpf(cpf)
         .then(data => {
             console.log('Resultado da busca por cpf:', data);
-            document.getElementById("nome").value = data[0].nome;
-            document.getElementById("sobrenome").value = data[0].sobrenome;
-            document.getElementById("cpfForm").value = data[0].cpf;
-            document.getElementById("dataNasc").value = data[0].data_nasc;
-            document.getElementById("email").value = data[0].email;
-            document.getElementById("telefone").value = data[0].telefone;
-            document.getElementById("endereco").value = data[0].endereco;
-            document.getElementById("uf").value = data[0].estado;
-            document.getElementById("cep").value = data[0].cep;
-            document.getElementById("cidade").value = data[0].cidade;
+            document.getElementById("nome").value = data.nome;
+            document.getElementById("url").value = data.url;
+            document.getElementById("estCivil").value = data.estado_civil;
+            document.getElementById("sexo").value = data.sexo;
+            document.getElementById("cpfForm").value = data.cpf;
+            document.getElementById("cpf").value = data.cpf;
+            document.getElementById("dataNasc").value = transformDateFormat(data.data_nasc.split("T")[0]);
+            document.getElementById("email").value = data.email;
+            document.getElementById("telefone").value = data.telefone;
+            document.getElementById("rua").value = data.rua;
+            document.getElementById("uf").value = data.uf;
+            document.getElementById("cep").value = data.cep;
+            document.getElementById("numero").value = data.numero;
+            document.getElementById("bairro").value = data.bairro;
+            document.getElementById("cidade").value = data.cidade;
         })
         .catch(error => {
             console.error('Ocorreu um erro:', error);
@@ -235,8 +259,8 @@ function Exclusao() {
 
     buscaCpf(cpf)
         .then(data => {
-            if (data[0] !== undefined) {
-                exibirAlertaExclusao(`Certeza que deseja excluir o cliente ${data[0].nome} da sua 
+            if (data !== undefined) {
+                exibirAlertaExclusao(`Certeza que deseja excluir o cliente ${data.nome} da sua 
             base de dados ?`, data)
             }
             else {
@@ -247,7 +271,7 @@ function Exclusao() {
 }
 
 function exclusaoConfirmada(data) {
-    fetch(`http://localhost:8080/api/apagar-cliente/${data[0].id}`)
+    fetch(`http://localhost:8080/api/apagar-cliente/${data.id}`)
         .then(response => response.text())
         .then(mens => {
             if (mens === "ok") {
