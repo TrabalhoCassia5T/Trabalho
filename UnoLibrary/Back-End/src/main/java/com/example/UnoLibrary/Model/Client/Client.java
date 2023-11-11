@@ -35,8 +35,7 @@ public class Client {
     public Client() {
     }
 
-    public Client (ClientRequestDTO data)
-    {
+    public Client(ClientRequestDTO data) {
         this.nome = data.nome();
         this.sobrenome = data.sobrenome();
         this.telefone = data.telefone();
@@ -45,8 +44,8 @@ public class Client {
         this.cidade = data.cidade();
         this.data_nasc = data.data_nasc();
         this.email = data.email();
-        this.cep = data.cep();
         this.estado = data.estado();
+        this.cep = data.cep();
     }
 
     public Long getId() {
@@ -105,20 +104,36 @@ public class Client {
         this.cidade = cidade;
     }
 
-    public String getdata_nasc() {
-        return data_nasc;
-    }
-
-    public void setdata_nasc(String dataNasc) {
-        this.data_nasc = dataNasc;
-    }
-
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getData_nasc() {
+        return data_nasc;
+    }
+
+    public void setData_nasc(String data_nasc) {
+        this.data_nasc = data_nasc;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
     }
 }
 

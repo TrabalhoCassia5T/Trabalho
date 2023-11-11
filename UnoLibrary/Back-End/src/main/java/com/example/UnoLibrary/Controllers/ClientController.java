@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequestMapping(value = "/api")
 @RestController
 @CrossOrigin
@@ -51,7 +53,7 @@ public class ClientController {
         return ResponseEntity.ok(repository.findByNome(nome));
     }
 
-    @PostMapping("/alterar-cliente")
+    @PutMapping("/alterar-cliente")
     public ResponseEntity<Object> updateClient(@RequestParam("nome") String nome,
                                                @RequestParam("sobrenome") String sobrenome,
                                                 @RequestParam("cpf") String cpf,
@@ -65,7 +67,9 @@ public class ClientController {
     {
         ClientRequestDTO dados = new ClientRequestDTO(nome, sobrenome, telefone, cpf, endereco, cidade, dataNasc, email, cep, estado);
         Client data = new Client(dados);
-        repository.save(data)
+        List<Client> client = repository.findByCpf(cpf);
+        repository.deleteById(client.get(0).getId());
+        repository.save(data);
         return ResponseEntity.ok().body("Cliente alterado");
     }
 

@@ -11,7 +11,7 @@ public class Alterar {
         sql=sql.replace("$3", dados.getTelefone());
         sql=sql.replace("$4",dados.getEndereco());
         sql=sql.replace("$5",dados.getCidade());
-        sql=sql.replace("$6", dados.getdata_nasc());
+        sql=sql.replace("$6", dados.getData_nasc());
         sql=sql.replace("$7", dados.getEmail());
 
         return sql;

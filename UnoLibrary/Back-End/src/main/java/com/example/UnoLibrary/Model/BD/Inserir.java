@@ -13,6 +13,6 @@ public class Inserir
     }
 
     public void inserirCliente(Client dados) {
-        sql = "INSERT INTO clientes(id, nome, sobrenome, telefone, cpf, endereco, cidade, data_nasc, email) value (dados)";
+        sql = "INSERT INTO clientes(id, nome, sobrenome, telefone, cpf, endereco, cidade, data_nasc, email, ) value (dados)";
     }
 }
