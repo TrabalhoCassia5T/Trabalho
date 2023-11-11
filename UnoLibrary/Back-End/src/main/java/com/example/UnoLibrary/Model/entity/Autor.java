@@ -2,6 +2,8 @@ package com.example.UnoLibrary.Model.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name="autor")
 public class Autor {
@@ -15,6 +17,9 @@ public class Autor {
     private String nacionalidade;
     @Column(name="aut_desc")
     private String desc;
+    @OneToMany(mappedBy = "autor")
+    private List<TituloAutor> autores;
+
 
     public Autor() {
     }

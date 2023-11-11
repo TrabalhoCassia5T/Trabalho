@@ -75,17 +75,17 @@ CREATE TABLE IF NOT EXISTS Editora (
 );
 
 CREATE TABLE IF NOT EXISTS Titulo_Autor (
+  "tit_aut_id" SERIAL PRIMARY KEY,
   "Titulo_tit_id" INT NOT NULL,
   "Autor_aut_id" INT NOT NULL,
-  PRIMARY KEY ("Titulo_tit_id", "Autor_aut_id"),
   FOREIGN KEY ("Titulo_tit_id") REFERENCES Titulo ("tit_id"),
   FOREIGN KEY ("Autor_aut_id") REFERENCES Autor ("aut_id")
 );
 
 CREATE TABLE IF NOT EXISTS Titulo_Editora (
+  "tit_edi_id" SERIAL PRIMARY KEY,
   "Titulo_tit_id" INT NOT NULL,
   "Editora_edit_id" INT NOT NULL,
-  PRIMARY KEY ("Titulo_tit_id", "Editora_edit_id"),
   FOREIGN KEY ("Titulo_tit_id") REFERENCES Titulo ("tit_id"),
   FOREIGN KEY ("Editora_edit_id") REFERENCES Editora ("edit_id")
 );
