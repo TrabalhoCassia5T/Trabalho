@@ -7,7 +7,7 @@ function mCpf() {
     event.target.value = cpf;
 }
 
-function mTel() { //telefone fixo
+function mTel() { 
     var tel = event.target.value;
     tel = tel.replace(/\D/g, "")
     tel = tel.replace(/^(\d)/, "($1")

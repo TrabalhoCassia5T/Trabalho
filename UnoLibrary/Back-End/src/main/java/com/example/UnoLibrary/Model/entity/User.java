@@ -1,5 +1,6 @@
-package com.example.UnoLibrary.Model.User;
+package com.example.UnoLibrary.Model.entity;
 
+import com.example.UnoLibrary.Model.DTOs.UserRequestDTO;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

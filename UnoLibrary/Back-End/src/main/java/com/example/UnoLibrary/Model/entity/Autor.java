@@ -15,8 +15,8 @@ public class Autor {
     private String nacionalidade;
     @Column(name="aut_desc")
     private String desc;
-    @ManyToMany(mappedBy = "autores", fetch = FetchType.LAZY)
-    private List<Titulo> titulos;
+//    @ManyToMany(mappedBy = "autores", fetch = FetchType.LAZY)
+//    private List<Titulo> titulos;
 
     public Autor() {
     }

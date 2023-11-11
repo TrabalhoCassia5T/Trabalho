@@ -1,4 +1,6 @@
 package com.example.UnoLibrary.Model.User;
+import com.example.UnoLibrary.Model.entity.User;
+import com.example.UnoLibrary.Model.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

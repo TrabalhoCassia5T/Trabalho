@@ -4,10 +4,10 @@
 <head>
     <script src="../scripts/scriptClient.js" type="text/javascript"></script>
     <script src="../scripts/mascaras.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="../assets/css/styleBuscaCliente.css">
+    <link rel="stylesheet" href="../assets/css/styleExclusaoCliente.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Busca de Cliente</title>
+    <title>Alteração de Cliente</title>
 </head>
 
 <body>
@@ -21,7 +21,7 @@
                         <li><a href="../cliente/telaCadCliente.html">Cadastrar Cliente</a></li>
                         <li><a href="../cliente/telaBuscaCliente.html">Buscar Cliente</a></li>
                         <li><a href="../cliente/telaAlterarCliente.html">Alterar Cliente</a></li>
-                        <li><a href="../cliente/telaExcluirCliente.html">Excluir Cliente</a></li>
+                        <li><a href="../cliente//telaExcluirCliente.html">Excluir Cliente</a></li>
                     </ul>
                 </li>
                 <li><a href="#">EXEMPLARES</a></li>
@@ -35,44 +35,22 @@
     </header>
 
     <div class="container">
-        <p class="tittle">Busca Cliente</p>
+        <p class="tittle">Excluir Cliente</p>
         <div class="containerForm">
-            <form method="post" id="formBuscaCliente" enctype="multipart/form-data">
-                <h3>Filtros:</h3>
+            <form method="post" id="formExcluirCliente" enctype="multipart/form-data">
+                <h3>Digite o cpf de quem deseja excluir:</h3>
                 <div class="filtros">
-                    <div class="containerInput">
-                        <label for="nome">Nome: </label>
-                        <input type="text" id="nome" name="nome" placeholder="Maria">
-                    </div>
                     <div class="containerInput">
                         <label for="cpf">CPF: </label>
                         <input type="text" id="cpf" name="cpf" required placeholder="123.456.789-01"
                             onkeypress="mCpf(this)" maxlength="14" onblur="validarCPF(this)">
                     </div>
                     <div>
-                        <button class="buttonWrapper" onclick="buscar()">Buscar</button>
+                        <button class="buttonWrapper" onclick="Exclusao()">Buscar</button>
                     </div>
                 </div>
             </form>
-            <div class="tableWrapper">
-                <table border="2">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Nome Completo</th>
-                            <th>CPF</th>
-                            <th>Email</th>
-                            <th>Url</th>
-                            <th>Estado Civil</th>
-                            <th>Telefone</th>
-                            <th>Endereco</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tb">
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        </div>    
     </div>
     <div class="footerLibrary">
         <p>@UNOLIBRARY</p>
