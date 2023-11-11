@@ -2,6 +2,8 @@ package com.example.UnoLibrary.Model.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name="editora")
 public class Editora {
@@ -17,6 +19,9 @@ public class Editora {
     private int quantidade;
     @Column(name="edit_end")
     private String endereco;
+    @OneToMany(mappedBy = "editora")
+    private List<TituloEditora> emprestados;
+
 
     public Editora() {
     }
