@@ -2,7 +2,7 @@ package com.example.UnoLibrary.Controllers;
 
 import com.example.UnoLibrary.Model.DTOs.CorporacaoRequestDTO;
 import com.example.UnoLibrary.Model.DTOs.CorporacaoResponseDTO;
-import com.example.UnoLibrary.Model.User.*;
+import com.example.UnoLibrary.Model.Corporacao.*;
 import com.example.UnoLibrary.Model.entity.Corporacao;
 import com.example.UnoLibrary.Model.repository.CorporacaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class CorporacaoController
     @Autowired
     private CorporacaoRepository repository;
     @Autowired
-    private UserService repo;
+    private CorporacaoService repo;
 
     @PostMapping(value = "/cadastro")
     public ResponseEntity<Object> saveUser(@RequestParam ("bairro") String bairro, @RequestParam ("cep") String cep,
