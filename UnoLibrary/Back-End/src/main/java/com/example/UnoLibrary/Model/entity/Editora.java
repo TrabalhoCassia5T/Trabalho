@@ -11,22 +11,33 @@ public class Editora {
     @Column(name="edit_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name="edit_nome")
+    private String nome;
     @Column(name="edit_telefone")
     private String telefone;
     @Column(name="edit_email")
     private String email;
-    @Column(name="edit_qtdeLivros")
+    @Column(name="edit_qtde_livros")
     private int quantidade;
-    @Column(name="edit_end")
-    private String endereco;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "end_id", referencedColumnName = "end_id")
+    private Endereco endereco;
     @OneToMany(mappedBy = "editora")
-    private List<TituloEditora> emprestados;
+    private List<TituloEditora> titulos;
 
 
     public Editora() {
     }
 
-    public Editora(Long id, String telefone, String email, int quantidade, String endereco) {
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public Editora(Long id, String telefone, String email, String nome, int quantidade, Endereco endereco) {
         this.id = id;
         this.telefone = telefone;
         this.email = email;
@@ -66,11 +77,11 @@ public class Editora {
         this.quantidade = quantidade;
     }
 
-    public String getEndereco() {
+    public Endereco getEndereco() {
         return endereco;
     }
 
-    public void setEndereco(String endereco) {
+    public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
 }

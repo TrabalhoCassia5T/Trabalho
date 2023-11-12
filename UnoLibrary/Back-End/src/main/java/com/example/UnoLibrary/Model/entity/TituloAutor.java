@@ -10,10 +10,10 @@ public class TituloAutor {
     @Column(name="tit_aut_id")
     private Long id;
     @ManyToOne
-    @JoinColumn(name = "Titulo_aut_id", referencedColumnName = "aut_id")
+    @JoinColumn(name = "autor_aut_id", referencedColumnName = "aut_id")
     private Autor autor;
     @ManyToOne
-    @JoinColumn(name = "Titulo_tit_id", referencedColumnName = "tit_id")
+    @JoinColumn(name = "titulo_tit_id", referencedColumnName = "tit_id")
     private Titulo titulo;
 
     public TituloAutor() {

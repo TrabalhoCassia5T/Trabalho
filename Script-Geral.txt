@@ -68,6 +68,7 @@ CREATE TABLE IF NOT EXISTS Autor (
 CREATE TABLE IF NOT EXISTS Editora (
   "edit_id" SERIAL PRIMARY KEY,
 	"end_id" INT NOT NULL,
+	"edit_nome" VARCHAR(45) NOT NULL,
   "edit_telefone" VARCHAR(45) NOT NULL,
   "edit_email" VARCHAR(45) NOT NULL,
   "edit_qtdeLivros" INT NOT NULL,
@@ -76,26 +77,26 @@ CREATE TABLE IF NOT EXISTS Editora (
 
 CREATE TABLE IF NOT EXISTS Titulo_Autor (
   "tit_aut_id" SERIAL PRIMARY KEY,
-  "Titulo_tit_id" INT NOT NULL,
-  "Autor_aut_id" INT NOT NULL,
-  FOREIGN KEY ("Titulo_tit_id") REFERENCES Titulo ("tit_id"),
-  FOREIGN KEY ("Autor_aut_id") REFERENCES Autor ("aut_id")
+  "titulo_tit_id" INT NOT NULL,
+  "autor_aut_id" INT NOT NULL,
+  FOREIGN KEY ("titulo_tit_id") REFERENCES Titulo ("tit_id"),
+  FOREIGN KEY ("autor_aut_id") REFERENCES Autor ("aut_id")
 );
 
 CREATE TABLE IF NOT EXISTS Titulo_Editora (
   "tit_edi_id" SERIAL PRIMARY KEY,
-  "Titulo_tit_id" INT NOT NULL,
-  "Editora_edit_id" INT NOT NULL,
-  FOREIGN KEY ("Titulo_tit_id") REFERENCES Titulo ("tit_id"),
-  FOREIGN KEY ("Editora_edit_id") REFERENCES Editora ("edit_id")
+  "titulo_tit_id" INT NOT NULL,
+  "editora_edit_id" INT NOT NULL,
+  FOREIGN KEY ("titulo_tit_id") REFERENCES Titulo ("tit_id"),
+  FOREIGN KEY ("editora_edit_id") REFERENCES Editora ("edit_id")
 );
 
 CREATE TABLE IF NOT EXISTS Exemplar (
   "exe_id" SERIAL PRIMARY KEY,
   "exe_status" VARCHAR(45) NOT NULL,
   "exe_data_entrada" DATE NOT NULL,
-  "Titulo_tit_id" INT NOT NULL,
-  FOREIGN KEY ("Titulo_tit_id") REFERENCES Titulo ("tit_id")
+  "titulo_tit_id" INT NOT NULL,
+  FOREIGN KEY ("titulo_tit_id") REFERENCES Titulo ("tit_id")
 );
 
 CREATE TABLE IF NOT EXISTS Usuario (

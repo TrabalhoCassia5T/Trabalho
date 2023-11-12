@@ -11,10 +11,10 @@ public class TituloEditora {
     @Column(name="tit_edi_id")
     private Long id;
     @ManyToOne
-    @JoinColumn(name = "Titulo_tit_id", referencedColumnName = "tit_id")
+    @JoinColumn(name = "titulo_tit_id", referencedColumnName = "tit_id")
     private Titulo titulo;
     @ManyToOne
-    @JoinColumn(name = "Editora_edit_id", referencedColumnName = "edit_id")
+    @JoinColumn(name = "editora_edit_id", referencedColumnName = "edit_id")
     private Editora editora;
 
     public TituloEditora() {
