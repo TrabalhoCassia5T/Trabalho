@@ -1,6 +1,6 @@
 package com.example.UnoLibrary.Model.User;
-import com.example.UnoLibrary.Model.entity.User;
-import com.example.UnoLibrary.Model.repository.UserRepository;
+import com.example.UnoLibrary.Model.entity.Corporacao;
+import com.example.UnoLibrary.Model.repository.CorporacaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 public class UserService
 {
     @Autowired
-    private UserRepository repository;
+    private CorporacaoRepository repository;
 //    public void save(User user)
 //    {
 //        this.repository.save(user);
@@ -26,7 +26,7 @@ public class UserService
 //        this.repository.save(bairro,cep,cidade,cnpj,complemento,email,inscricaoestadual,login,logotipog,logotipop,nomeempresa,numero,razaosocial,rua,senha,senhaconfirmada,site,uf);
 //
 //    }
-    public void save(User dados)
+    public void save(Corporacao dados)
     {
         this.repository.save(dados);
 
