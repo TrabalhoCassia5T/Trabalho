@@ -1,6 +1,6 @@
 package com.example.UnoLibrary.Model.entity;
 
-import com.example.UnoLibrary.Model.DTOs.UserRequestDTO;
+import com.example.UnoLibrary.Model.DTOs.CorporacaoRequestDTO;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class User
+public class Corporacao
 {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  long id;
@@ -34,7 +34,7 @@ public class User
     private String logotipog;
     private String logotipop;
 
-    public User(long id, String login, String nomeempresa, String cnpj, String razaosocial, String inscricaoestadual, String email, String site, String cep, String cidade, String uf, String rua, String bairro, String numero, String complemento, String senha, String senhaconfirmada, String logotipog, String logotipop) {
+    public Corporacao(long id, String login, String nomeempresa, String cnpj, String razaosocial, String inscricaoestadual, String email, String site, String cep, String cidade, String uf, String rua, String bairro, String numero, String complemento, String senha, String senhaconfirmada, String logotipog, String logotipop) {
         this.id = id;
         this.login = login;
         this.nomeempresa = nomeempresa;
@@ -56,7 +56,7 @@ public class User
         this.logotipop = logotipop;
     }
 
-    public User (UserRequestDTO data)
+    public Corporacao(CorporacaoRequestDTO data)
     {
         this.login = data.login();
         this.nomeempresa = data.nomeempresa();
