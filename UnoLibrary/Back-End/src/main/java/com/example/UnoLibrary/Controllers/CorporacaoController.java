@@ -1,10 +1,10 @@
 package com.example.UnoLibrary.Controllers;
 
-import com.example.UnoLibrary.Model.DTOs.UserRequestDTO;
-import com.example.UnoLibrary.Model.DTOs.UserResponseDTO;
+import com.example.UnoLibrary.Model.DTOs.CorporacaoRequestDTO;
+import com.example.UnoLibrary.Model.DTOs.CorporacaoResponseDTO;
 import com.example.UnoLibrary.Model.User.*;
-import com.example.UnoLibrary.Model.entity.User;
-import com.example.UnoLibrary.Model.repository.UserRepository;
+import com.example.UnoLibrary.Model.entity.Corporacao;
+import com.example.UnoLibrary.Model.repository.CorporacaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,11 +14,11 @@ import java.util.List;
 @RequestMapping(value = "/api")
 @RestController
 @CrossOrigin
-public class UserController
+public class CorporacaoController
 {
 
     @Autowired
-    private UserRepository repository;
+    private CorporacaoRepository repository;
     @Autowired
     private UserService repo;
 
@@ -34,9 +34,9 @@ public class UserController
                                            @RequestParam ("site") String site, @RequestParam ("uf") String uf)
     {
         String senha = "teste", senhaconfirmada = "teste", login = "empresaTeste";
-        UserRequestDTO data = new UserRequestDTO(login, nomeempresa, cnpj, razaosocial, inscricaoestadual,
+        CorporacaoRequestDTO data = new CorporacaoRequestDTO(login, nomeempresa, cnpj, razaosocial, inscricaoestadual,
                 email, site, cep, cidade, uf, rua, bairro, numero, complemento, senha, senhaconfirmada, logotipog.getName(), logotipop.getName());
-        User dados = new User(data);
+        Corporacao dados = new Corporacao(data);
         repo.save(dados);
         return ResponseEntity.ok().body("ok");
     }
@@ -44,7 +44,7 @@ public class UserController
     @PostMapping(value = "/verificar-login")
     public String verificalogin(@RequestParam("login")String login,@RequestParam("senha")String senha)
     {
-        List<UserResponseDTO> userlist = repository.findAll().stream().map(UserResponseDTO::new).toList();
+        List<CorporacaoResponseDTO> userlist = repository.findAll().stream().map(CorporacaoResponseDTO::new).toList();
         for(int i = 0; i< userlist.size();i++)
         {
             if(userlist.get(i).login().equals(login))
@@ -55,10 +55,10 @@ public class UserController
 
 
     @GetMapping
-    public List<UserResponseDTO> getall()
+    public List<CorporacaoResponseDTO> getall()
     {
         System.out.println("entrou aqui3");
-        List<UserResponseDTO> userlist = repository.findAll().stream().map(UserResponseDTO::new).toList();
+        List<CorporacaoResponseDTO> userlist = repository.findAll().stream().map(CorporacaoResponseDTO::new).toList();
 
         return userlist;
     }
