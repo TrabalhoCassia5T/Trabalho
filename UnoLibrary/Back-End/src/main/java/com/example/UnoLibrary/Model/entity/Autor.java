@@ -11,7 +11,7 @@ public class Autor {
     @Column(name="aut_id")
     @GeneratedValue(strategy =GenerationType.IDENTITY)
     private Long id;
-    @Column(name="aut_name")
+    @Column(name="aut_nome")
     private String nome;
     @Column(name="aut_nacionalidade")
     private String nacionalidade;
