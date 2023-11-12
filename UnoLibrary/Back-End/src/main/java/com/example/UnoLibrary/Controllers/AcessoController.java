@@ -1,11 +1,11 @@
 package com.example.UnoLibrary.Controllers;
 
+import com.example.UnoLibrary.Model.entity.Exemplar;
+import com.example.UnoLibrary.Model.repository.ExemplarRepository;
 import com.example.UnoLibrary.Seguranca.JWTTokenProvider;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 //Alterar
 
@@ -23,5 +23,28 @@ public class AcessoController {
         }
         else
             return ResponseEntity.badRequest().body("Usuario não autenticado");
+    }
+
+    @RestController
+    @RequestMapping("/api/exemplar")
+    public static class ExemplarController {
+        @Autowired
+        private ExemplarRepository repo;
+        @PostMapping("cadastrar")
+        public ResponseEntity<Object> incluir(@RequestBody Exemplar exemplar) {
+            return ResponseEntity.ok(repo.save(exemplar));
+        }
+        @GetMapping("buscar")
+        public ResponseEntity<Object> buscarTodos() {
+            return ResponseEntity.ok(repo.findAll());
+        }
+        @PostMapping("alterar")
+        public ResponseEntity<Object> alterar(@RequestBody Exemplar exemplar) {
+            return ResponseEntity.ok(repo.save(exemplar));
+        }
+        @GetMapping("excluir/{id}")
+        public void apagar(@PathVariable Long id) {
+            repo.deleteById(id);
+        }
     }
 }

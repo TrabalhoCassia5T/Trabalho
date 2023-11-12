@@ -3,9 +3,11 @@ package com.example.UnoLibrary.Model.entity;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name="titulo_editora")
-public class TituloEditora {
+public class TituloEditora implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="tit_edi_id")
