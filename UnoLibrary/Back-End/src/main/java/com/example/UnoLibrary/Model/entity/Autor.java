@@ -2,11 +2,12 @@ package com.example.UnoLibrary.Model.entity;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name="autor")
-public class Autor {
+public class Autor implements Serializable {
     @Id
     @Column(name="aut_id")
     @GeneratedValue(strategy =GenerationType.IDENTITY)
@@ -17,8 +18,8 @@ public class Autor {
     private String nacionalidade;
     @Column(name="aut_desc")
     private String desc;
-    @OneToMany(mappedBy = "autor")
-    private List<TituloAutor> autores;
+    @ManyToMany(mappedBy = "autores", fetch = FetchType.LAZY)
+    private List<Titulo> titulo;
 
 
     public Autor() {
