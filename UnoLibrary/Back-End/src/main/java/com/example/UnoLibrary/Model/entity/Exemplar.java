@@ -16,7 +16,7 @@ public class Exemplar {
     @Column(name="exe_data_entrada")
     private LocalDate dataEntrada;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="tit_id")
+    @JoinColumn(name="titulo_tit_id")
     private Titulo titulo;
 
     public Exemplar(Long id, String status, LocalDate dataEntrada) {

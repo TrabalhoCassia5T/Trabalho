@@ -22,6 +22,9 @@ public class Endereco {
     @Column(name = "end_uf")
     private String end_uf;
 
+    @OneToOne(mappedBy = "endereco")
+    private Editora editora;
+
     public Endereco() {
     }
 
