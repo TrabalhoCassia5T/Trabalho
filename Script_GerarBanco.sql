@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS Fisica (
 CREATE TABLE IF NOT EXISTS Juridica (
   "jur_id" SERIAL PRIMARY KEY,
   "jur_cnpj" VARCHAR(45) NOT NULL,
-  "jur_razaoSocial" VARCHAR(45) NOT NULL,
+  "jur_razao_social" VARCHAR(45) NOT NULL,
   "pessoa_pes_id" INT NOT NULL,
   FOREIGN KEY ("pessoa_pes_id") REFERENCES Pessoa ("pes_id")
 );
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS Editora (
 	"edit_nome" VARCHAR(45) NOT NULL,
   "edit_telefone" VARCHAR(45) NOT NULL,
   "edit_email" VARCHAR(45) NOT NULL,
-  "edit_qtdeLivros" INT NOT NULL,
+  "edit_qtde_livros" INT NOT NULL,
 	FOREIGN KEY ("end_id") REFERENCES Endereco ("end_id")
 );
 
@@ -110,44 +110,44 @@ CREATE TABLE IF NOT EXISTS Usuario (
   FOREIGN KEY ("funcionario_func_id") REFERENCES Funcionario ("func_id")
 );
 
-CREATE TABLE IF NOT EXISTS Empréstimo (
+CREATE TABLE IF NOT EXISTS Emprestimo (
   "emp_id" SERIAL PRIMARY KEY,
-  "Cliente_cli_id" INT NOT NULL,
+  "cliente_cli_id" INT NOT NULL,
   "emp_data" DATE NOT NULL,
   "emp_prev_devolucao" DATE NOT NULL,
-  "Usuario_Funcionario_func_id" INT NOT NULL,
-  "empE_status" VARCHAR(45) NOT NULL,
-  FOREIGN KEY ("Cliente_cli_id") REFERENCES Cliente ("cli_id"),
-  FOREIGN KEY ("Usuario_Funcionario_func_id") REFERENCES Usuario ("Funcionario_func_id")
+  "usuario_funcionario_func_id" INT NOT NULL,
+  "emp_status" VARCHAR(45) NOT NULL,
+  FOREIGN KEY ("cliente_cli_id") REFERENCES Cliente ("cli_id"),
+  FOREIGN KEY ("usuario_funcionario_func_id") REFERENCES Usuario ("funcionario_func_id")
 );
 
 CREATE TABLE IF NOT EXISTS Emprestimo_Exemplar (
-  "Empréstimo_emp_id" INT NOT NULL,
-  "Exemplar_exe_id" INT NOT NULL,
-  "empE_data_dvlv" DATE NOT NULL,
-  PRIMARY KEY ("Empréstimo_emp_id", "Exemplar_exe_id"),
-  FOREIGN KEY ("Empréstimo_emp_id") REFERENCES Empréstimo ("emp_id"),
-  FOREIGN KEY ("Exemplar_exe_id") REFERENCES Exemplar ("exe_id")
+  "emprestimo_emp_id" INT NOT NULL,
+  "exemplar_exe_id" INT NOT NULL,
+  "emp_data_dvlv" DATE NOT NULL,
+  PRIMARY KEY ("emprestimo_emp_id", "exemplar_exe_id"),
+  FOREIGN KEY ("emprestimo_emp_id") REFERENCES Emprestimo ("emp_id"),
+  FOREIGN KEY ("exemplar_exe_id") REFERENCES Exemplar ("exe_id")
 );
 
 CREATE TABLE IF NOT EXISTS Recebimento (
   "rec_id" SERIAL PRIMARY KEY,
   "rec_valor" DOUBLE PRECISION NOT NULL,
   "rec_data" DATE NOT NULL,
-  "Empréstimo_emp_id" INT NOT NULL,
-  "Usuario_Funcionario_func_id" INT NOT NULL,
-  FOREIGN KEY ("Empréstimo_emp_id") REFERENCES Empréstimo ("emp_id"),
-  FOREIGN KEY ("Usuario_Funcionario_func_id") REFERENCES Usuario ("Funcionario_func_id")
+  "emprestimo_emp_id" INT NOT NULL,
+  "usuario_funcionario_func_id" INT NOT NULL,
+  FOREIGN KEY ("emprestimo_emp_id") REFERENCES Emprestimo ("emp_id"),
+  FOREIGN KEY ("usuario_funcionario_func_id") REFERENCES Usuario ("funcionario_func_id")
 );
 
-CREATE TABLE IF NOT EXISTS Renovação (
+CREATE TABLE IF NOT EXISTS Renovacao (
   "ren_id" SERIAL PRIMARY KEY,
-  "Emprestimo_Exemplar_Empréstimo_emp_id" INT NOT NULL,
-  "Emprestimo_Exemplar_Exemplar_exe_id" INT NOT NULL,
+  "emprestimo_exemplar_emprestimo_emp_id" INT NOT NULL,
+  "emprestimo_exemplar_exemplar_exe_id" INT NOT NULL,
   "ren_data_prev_devolucao" DATE NOT NULL,
-  "Usuario_Funcionario_func_id" INT NOT NULL,
-  FOREIGN KEY ("Emprestimo_Exemplar_Empréstimo_emp_id", "Emprestimo_Exemplar_Exemplar_exe_id") REFERENCES Emprestimo_Exemplar ("Empréstimo_emp_id", "Exemplar_exe_id"),
-  FOREIGN KEY ("Usuario_Funcionario_func_id") REFERENCES Usuario ("Funcionario_func_id")
+  "usuario_funcionario_func_id" INT NOT NULL,
+  FOREIGN KEY ("emprestimo_exemplar_emprestimo_emp_id", "emprestimo_exemplar_exemplar_exe_id") REFERENCES Emprestimo_Exemplar ("emprestimo_emp_id", "exemplar_exe_id"),
+  FOREIGN KEY ("usuario_funcionario_func_id") REFERENCES Usuario ("funcionario_func_id")
 );
 
 CREATE TABLE IF NOT EXISTS Baixa (
@@ -155,109 +155,109 @@ CREATE TABLE IF NOT EXISTS Baixa (
   "baix_motivo" VARCHAR(45) NOT NULL,
   "baix_desc" VARCHAR(45) NOT NULL,
   "baix_data" VARCHAR(45) NOT NULL,
-  "Exemplar_exe_id" INT NOT NULL,
-  "Usuario_Funcionario_func_id" INT NOT NULL,
-  FOREIGN KEY ("Exemplar_exe_id") REFERENCES Exemplar ("exe_id"),
-  FOREIGN KEY ("Usuario_Funcionario_func_id") REFERENCES Usuario ("Funcionario_func_id")
+  "exemplar_exe_id" INT NOT NULL,
+  "usuario_funcionario_func_id" INT NOT NULL,
+  FOREIGN KEY ("exemplar_exe_id") REFERENCES Exemplar ("exe_id"),
+  FOREIGN KEY ("usuario_funcionario_func_id") REFERENCES Usuario ("funcionario_func_id")
 );
 
 CREATE TABLE IF NOT EXISTS Selecao (
   "sel_id" SERIAL PRIMARY KEY,
-  "Cliente_cli_id" INT NOT NULL,
-  "Titulo_tit_id" INT NOT NULL,
-  "Usuario_Funcionario_func_id" INT NOT NULL,
-  FOREIGN KEY ("Cliente_cli_id") REFERENCES Cliente ("cli_id"),
-  FOREIGN KEY ("Titulo_tit_id") REFERENCES Titulo ("tit_id"),
-  FOREIGN KEY ("Usuario_Funcionario_func_id") REFERENCES Usuario ("Funcionario_func_id")
+  "cliente_cli_id" INT NOT NULL,
+  "titulo_tit_id" INT NOT NULL,
+  "usuario_funcionario_func_id" INT NOT NULL,
+  FOREIGN KEY ("cliente_cli_id") REFERENCES Cliente ("cli_id"),
+  FOREIGN KEY ("titulo_tit_id") REFERENCES Titulo ("tit_id"),
+  FOREIGN KEY ("usuario_funcionario_func_id") REFERENCES Usuario ("funcionario_func_id")
 );
 
 CREATE TABLE IF NOT EXISTS Reserva (
   "res_id" SERIAL PRIMARY KEY,
-  "Titulo_tit_id" INT NOT NULL,
-  "Cliente_cli_id" INT NOT NULL,
-  "Usuario_Funcionario_func_id" INT NOT NULL,
-  FOREIGN KEY ("Titulo_tit_id") REFERENCES Titulo ("tit_id"),
-  FOREIGN KEY ("Cliente_cli_id") REFERENCES Cliente ("cli_id"),
-  FOREIGN KEY ("Usuario_Funcionario_func_id") REFERENCES Usuario ("Funcionario_func_id")
+  "titulo_tit_id" INT NOT NULL,
+  "cliente_cli_id" INT NOT NULL,
+  "usuario_funcionario_func_id" INT NOT NULL,
+  FOREIGN KEY ("titulo_tit_id") REFERENCES Titulo ("tit_id"),
+  FOREIGN KEY ("cliente_cli_id") REFERENCES Cliente ("cli_id"),
+  FOREIGN KEY ("usuario_funcionario_func_id") REFERENCES Usuario ("funcionario_func_id")
 );
 
 CREATE TABLE IF NOT EXISTS SolicitarTitulo (
-  "sTit_id" SERIAL PRIMARY KEY,
-  "Funcionario_func_id" INT NOT NULL,
-  "sTit_data" VARCHAR(45) NOT NULL,
-  "sTit_obs" VARCHAR(45) NOT NULL,
-  FOREIGN KEY ("Funcionario_func_id") REFERENCES Funcionario ("func_id")
+  "stit_id" SERIAL PRIMARY KEY,
+  "funcionario_func_id" INT NOT NULL,
+  "stit_data" VARCHAR(45) NOT NULL,
+  "stit_obs" VARCHAR(45) NOT NULL,
+  FOREIGN KEY ("funcionario_func_id") REFERENCES Funcionario ("func_id")
 );
 
 CREATE TABLE IF NOT EXISTS Item_Solicitacao (
-  "itS_id" INT NOT NULL,
-  "SolicitarTitulo_sTit_id" INT NOT NULL,
-  "Titulo_tit_id" INT NOT NULL,
-  "itS_quantidade" VARCHAR(45) NOT NULL,
-  PRIMARY KEY ("itS_id", "SolicitarTitulo_sTit_id", "Titulo_tit_id"),
-  FOREIGN KEY ("SolicitarTitulo_sTit_id") REFERENCES SolicitarTitulo ("sTit_id"),
-  FOREIGN KEY ("Titulo_tit_id") REFERENCES Titulo ("tit_id")
+  "its_id" INT NOT NULL,
+  "solicitar_titulo_stit_id" INT NOT NULL,
+  "titulo_tit_id" INT NOT NULL,
+  "its_quantidade" VARCHAR(45) NOT NULL,
+  PRIMARY KEY ("its_id", "solicitar_titulo_stit_id", "titulo_tit_id"),
+  FOREIGN KEY ("solicitar_titulo_stit_id") REFERENCES SolicitarTitulo ("stit_id"),
+  FOREIGN KEY ("titulo_tit_id") REFERENCES Titulo ("tit_id")
 );
 
 CREATE TABLE IF NOT EXISTS Pedido (
   "ped_id" SERIAL PRIMARY KEY,
-  "Juridica_jur_id" INT NOT NULL,
+  "juridica_jur_id" INT NOT NULL,
   "ped_data" DATE NOT NULL,
   "ped_data_entrega" VARCHAR(45) NOT NULL,
-  FOREIGN KEY ("Juridica_jur_id") REFERENCES Juridica ("jur_id")
+  FOREIGN KEY ("juridica_jur_id") REFERENCES Juridica ("jur_id")
 );
 
 CREATE TABLE IF NOT EXISTS Comprar (
   "comp_id" SERIAL PRIMARY KEY,
-  "Pedido_ped_id" INT NOT NULL,
+  "pedido_ped_id" INT NOT NULL,
   "comp_data" DATE NOT NULL,
   "comp_nota" VARCHAR(45) NOT NULL,
-  "comp_valorTot" DOUBLE PRECISION NOT NULL,
+  "comp_valor_tot" DOUBLE PRECISION NOT NULL,
   "comp_forma_pagamento" VARCHAR(45) NOT NULL,
-  "Usuario_Funcionario_func_id" INT NOT NULL,
-  FOREIGN KEY ("Pedido_ped_id") REFERENCES Pedido ("ped_id"),
-  FOREIGN KEY ("Usuario_Funcionario_func_id") REFERENCES Usuario ("Funcionario_func_id")
+  "usuario_funcionario_func_id" INT NOT NULL,
+  FOREIGN KEY ("pedido_ped_id") REFERENCES Pedido ("ped_id"),
+  FOREIGN KEY ("usuario_funcionario_func_id") REFERENCES Usuario ("funcionario_func_id")
 );
 
 CREATE TABLE IF NOT EXISTS Item_Pedido (
-  "Pedido_ped_id" INT NOT NULL,
-  "Titulo_tit_id" INT NOT NULL,
-  "itP_qtde" INT NULL,
-  PRIMARY KEY ("Pedido_ped_id", "Titulo_tit_id"),
-  FOREIGN KEY ("Pedido_ped_id") REFERENCES Pedido ("ped_id"),
-  FOREIGN KEY ("Titulo_tit_id") REFERENCES Titulo ("tit_id")
+  "pedido_ped_id" INT NOT NULL,
+  "titulo_tit_id" INT NOT NULL,
+  "itp_qtde" INT NULL,
+  PRIMARY KEY ("pedido_ped_id", "titulo_tit_id"),
+  FOREIGN KEY ("pedido_ped_id") REFERENCES Pedido ("ped_id"),
+  FOREIGN KEY ("titulo_tit_id") REFERENCES Titulo ("tit_id")
 );
 
 CREATE TABLE IF NOT EXISTS Item_Compra (
-  "EntradaPedidos_entPed_id" INT NOT NULL,
-  "Item_Pedido_Pedido_ped_id" INT NOT NULL,
-  "Item_Pedido_Titulo_tit_id" INT NOT NULL,
-  "itC_qtde" VARCHAR(45) NOT NULL,
-  "itC_valor" VARCHAR(45) NOT NULL,
-  PRIMARY KEY ("EntradaPedidos_entPed_id", "Item_Pedido_Pedido_ped_id", "Item_Pedido_Titulo_tit_id"),
-  FOREIGN KEY ("EntradaPedidos_entPed_id") REFERENCES Comprar ("comp_id"),
-  FOREIGN KEY ("Item_Pedido_Pedido_ped_id", "Item_Pedido_Titulo_tit_id") REFERENCES Item_Pedido ("Pedido_ped_id", "Titulo_tit_id")
+  "entrada_pedidos_entped_id" INT NOT NULL,
+  "item_pedido_pedido_ped_id" INT NOT NULL,
+  "item_pedido_titulo_tit_id" INT NOT NULL,
+  "itc_qtde" VARCHAR(45) NOT NULL,
+  "itc_valor" VARCHAR(45) NOT NULL,
+  PRIMARY KEY ("entrada_pedidos_entped_id", "item_pedido_pedido_ped_id", "item_pedido_titulo_tit_id"),
+  FOREIGN KEY ("entrada_pedidos_entped_id") REFERENCES Comprar ("comp_id"),
+  FOREIGN KEY ("item_pedido_pedido_ped_id", "item_pedido_titulo_tit_id") REFERENCES Item_Pedido ("pedido_ped_id", "titulo_tit_id")
 );
 
 CREATE TABLE IF NOT EXISTS Encomenda_Titulo (
-  "Pedido_ped_id" INT NOT NULL,
-  "SolicitarTitulo_sTit_id" INT NOT NULL,
-  PRIMARY KEY ("Pedido_ped_id", "SolicitarTitulo_sTit_id"),
-  FOREIGN KEY ("Pedido_ped_id") REFERENCES Pedido ("ped_id"),
-  FOREIGN KEY ("SolicitarTitulo_sTit_id") REFERENCES SolicitarTitulo ("sTit_id")
+  "pedido_ped_id" INT NOT NULL,
+  "solicitar_titulo_stit_id" INT NOT NULL,
+  PRIMARY KEY ("pedido_ped_id", "solicitar_titulo_stit_id"),
+  FOREIGN KEY ("pedido_ped_id") REFERENCES Pedido ("ped_id"),
+  FOREIGN KEY ("solicitar_titulo_stit_id") REFERENCES SolicitarTitulo ("stit_id")
 );
 
 CREATE TABLE IF NOT EXISTS Parametrizacao (
 	"pam_id" SERIAL PRIMARY KEY,
 	"end_id" INT NOT NULL,
-	"pam_nomeFantasia" VARCHAR(45) NOT NULL,
-  	"pam_razaoSocial" VARCHAR(45) NOT NULL,
+	"pam_nome_fantasia" VARCHAR(45) NOT NULL,
+  	"pam_razao_social" VARCHAR(45) NOT NULL,
 	"pam_site" VARCHAR(45) NOT NULL,
 	"pam_email" VARCHAR(45) NOT NULL,
 	"pam_cnpj" VARCHAR(45) NOT NULL,
-	"pam_inscEstadual" VARCHAR(45) NOT NULL,
-	"pam_logotipoGrande" VARCHAR(45) NOT NULL,
-	"pam_logotipoPeq" VARCHAR(45) NOT NULL,
+	"pam_insc_estadual" VARCHAR(45) NOT NULL,
+	"pam_logotipo_grande" VARCHAR(45) NOT NULL,
+	"pam_logotipo_peq" VARCHAR(45) NOT NULL,
 	"pam_login" VARCHAR(45) NOT NULL,
 	"pam_senha" VARCHAR(45) NOT NULL,
 	FOREIGN KEY ("end_id") REFERENCES Endereco ("end_id")
@@ -279,7 +279,7 @@ DROP TABLE IF EXISTS Titulo_Autor CASCADE;
 DROP TABLE IF EXISTS Titulo_Editora CASCADE;
 DROP TABLE IF EXISTS Exemplar CASCADE;
 DROP TABLE IF EXISTS Usuario CASCADE;
-DROP TABLE IF EXISTS Empréstimo CASCADE;
+DROP TABLE IF EXISTS Emprestimo CASCADE;
 DROP TABLE IF EXISTS Emprestimo_Exemplar CASCADE;
 DROP TABLE IF EXISTS Recebimento CASCADE;
 DROP TABLE IF EXISTS Renovação CASCADE;
