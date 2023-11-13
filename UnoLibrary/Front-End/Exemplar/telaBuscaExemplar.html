@@ -45,14 +45,15 @@
         <p class="tittle">Cadastro Exemplar</p>
         <div class="containerForm">
             <form method="post" id="formCadastaExemplar" enctype="multipart/form-data">
+                <h3>Filtros</h3>
                 <div class="filtros">
                     <div class="containerInput">
-                        <label for="status">Status: </label>
-                        <input type="text" id="status" name="status" placeholder="Novo">
+                        <label for="data">Data Inicio: </label>
+                        <input type="date" id="data" name="data"  value="2017-06-01" required />
                     </div>
                     <div class="containerInput">
-                        <label for="data">Data: </label>
-                        <input type="date" id="data" name="data"  value="2017-06-01" required />
+                        <label for="data2">Data Fim: </label>
+                        <input type="date" id="data2" name="data2"  value="2017-06-01" required />
                     </div>
                     <div class="containerInput">
                         <label for="titulo">Titulo: </label>
@@ -68,10 +69,9 @@
                     <thead>
                         <tr>
                             <th>Id</th>
-                            <th>Nome Completo</th>
-                            <th>Quantidade</th>
-                            <th>Edição</th>
-                            <th>Genero</th>
+                            <th>Status</th>
+                            <th>Data Entrada</th>
+                            <th>Titulo</th>
                         </tr>
                     </thead>
                     <tbody id="tb">
