@@ -101,8 +101,7 @@
         }
         .btn-voltar
         {
-            border:red;
-            width: auto;
+            
         }
 
         
@@ -113,75 +112,89 @@
     <form method="post" id="formlogin2"  enctype="multipart/form-data" onsubmit="gravar1()">
         <h1>Cadastro de Empresa</h1>
         <div class="input-row">
+            
             <div class="input-group">
                 <label for="nomeFantasia">Nome Fantasia:</label>
-                <input type="text" id="nomeFantasia" name="nomeFantasia" required>
+                <input type="text" id="nomeFantasia" name="nomeFantasia" required placeholder="Nome Fantasia" maxlength="30">
             </div>
             <div class="input-group">
                 <label for="razaoSocial">Razão Social:</label>
-                <input type="text" id="razaoSocial" name="razaoSocial" required>
+                <input type="text" id="razaoSocial" name="razaoSocial" required placeholder="Razão Social" maxlength="30">
             </div>
             <div class="input-group">
                 <label for="site">Site:</label>
-                <input type="text" id="site" name="site">
+                <input type="text" id="site" name="site" placeholder="www.site.com" maxlength="30">
             </div>
         </div>
         <div class="input-row">
             <div class="input-group">
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+                <input type="email" id="email" name="email" required placeholder="email@gmail.com" maxlength="30">
             </div>
+            
 
             <div class="input-group">
                 <label for="rua">Rua:</label>
-                <input type="text" id="rua" name="rua">
+                <input type="text" id="rua" name="rua" placeholder="Rua" maxlength="30">
             </div>
 
             <div class="input-group">
                 <label for="bairro">Bairro:</label>
-                <input type="text" id="bairro" name="bairro">
+                <input type="text" id="bairro" name="bairro" placeholder="Bairro" maxlength="30">
             </div>
         </div>
 
         <div class="input-row">
             <div class="input-group">
                 <label for="numero">Número:</label>
-                <input type="text" id="numero" name="numero">
+                <input type="text" id="numero" name="numero" placeholder="(xx) xxxxx-xxxx"onkeypress="mTel()" maxlength="14">
             </div>
 
             <div class="input-group">
                 <label for="complemento">Complemento:</label>
-                <input type="text" id="complemento" name="complemento">
+                <input type="text" id="complemento" name="complemento" placeholder="Complemento" maxlength="30">
             </div>
 
             <div class="input-group">
                 <label for="cep">CEP:</label>
-                <input type="text" id="cep" name="cep">
+                <input type="text" id="cep" name="cep" placeholder="CEP" onkeypress="mCEP()" maxlength="9">
             </div>
         </div>
 
         <div class="input-row">
             <div class="input-group">
                 <label for="cidade">Cidade:</label>
-                <input type="text" id="cidade" name="cidade">
+                <input type="text" id="cidade" name="cidade" placeholder="Cidade" maxlength="30">
             </div>
 
             <div class="input-group">
                 <label for="uf">UF:</label>
-                <input type="text" id="uf" name="uf">
+                <input type="text" id="uf" name="uf" placeholder="UF" maxlength="2">
             </div>
 
             <div class="input-group">
                 <label for="cnpj">CNPJ:</label>
-                <input type="text" id="cnpj" name="cnpj" required>
+                <input type="text" id="cnpj" name="cnpj" required placeholder="CNPJ" onkeypress="mascaraMutuario(this,cpfCnpj)" maxlength="18">
             </div>
         </div>
 
         <div class="input-row">
             <div class="input-group">
                 <label for="inscricaoEstadual">Inscrição Estadual:</label>
-                <input type="text" id="inscricaoEstadual" name="inscricaoEstadual">
+                <input type="text" id="inscricaoEstadual" name="inscricaoEstadual" placeholder="Inscrição Estadual" maxlength="30">
             </div>
+
+            <div class="input-group">
+                <label for="login">Login:</label>
+                <input type="text" id="login" name="login" placeholder="Login" maxlength="20">
+            </div>
+
+            <div class="input-group">
+                <label for="senha">Senha</label>
+                <input type="text" id="senha" name="senha" placeholder="Senha" maxlength="20">
+            </div>
+
+            
 
             <div class="input-group">
                 <label for="logotipoGrande">Logotipo Grande:</label>
@@ -192,6 +205,7 @@
                 <label for="logotipoPequeno">Logotipo Pequeno:</label>
                 <input type="file" id="logotipoPequeno" name="logotipoPequeno">
             </div>
+        </div>
 
             <!-- Botões de Voltar e Cadastrar -->
             <div class="btn-group">
