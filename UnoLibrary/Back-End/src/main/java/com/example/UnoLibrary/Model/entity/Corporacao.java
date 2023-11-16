@@ -22,19 +22,12 @@ public class Corporacao
     private String inscricaoestadual;
     private String email;
     private String site;
-    private String cep;
-    private String cidade;
-    private String uf;
-    private String rua;
-    private String bairro;
-    private String numero;
-    private String complemento;
+    private Long   end_id;
     private String senha;
-    private String senhaconfirmada;
     private String logotipog;
     private String logotipop;
 
-    public Corporacao(long id, String login, String nomeempresa, String cnpj, String razaosocial, String inscricaoestadual, String email, String site, String cep, String cidade, String uf, String rua, String bairro, String numero, String complemento, String senha, String senhaconfirmada, String logotipog, String logotipop) {
+    public Corporacao(long id, String login, String nomeempresa, String cnpj, String razaosocial, String inscricaoestadual, String email, String site, Long end_id, String senha, String logotipog, String logotipop) {
         this.id = id;
         this.login = login;
         this.nomeempresa = nomeempresa;
@@ -43,15 +36,8 @@ public class Corporacao
         this.inscricaoestadual = inscricaoestadual;
         this.email = email;
         this.site = site;
-        this.cep = cep;
-        this.cidade = cidade;
-        this.uf = uf;
-        this.rua = rua;
-        this.bairro = bairro;
-        this.numero = numero;
-        this.complemento = complemento;
+        this.end_id = end_id;
         this.senha = senha;
-        this.senhaconfirmada = senhaconfirmada;
         this.logotipog = logotipog;
         this.logotipop = logotipop;
     }
@@ -65,15 +51,8 @@ public class Corporacao
         this.inscricaoestadual = data.inscricaoestadual();
         this.email = data.email();
         this.site = data.site();
-        this.cep = data.cep();
-        this.cidade = data.cidade();
-        this.uf = data.uf();
-        this.rua = data.rua();
-        this.bairro = data.bairro();
-        this.numero = data.numero();
-        this.complemento = data.complemento();
+        this.end_id = data.endId();
         this.senha = data.senha();
-        this.senhaconfirmada = data.senhaconfirmada();
         this.logotipog = data.logotipog();
         this.logotipop = data.logotipop();
     }
@@ -142,76 +121,20 @@ public class Corporacao
         this.site = site;
     }
 
-    public String getCep() {
-        return cep;
+    public void setEndId(Long id) {
+        this.end_id = id;
     }
 
-    public void setCep(String cep) {
-        this.cep = cep;
+    public Long getEndId() {
+        return end_id;
     }
-
-    public String getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
-
-    public String getUf() {
-        return uf;
-    }
-
-    public void setUf(String uf) {
-        this.uf = uf;
-    }
-
-    public String getRua() {
-        return rua;
-    }
-
-    public void setRua(String rua) {
-        this.rua = rua;
-    }
-
-    public String getBairro() {
-        return bairro;
-    }
-
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
-    }
-
-    public String getNumero() {
-        return numero;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-
-    public String getComplemento() {
-        return complemento;
-    }
-
-    public void setComplemento(String complemento) {
-        this.complemento = complemento;
-    }
-
+   
     public String getSenha() {
         return senha;
     }
 
     public void setSenha(String senha) {
         this.senha = senha;
-    }
-
-    public String getSenhaconfirmada() {
-        return senhaconfirmada;
-    }
-
-    public void setSenhaconfirmada(String senhaconfirmada) {
-        this.senhaconfirmada = senhaconfirmada;
     }
 
     public String getLogotipog() {
