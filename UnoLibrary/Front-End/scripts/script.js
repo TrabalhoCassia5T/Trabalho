@@ -5,8 +5,10 @@ function gravar() {
       fetch("http://localhost:8080/api/verificar-login", { method: 'post', body: dados })
         .then(response => response.text())
         .then(mens => {
-          if (mens === "Não existe Cadastro") {
-            exibirAlerta(mens); // Exibe o alerta com a mensagem
+          if (mens === "Não existe Cadastro" ) 
+          {
+            alert("Não possui cadastro");
+            window.location.href = "empresa/telaCadEmpresa.html" // Exibe o alerta com a mensagem
           } 
           else 
           {
