@@ -11,11 +11,15 @@ import com.example.UnoLibrary.Model.repository.EnderecoRepository;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Base64;
 import java.util.List;
 
@@ -24,7 +28,9 @@ import java.util.List;
 @CrossOrigin
 public class CorporacaoController
 {
-
+    private final static String LOGOTIPOS_FOLDER="/logotipos";
+    @Autowired
+    private ResourceLoader resourceLoader;
     @Autowired
     private CorporacaoRepository repository;
     @Autowired
@@ -37,7 +43,7 @@ public class CorporacaoController
                                            @RequestParam ("cidade") String cidade, @RequestParam ("cnpj") String cnpj,
                                            @RequestParam ("complemento") String complemento, @RequestParam ("email") String email,
                                            @RequestParam ("inscricaoEstadual") String inscricaoestadual, @RequestParam ("login") String login,
-                                           @RequestParam ("logotipoGrande") MultipartFile logotipog, @RequestParam ("logotipoPequeno") MultipartFile logotipop,
+                                           @RequestParam ("logotipoGrande") String logotipog, @RequestParam ("logotipoPequeno") String logotipop,
                                            @RequestParam ("nomeFantasia") String nomeempresa, @RequestParam ("numero") String numero,
                                            @RequestParam ("razaoSocial") String razaosocial, @RequestParam ("rua") String rua,
                                            @RequestParam ("senha") String senha,
@@ -46,16 +52,37 @@ public class CorporacaoController
         Endereco end = new EnderecoControlFacede(endRepository).inserir(
             new Endereco(0L, rua, numero, bairro, cep, cidade, uf)
         );
-        // https://stackoverflow.com/questions/36492084/how-to-convert-an-image-to-base64-string-in-java
-        byte[] bytes = new byte[(int)logotipop.getSize()];
-        fileInputStreamReader.read(bytes);
-        String encodedfile = new String(Base64.encodeBase64(bytes), "UTF-8");
+        File logotipo = new File(getStaticPath()+LOGOTIPOS_FOLDER);
+        if (!logotipo.exists())
+            logotipo.mkdir();
+        //String logotipop = getStaticPath()+LOGOTIPOS_FOLDER+"\\"+login+"_"+nomeempresa+"_"+cnpj+".png";
+        //String logotipog = getStaticPath()+LOGOTIPOS_FOLDER+"\\"+login+"_"+nomeempresa+"_"+cnpj+".png";
+        Path root= Paths.get(".");
+        try {
+            //Files.copy(logotipope.getInputStream(), root.resolve(logotipop));
+            //Files.copy(logotipogr.getInputStream(), root.resolve(logotipog));
+            return ResponseEntity.ok("arquivo recebido");
+        }
+        catch(Exception e)
+        {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
 
-        CorporacaoRequestDTO data = new CorporacaoRequestDTO(login, nomeempresa, cnpj, razaosocial, inscricaoestadual,
-                email, site, end.getEnd_id() , senha, );
+
+        CorporacaoRequestDTO data = new CorporacaoRequestDTO(login,nomeempresa,cnpj,razaosocial
+                ,inscricaoestadual,email,site, end.getEnd_id(), senha,logotipop,logotipop);
         Corporacao dados = new Corporacao(data);
         repo.save(dados);
         return ResponseEntity.ok().body("ok");
+    }
+
+    public String getStaticPath()
+    {
+        String staticPath = null;
+        try {
+            staticPath = resourceLoader.getResource("classpath:static").getFile().getAbsolutePath();
+        }catch (Exception e){}
+        return staticPath;
     }
 
     @PostMapping(value = "/verificar-login")
@@ -64,8 +91,13 @@ public class CorporacaoController
         List<CorporacaoResponseDTO> userlist = repository.findAll().stream().map(CorporacaoResponseDTO::new).toList();
         for(int i = 0; i< userlist.size();i++)
         {
-            if(userlist.get(i).login().equals(login))
-                return "Login bem sucedido";
+            if(userlist.get(i).login().equals(login)) // compara login
+                if(userlist.get(i).senha().equals(senha)) // compara senha
+                    return "Login bem sucedido";
+                else
+                    return "Senha Incorreta";
+            else
+                return "Login Incorreto";
         }
         return "Não existe Cadastro";
     }
