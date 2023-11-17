@@ -28,6 +28,10 @@ public class Exemplar {
     public Exemplar() {
     }
 
+    public Titulo getTitulo() {
+        return titulo;
+    }
+
     public Long getId() {
         return id;
     }

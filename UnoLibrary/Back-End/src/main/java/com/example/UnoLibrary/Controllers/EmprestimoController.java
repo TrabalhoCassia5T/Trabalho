@@ -1,8 +1,8 @@
 package com.example.UnoLibrary.Controllers;
 
-import com.example.UnoLibrary.Facede.EmprestimoExemplarControlFacede;
-import com.example.UnoLibrary.Facede.FisicaControlFacede;
-import com.example.UnoLibrary.Facede.PessoaControlFacede;
+// import com.example.UnoLibrary.Facede.EmprestimoExemplarControlFacede;
+// import com.example.UnoLibrary.Facede.FisicaControlFacede;
+// import com.example.UnoLibrary.Facede.PessoaControlFacede;
 import com.example.UnoLibrary.Model.entity.*;
 import com.example.UnoLibrary.Model.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +22,16 @@ public class EmprestimoController {
     private EmprestimoRepository repository;
     @Autowired
     private ClientRepository cliRepo;
+    // @Autowired
+    // private PessoaRepository pesRepo;
+    // @Autowired
+    // private FisicaRepository fisRepo;
+    // @Autowired
+    // private  EmprestimoExemplarRepository emprestimoExemplarRepo;
     @Autowired
-    private PessoaRepository pesRepo;
+    private TituloRepository titRepo;
     @Autowired
-    private FisicaRepository fisRepo;
-    @Autowired
-    private  EmprestimoExemplarRepository emprestimoExemplarRepo;
+    private ExemplarRepository exempRepo;
 
     @PostMapping(value = "/emprestimo/cadastrar")
     public ResponseEntity<Object> cadastrarEmprestimo(@RequestParam("num_cliente") int numero_cliente,
@@ -38,10 +42,11 @@ public class EmprestimoController {
                                                       @RequestParam("status") String status,
                                                       @RequestParam("func_id") int func_id) {
         Optional<Cliente> cli = cliRepo.findById((long) numero_cliente);
-        Fisica fis = new FisicaControlFacede(fisRepo).buscar(cli.get().getFisica_fis_id());
-        Pessoa pes = new PessoaControlFacede(pesRepo).buscar(fis.getPessoa_pes_id());
-        EmprestimoExemplar empExemp = new EmprestimoExemplarControlFacede(emprestimoExemplarRepo).inserir(new EmprestimoExemplar(cli.get().getCli_id(), (long) cod_livro, data));
-
+        Exemplar exemplar = exempRepo.findById((long) cod_livro).get();
+        // EmprestimoExemplar empExemp = new EmprestimoExemplarControlFacede(emprestimoExemplarRepo).inserir(new EmprestimoExemplar(cli.get().getCli_id(), exemplar.getId(), data));
+        Titulo tit = titRepo.findById(exemplar.getTitulo().getId()).get(); 
+        tit.setQtde(tit.getQtde()-1);
+        titRepo.save(tit);                                
         repository.save(new Emprestimo(0L, cli.get().getCli_id(), new Date(), data, (long) func_id, status));
         return ResponseEntity.ok().body("ok");
     }
