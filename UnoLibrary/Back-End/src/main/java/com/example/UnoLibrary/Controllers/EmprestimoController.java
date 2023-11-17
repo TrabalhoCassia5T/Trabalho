@@ -1,11 +1,9 @@
 package com.example.UnoLibrary.Controllers;
 
+import com.example.UnoLibrary.Facede.EmprestimoExemplarControlFacede;
 import com.example.UnoLibrary.Facede.FisicaControlFacede;
 import com.example.UnoLibrary.Facede.PessoaControlFacede;
-import com.example.UnoLibrary.Model.entity.Cliente;
-import com.example.UnoLibrary.Model.entity.Emprestimo;
-import com.example.UnoLibrary.Model.entity.Fisica;
-import com.example.UnoLibrary.Model.entity.Pessoa;
+import com.example.UnoLibrary.Model.entity.*;
 import com.example.UnoLibrary.Model.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +26,8 @@ public class EmprestimoController {
     private PessoaRepository pesRepo;
     @Autowired
     private FisicaRepository fisRepo;
+    @Autowired
+    private  EmprestimoExemplarRepository emprestimoExemplarRepo;
 
     @PostMapping(value = "/emprestimo/cadastrar")
     public ResponseEntity<Object> cadastrarEmprestimo(@RequestParam("num_cliente") int numero_cliente,
@@ -40,6 +40,7 @@ public class EmprestimoController {
         Optional<Cliente> cli = cliRepo.findById((long) numero_cliente);
         Fisica fis = new FisicaControlFacede(fisRepo).buscar(cli.get().getFisica_fis_id());
         Pessoa pes = new PessoaControlFacede(pesRepo).buscar(fis.getPessoa_pes_id());
+        EmprestimoExemplar empExemp = new EmprestimoExemplarControlFacede(emprestimoExemplarRepo).inserir(new EmprestimoExemplar(cli.get().getCli_id(), (long) cod_livro, data));
 
         repository.save(new Emprestimo(0L, cli.get().getCli_id(), new Date(), data, (long) func_id, status));
         return ResponseEntity.ok().body("ok");
