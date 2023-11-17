@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <script src="../scripts/scriptClient.js" type="text/javascript"></script>
+    <script src="../scripts/mascaras.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="../assets/css/styleAltCliente.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alteração de Cliente</title>
+</head>
+
+<body>
+    <header>
+        <img src="../img/img_software.png" class="imgLogo" />
+        <nav>
+            <ul class="menu">
+                <li><a href="../home/index.html">HOME</a></li>
+                <li><a href="#" class="client">CLIENTE</a>
+                    <ul>
+                        <li><a href="../cliente/telaCadCliente.html">Cadastrar Cliente</a></li>
+                        <li><a href="../cliente/telaBuscaCliente.html">Buscar Cliente</a></li>
+                        <li><a href="../cliente/telaAlterarCliente.html">Alterar Cliente</a></li>
+                        <li><a href="../cliente/telaExcluirCliente.html">Excluir Cliente</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" class="client">EXEMPLAR</a>
+                    <ul>
+                        <li><a href="../Exemplar/telaCadExemplar.html">Cadastrar Exemplar</a></li>
+                        <li><a href="../Exemplar/telaBuscaExemplar.html">Buscar Exemplar</a></li>
+                        <li><a href="../Exemplar/telaAlterarExemplar.html">Alterar Exemplar</a></li>
+                        <li><a href="../Exemplar/telaExcluirExemplar.html">Excluir Exemplar</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">EMPRÉSTIMO</a></li>
+                <li><a href="#">BAIXA</a></li>
+                <li><a href="#">EFETUAR ENTRADA</a></li>
+                <li><a href="#">RELATÓRIOS</a></li>
+            </ul>
+        </nav>
+        <div class="profile"><a href="#"><img src="../img/Edit Profile.png" /></a></div>
+    </header>
+
+    <div class="container">
+        <p class="tittle">Alterar Cliente</p>
+        <div class="containerForm">
+            <form method="post" id="formBuscaCliente" enctype="multipart/form-data" class="formBusca">
+                <h3>Pesquisa:</h3>
+                <div class="filtros">
+                    <div class="containerInput">
+                        <label for="codigo">Código: </label>
+                        <input type="text" id="codigo" name="codigo" required>
+                    </div>
+                    <div>
+                        <button class="buttonWrapper" onclick="BuscaAlteracao()">Buscar</button>
+                    </div>
+                </div>
+            </form>
+            <div class="tableWrapper">
+                <form method="post" id="formAltCliente" enctype="multipart/form-data" onsubmit="" class="formAlt">
+                    <div class="formContent">
+                        <div class="divContent">
+                            <div class="containerInputAlt">
+                                <label for="status">Status:</label>
+                                <input type="text" id="status" name="status" required>
+                            </div>
+                            <div class="containerInputAlt">
+                                <label for="data">Data:</label>
+                                <input type="date" id="data" name="data" required>
+                            </div>
+                            <div class="containerInputAlt">
+                                <label for="titulo">Titulo:</label>
+                                <input type="text" id="titulo" name="titulo">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <button type="button" class="btnCancelar" onclick="limparForm()">Cancelar</button>
+                        <input type="submit" value="Confirmar" class="btnConfirmar" onclick="gravarAlteracao()">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="footerLibrary">
+        <p>@UNOLIBRARY</p>
+    </div>
+</body>
+
+</html>
