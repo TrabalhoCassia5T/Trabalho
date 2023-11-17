@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS Pessoa (
   "pes_nome" VARCHAR(45) NOT NULL,
   "pes_telefone" VARCHAR(45) NOT NULL,
   "pes_email" VARCHAR(45) NOT NULL,
-  "pes_url" VARCHAR(45) NOT NULL,
+  "pes_url" VARCHAR(60) NOT NULL,
   FOREIGN KEY ("end_id") REFERENCES Endereco ("end_id")
 );
 
@@ -77,10 +77,10 @@ CREATE TABLE IF NOT EXISTS Editora (
 
 CREATE TABLE IF NOT EXISTS Titulo_Autor (
   "tit_aut_id" SERIAL PRIMARY KEY,
-  "titulo_tit_id" INT NOT NULL,
-  "autor_aut_id" INT NOT NULL,
-  FOREIGN KEY ("titulo_tit_id") REFERENCES Titulo ("tit_id"),
-  FOREIGN KEY ("autor_aut_id") REFERENCES Autor ("aut_id")
+  "tit_id" INT NOT NULL,
+  "aut_id" INT NOT NULL,
+  FOREIGN KEY ("tit_id") REFERENCES Titulo ("tit_id"),
+  FOREIGN KEY ("aut_id") REFERENCES Autor ("aut_id")
 );
 
 CREATE TABLE IF NOT EXISTS Titulo_Editora (
@@ -103,8 +103,8 @@ CREATE TABLE IF NOT EXISTS Usuario (
   "funcionario_func_id" INT NOT NULL,
   "usu_login" VARCHAR(45) NOT NULL,
   "usu_senha" VARCHAR(45) NOT NULL,
-  "usu_data_perm" VARCHAR(45) NOT NULL,
-  "usu_data_desativa" VARCHAR(45) NOT NULL,
+  "usu_data_perm" DATE NOT NULL,
+  "usu_data_desativa" DATE,
   "usu_nivel" VARCHAR(45) NOT NULL,
   PRIMARY KEY ("funcionario_func_id"),
   FOREIGN KEY ("funcionario_func_id") REFERENCES Funcionario ("func_id")
@@ -153,8 +153,8 @@ CREATE TABLE IF NOT EXISTS Renovacao (
 CREATE TABLE IF NOT EXISTS Baixa (
   "baix_id" SERIAL PRIMARY KEY,
   "baix_motivo" VARCHAR(45) NOT NULL,
-  "baix_desc" VARCHAR(45) NOT NULL,
-  "baix_data" VARCHAR(45) NOT NULL,
+  "baix_desc" VARCHAR(200) NOT NULL,
+  "baix_data" DATE NOT NULL,
   "exemplar_exe_id" INT NOT NULL,
   "usuario_funcionario_func_id" INT NOT NULL,
   FOREIGN KEY ("exemplar_exe_id") REFERENCES Exemplar ("exe_id"),
@@ -184,7 +184,7 @@ CREATE TABLE IF NOT EXISTS Reserva (
 CREATE TABLE IF NOT EXISTS SolicitarTitulo (
   "stit_id" SERIAL PRIMARY KEY,
   "funcionario_func_id" INT NOT NULL,
-  "stit_data" VARCHAR(45) NOT NULL,
+  "stit_data" DATE NOT NULL,
   "stit_obs" VARCHAR(45) NOT NULL,
   FOREIGN KEY ("funcionario_func_id") REFERENCES Funcionario ("func_id")
 );
@@ -193,7 +193,7 @@ CREATE TABLE IF NOT EXISTS Item_Solicitacao (
   "its_id" INT NOT NULL,
   "solicitar_titulo_stit_id" INT NOT NULL,
   "titulo_tit_id" INT NOT NULL,
-  "its_quantidade" VARCHAR(45) NOT NULL,
+  "its_quantidade" INT NOT NULL,
   PRIMARY KEY ("its_id", "solicitar_titulo_stit_id", "titulo_tit_id"),
   FOREIGN KEY ("solicitar_titulo_stit_id") REFERENCES SolicitarTitulo ("stit_id"),
   FOREIGN KEY ("titulo_tit_id") REFERENCES Titulo ("tit_id")
@@ -203,7 +203,7 @@ CREATE TABLE IF NOT EXISTS Pedido (
   "ped_id" SERIAL PRIMARY KEY,
   "juridica_jur_id" INT NOT NULL,
   "ped_data" DATE NOT NULL,
-  "ped_data_entrega" VARCHAR(45) NOT NULL,
+  "ped_data_entrega" DATE NOT NULL,
   FOREIGN KEY ("juridica_jur_id") REFERENCES Juridica ("jur_id")
 );
 
@@ -232,8 +232,8 @@ CREATE TABLE IF NOT EXISTS Item_Compra (
   "entrada_pedidos_entped_id" INT NOT NULL,
   "item_pedido_pedido_ped_id" INT NOT NULL,
   "item_pedido_titulo_tit_id" INT NOT NULL,
-  "itc_qtde" VARCHAR(45) NOT NULL,
-  "itc_valor" VARCHAR(45) NOT NULL,
+  "itc_qtde" INT NOT NULL,
+  "itc_valor" DOUBLE PRECISION NOT NULL,
   PRIMARY KEY ("entrada_pedidos_entped_id", "item_pedido_pedido_ped_id", "item_pedido_titulo_tit_id"),
   FOREIGN KEY ("entrada_pedidos_entped_id") REFERENCES Comprar ("comp_id"),
   FOREIGN KEY ("item_pedido_pedido_ped_id", "item_pedido_titulo_tit_id") REFERENCES Item_Pedido ("pedido_ped_id", "titulo_tit_id")
@@ -251,13 +251,13 @@ CREATE TABLE IF NOT EXISTS Parametrizacao (
 	"pam_id" SERIAL PRIMARY KEY,
 	"end_id" INT NOT NULL,
 	"pam_nome_fantasia" VARCHAR(45) NOT NULL,
-  "pam_razao_social" VARCHAR(45) NOT NULL,
+  	"pam_razao_social" VARCHAR(45) NOT NULL,
 	"pam_site" VARCHAR(45) NOT NULL,
 	"pam_email" VARCHAR(45) NOT NULL,
 	"pam_cnpj" VARCHAR(45) NOT NULL,
 	"pam_insc_estadual" VARCHAR(45) NOT NULL,
-	"pam_logotipo_grande" VARCHAR(260) NOT NULL,
-	"pam_logotipo_peq" VARCHAR(260) NOT NULL,
+	"pam_logotipo_grande" VARCHAR(45) NOT NULL,
+	"pam_logotipo_peq" VARCHAR(45) NOT NULL,
 	"pam_login" VARCHAR(45) NOT NULL,
 	"pam_senha" VARCHAR(45) NOT NULL,
 	FOREIGN KEY ("end_id") REFERENCES Endereco ("end_id")
