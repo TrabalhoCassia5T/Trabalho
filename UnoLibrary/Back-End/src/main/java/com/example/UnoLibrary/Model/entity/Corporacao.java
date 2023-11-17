@@ -4,13 +4,11 @@ import com.example.UnoLibrary.Model.DTOs.CorporacaoRequestDTO;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Table(name = "parametrizacao")
 @Entity(name = "parametrizacao")
 @Getter
-@NoArgsConstructor
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(of = "pam_id")
 public class Corporacao
 {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,6 +47,9 @@ public class Corporacao
 
     @Column(name = "pam_logotipo_peq")
     private String pam_logotipo_peq;
+
+    public Corporacao() {
+    }
 
     public Corporacao(long pam_id, String pam_login, String pam_nome_fantasia, String pam_cnpj, String pam_razao_social, String pam_insc_estadual,
                       String pam_email, String pam_site, Long end_id, String pam_senha, String pam_logotipo_grande, String pam_logotipo_peq) {

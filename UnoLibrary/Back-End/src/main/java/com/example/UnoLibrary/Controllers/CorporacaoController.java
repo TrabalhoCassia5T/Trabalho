@@ -9,7 +9,6 @@ import com.example.UnoLibrary.Model.entity.Endereco;
 import com.example.UnoLibrary.Model.repository.CorporacaoRepository;
 import com.example.UnoLibrary.Model.repository.EnderecoRepository;
 
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +19,6 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 
 @RequestMapping(value = "/api")
@@ -53,6 +50,7 @@ public class CorporacaoController
         Endereco end = new EnderecoControlFacede(endRepository).inserir(
             new Endereco(0L, rua, numero, bairro, cep, cidade, uf)
         );
+
         File logotipo = new File(getStaticPath()+LOGOTIPOS_FOLDER);
         if (!logotipo.exists())
             logotipo.mkdir();
