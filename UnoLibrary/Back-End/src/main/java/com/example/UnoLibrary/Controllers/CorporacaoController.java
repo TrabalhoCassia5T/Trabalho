@@ -101,12 +101,10 @@ public class CorporacaoController
     @PostMapping(value = "/verificar-login")
     public String verificalogin(@RequestParam("login")String login,@RequestParam("senha")String senha)
     {
-        System.out.println("teste1");
+
         List<CorporacaoResponseDTO> userlist = repository.findAll().stream().map(CorporacaoResponseDTO::new).toList();
-        System.out.println("teste2");
         for(int i = 0; i< userlist.size();i++)
         {
-            System.out.println("dentro do for");
             if(userlist.get(i).pam_login().equals(login)) // compara login
                 if(userlist.get(i).pam_senha().equals(senha)) // compara senha
                     return "Login bem sucedido";
