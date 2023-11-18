@@ -13,10 +13,10 @@ public class Cliente {
     @Column(name = "cli_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cli_id;
+
     @Column(name = "cli_data")
     private Date cli_data;
-//    @ManyToOne
-//    @JoinColumn(name="fis_id", nullable=false)
+
     @Column(name = "fisica_fis_id")
     private Long fisica_fis_id;
 
