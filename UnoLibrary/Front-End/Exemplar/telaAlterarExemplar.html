@@ -4,10 +4,10 @@
 <head>
     <script src="../scripts/scriptClient.js" type="text/javascript"></script>
     <script src="../scripts/mascaras.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="../assets/css/styleBuscaCliente.css">
+    <link rel="stylesheet" href="../assets/css/styleAltCliente.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Busca de Cliente</title>
+    <title>Alteração de Cliente</title>
 </head>
 
 <body>
@@ -24,12 +24,12 @@
                         <li><a href="../cliente/telaExcluirCliente.html">Excluir Cliente</a></li>
                     </ul>
                 </li>
-                <li><a href="#" class="client">EXEMPLARES</a>
+                <li><a href="#" class="client">EXEMPLAR</a>
                     <ul>
                         <li><a href="../Exemplar/telaCadExemplar.html">Cadastrar Exemplar</a></li>
                         <li><a href="../Exemplar/telaBuscaExemplar.html">Buscar Exemplar</a></li>
-                        <li><a href="">Alterar Exemplar</a></li>
-                        <li><a href="">Excluir Exemplar</a></li>
+                        <li><a href="../Exemplar/telaAlterarExemplar.html">Alterar Exemplar</a></li>
+                        <li><a href="../Exemplar/telaExcluirExemplar.html">Excluir Exemplar</a></li>
                     </ul>
                 </li>
                 <li><a href="../emprestimo/telaCadEmprestimo.html">EMPRÉSTIMO</a></li>
@@ -42,42 +42,43 @@
     </header>
 
     <div class="container">
-        <p class="tittle">Busca Cliente</p>
+        <p class="tittle">Alterar Cliente</p>
         <div class="containerForm">
-            <form method="post" id="formBuscaCliente" enctype="multipart/form-data">
-                <h3>Filtros:</h3>
+            <form method="post" id="formBuscaCliente" enctype="multipart/form-data" class="formBusca">
+                <h3>Pesquisa:</h3>
                 <div class="filtros">
                     <div class="containerInput">
-                        <label for="nome">Nome: </label>
-                        <input type="text" id="nome" name="nome" placeholder="Maria">
-                    </div>
-                    <div class="containerInput">
-                        <label for="cpf">CPF: </label>
-                        <input type="text" id="cpf" name="cpf" required placeholder="123.456.789-01"
-                            onkeypress="mCpf(this)" maxlength="14" onblur="validarCPF(this)">
+                        <label for="codigo">Código: </label>
+                        <input type="text" id="codigo" name="codigo" required>
                     </div>
                     <div>
-                        <button class="buttonWrapper" onclick="buscar()">Buscar</button>
+                        <button class="buttonWrapper" onclick="BuscaAlteracao()">Buscar</button>
                     </div>
                 </div>
             </form>
             <div class="tableWrapper">
-                <table border="2">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Nome Completo</th>
-                            <th>CPF</th>
-                            <th>Email</th>
-                            <th>Url</th>
-                            <th>Estado Civil</th>
-                            <th>Telefone</th>
-                            <th>Endereco</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tb">
-                    </tbody>
-                </table>
+                <form method="post" id="formAltCliente" enctype="multipart/form-data" onsubmit="" class="formAlt">
+                    <div class="formContent">
+                        <div class="divContent">
+                            <div class="containerInputAlt">
+                                <label for="status">Status:</label>
+                                <input type="text" id="status" name="status" required>
+                            </div>
+                            <div class="containerInputAlt">
+                                <label for="data">Data:</label>
+                                <input type="date" id="data" name="data" required>
+                            </div>
+                            <div class="containerInputAlt">
+                                <label for="titulo">Titulo:</label>
+                                <input type="text" id="titulo" name="titulo">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <button type="button" class="btnCancelar" onclick="limparForm()">Cancelar</button>
+                        <input type="submit" value="Confirmar" class="btnConfirmar" onclick="gravarAlteracao()">
+                    </div>
+                </form>
             </div>
         </div>
     </div>
