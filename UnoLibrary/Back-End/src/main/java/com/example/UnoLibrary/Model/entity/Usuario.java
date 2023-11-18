@@ -8,7 +8,9 @@ import java.time.LocalDate;
 @Table(name = "usuario")
 public class Usuario {
 
-    @Column(name = "func_id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "funcionario_func_id")
     private Long id;
     @Column(name = "usu_login")
     private String usu_login;
@@ -25,7 +27,6 @@ public class Usuario {
     @Column(name = "usu_nivel")
     private String usu_nivel;
 
-    @Id
     @OneToOne
     @JoinColumn(name = "funcionario_func_id", referencedColumnName = "func_id")
     private Funcionario funcionario_func_id;
@@ -34,7 +35,7 @@ public class Usuario {
     }
 
     public Usuario(Funcionario funcionario_func_id) {
-        funcionario_func_id = funcionario_func_id;
+        this.funcionario_func_id = funcionario_func_id;
     }
 
     public Usuario(String usu_login, String usu_senha, LocalDate usu_data_perm, LocalDate usu_data_desativa, String usu_nivel, Funcionario funcionario_func_id) {
@@ -43,7 +44,7 @@ public class Usuario {
         this.usu_data_perm = usu_data_perm;
         this.usu_data_desativa = usu_data_desativa;
         this.usu_nivel = usu_nivel;
-        funcionario_func_id = funcionario_func_id;
+        this.funcionario_func_id = funcionario_func_id;
     }
 
     public String getUsu_login() {
@@ -87,10 +88,10 @@ public class Usuario {
     }
 
     public Funcionario getFuncionario_func_id() {
-        return funcionario_func_id;
+        return this.funcionario_func_id;
     }
 
     public void setFuncionario_func_id(Funcionario funcionario_func_id) {
-        funcionario_func_id = funcionario_func_id;
+        this.funcionario_func_id = funcionario_func_id;
     }
 }

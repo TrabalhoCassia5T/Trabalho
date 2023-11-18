@@ -1,5 +1,6 @@
 package com.example.UnoLibrary.Model.entity;
 import java.util.Date;
+import java.util.List;
 
 import jakarta.persistence.*;
 
@@ -22,6 +23,9 @@ public class Fisica {
 //    @JoinColumn(name="pes_id", nullable=false)
     @Column(name="pessoa_pes_id")
     private Long pessoa_pes_id;
+
+    @OneToMany(mappedBy = "fisica")
+    private List<Funcionario> funcionarios;
 
     public Fisica() {
     }
