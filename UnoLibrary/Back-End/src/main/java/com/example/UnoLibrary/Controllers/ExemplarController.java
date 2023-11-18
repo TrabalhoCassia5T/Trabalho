@@ -1,2 +1,3 @@
-package com.example.UnoLibrary.Controllers;public class ExemplarController {
+package com.example.UnoLibrary.Controllers;
+public class ExemplarController {
 }

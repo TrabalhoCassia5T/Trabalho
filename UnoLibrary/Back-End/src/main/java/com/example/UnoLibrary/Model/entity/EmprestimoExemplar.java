@@ -14,7 +14,6 @@ import java.util.Date;
 public class EmprestimoExemplar {
     @Id
     @Column(name = "emprestimo_emp_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long emprestimo_emp_id;
 
     @Column(name = "exemplar_exe_id")

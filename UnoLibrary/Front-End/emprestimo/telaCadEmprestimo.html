@@ -3,6 +3,7 @@
 
 <head>
     <script src="../scripts/scriptEmprestimo.js" type="text/javascript"></script>
+    <script src="../scripts/mascaras.js" type="text/javascript"></script>
     <link rel="stylesheet" href="../assets/css/styleCadEmprestimo.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -43,16 +44,17 @@
     <div class="container">
         <p class="tittle">Efetuar Emprestimo</p>
         <div class="containerForm">
-            <form method="post" id="formCadCliente" enctype="multipart/form-data" onsubmit="gravar()">
+            <form method="post" id="formEmprestimo" enctype="multipart/form-data" onsubmit="gravar()">
                 <div class="formContent">
                     <div class="divContent">
                         <div class="containerInput">
-                            <label for="num_cliente">Numero de Cadastro do Cliente:</label>
-                            <input type="text" id="num_cliente" name="num_cliente" required placeholder="001">
+                            <label for="cpf_cliente">CPF do Cliente:</label>
+                            <input type="text" id="cpf_cliente" name="cpf_cliente" required placeholder="123.456.789-09"
+                             onkeypress="mCpf(this)" maxlength="14"onblur="verificaCliente()">
                         </div>
                         <div class="containerInput">
-                            <label for="cod_livro">Código do Livro:</label>
-                            <input type="text" id="cod_livro" name="cod_livro" required placeholder="001">
+                            <label for="cod_livro">Códigos dos Livros:</label>
+                            <input type="text" id="cod_livro" name="cod_livro" required placeholder="001, 002, 003">
                         </div>
                         <div class="containerInput">
                             <label for="data_devolucao">Data de devolução:</label>
@@ -65,18 +67,18 @@
                             <input type="text" id="nome_cliente" name="nome_cliente" required placeholder="Maria">
                         </div>
                         <div class="containerInput">
-                            <label for="nome_livro">Nome do Livro:</label>
-                            <input type="text" id="nome_livro" name="nome_livro" placeholder="Nome do Livro"
+                            <label for="nome_livro">Nomes dos Livros:</label>
+                            <input type="text" id="nome_livro" name="nome_livro" placeholder="Nome do Livro1, Nome do Livro2, Nome do Livro3"
                              onblur="generateDate()">
                         </div>
                         <div class="status">
-                            <input class="statusText" type="text" id="status" name="status" placeholder="LIBERADO" disabled>
+                            <input class="statusText" type="text" id="status" name="status" disabled>
                         </div>
                     </div>
                 </div>
                 <div class="buttons">
-                    <button type="button" class="btnCancelar">Cancelar</button>
-                    <input type="submit" value="Confirmar" class="btnConfirmar" onclick="gravar()">
+                    <button type="button" class="btnCancelar" onclick="limpa()">Cancelar</button>
+                    <input type="submit" value="Confirmar" class="btnConfirmar">
                 </div>
             </form>
         </div>
