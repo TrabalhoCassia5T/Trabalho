@@ -1,5 +1,4 @@
 package com.example.UnoLibrary.Model.entity;
-import com.example.UnoLibrary.Model.entity.Funcionario;
 
 import jakarta.persistence.*;
 

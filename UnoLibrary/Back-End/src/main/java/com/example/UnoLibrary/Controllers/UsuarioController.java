@@ -22,9 +22,23 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioRepository.findAll());
     }
 
-    @PostMapping("alterar")
-    public ResponseEntity<Object> alterar(@RequestBody Usuario usuario) {
-        return ResponseEntity.ok(usuarioRepository.save(usuario));
+    @PutMapping("alterar/{id}")
+    public ResponseEntity<Object> alterarUsuario(@PathVariable Long id, @RequestBody Usuario usuarioAtual) {
+        if (!usuarioRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Usuario usuarioEx = usuarioRepository.getById(id);
+
+        usuarioEx.setUsu_login(usuarioAtual.getUsu_login());
+        usuarioEx.setUsu_senha(usuarioAtual.getUsu_senha());
+        usuarioEx.setUsu_data_perm(usuarioAtual.getUsu_data_perm());
+        usuarioEx.setUsu_data_desativa(usuarioAtual.getUsu_data_desativa());
+        usuarioEx.setUsu_nivel(usuarioAtual.getUsu_nivel());
+
+        Usuario usuario = usuarioRepository.save(usuarioEx);
+
+        return ResponseEntity.ok(usuario);
     }
 
     @DeleteMapping("excluir/{id}")
