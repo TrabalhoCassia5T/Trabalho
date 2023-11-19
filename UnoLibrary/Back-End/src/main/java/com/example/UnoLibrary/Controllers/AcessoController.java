@@ -24,27 +24,4 @@ public class AcessoController {
         else
             return ResponseEntity.badRequest().body("Usuario não autenticado");
     }
-
-    @RestController
-    @RequestMapping("/api/exemplar")
-    public static class ExemplarController {
-        @Autowired
-        private ExemplarRepository repo;
-        @PostMapping("cadastrar")
-        public ResponseEntity<Object> incluir(@RequestBody Exemplar exemplar) {
-            return ResponseEntity.ok(repo.save(exemplar));
-        }
-        @GetMapping("buscar")
-        public ResponseEntity<Object> buscarTodos() {
-            return ResponseEntity.ok(repo.findAll());
-        }
-        @PostMapping("alterar")
-        public ResponseEntity<Object> alterar(@RequestBody Exemplar exemplar) {
-            return ResponseEntity.ok(repo.save(exemplar));
-        }
-        @GetMapping("excluir/{id}")
-        public void apagar(@PathVariable Long id) {
-            repo.deleteById(id);
-        }
-    }
 }

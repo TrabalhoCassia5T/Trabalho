@@ -25,10 +25,6 @@ public class Titulo implements Serializable {
     private List<Autor> autores;
     @OneToMany(mappedBy = "titulo")
     private List<TituloEditora> Editoras;
-
-    @OneToMany(mappedBy = "titulo")
-    private List<Exemplar> exemplares;
-
     public Titulo() {
     }
 
@@ -94,13 +90,5 @@ public class Titulo implements Serializable {
 
     public void setEditoras(List<TituloEditora> editoras) {
         Editoras = editoras;
-    }
-
-    public List<Exemplar> getExemplares() {
-        return exemplares;
-    }
-
-    public void setExemplares(List<Exemplar> exemplares) {
-        this.exemplares = exemplares;
     }
 }
