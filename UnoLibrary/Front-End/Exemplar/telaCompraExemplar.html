@@ -9,12 +9,12 @@
 </head>
 <body>
 
-  <form method="post" id="pesquisa"  enctype="multipart/form-data" onsubmit="compraExemplar()">
+  <form  id="searchForm" >
     <h1>Compra de Exemplares</h1>
     <h3>Digite nome do livro</h3>
-    <input type="text" name="nomeLivro" placeholder="Nome do Livro" required>
+    <input type="text" id="searchInput" name="searchInput" placeholder="Nome do Livro" required>
     <br>
-    <button type="submit">Enviar</button>
+    <button type="submit"  onclick="searchFornecedores()">Enviar</button>
   </form>
 
 </body>
