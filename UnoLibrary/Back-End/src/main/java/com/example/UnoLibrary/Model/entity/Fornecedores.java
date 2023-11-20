@@ -1,9 +1,14 @@
 package com.example.UnoLibrary.Model.entity;
 
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
 @Table(name = "fornecedor")
-public class Fornecedor
+@Entity(name = "fornecedor")
+@Getter
+@EqualsAndHashCode(of = "for_id")
+public class Fornecedores
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,7 +17,8 @@ public class Fornecedor
     @Column(name = "for_nome")
     private String nome;
 
-    public Fornecedor(long for_id, String nome) {
+    public Fornecedores(){}
+    public Fornecedores(long for_id, String nome) {
         this.for_id = for_id;
         this.nome = nome;
     }

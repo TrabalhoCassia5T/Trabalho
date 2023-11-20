@@ -1,51 +1,32 @@
-function compraExemplar()
-{
-    event.preventDefault();
-    const dados = new FormData(document.getElementById("pesquisa"));
-    fetch("http://localhost:8080/fornecedor/busca-fornecedor", { method: 'post', body: dados })
-        .then(response => response.text())
-        .then(mens => {
-          if (mens === "Não existe fornecedor" ) 
-          {
-            alert("Não possui fornecedor");
-            
-          } 
-          else 
-          {
-            createTable(response)
-          }
-        })
-        .catch(error => document.getElementById("feedback").innerHTML = error);
+function searchFornecedores() {
+  // Obter o valor de pesquisa
+  var searchInput = document.getElementById("searchInput").value;
+
+  // Fazer a requisição AJAX para o Spring
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function () {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+          // Manipular a resposta do Spring (JSON, por exemplo)
+          var fornecedores = JSON.parse(xhr.responseText);
+          showFornecedoresTable(fornecedores);
+      }
+  };
+  
+  // Substitua a URL abaixo pelo endpoint real do Spring que retorna os fornecedores
+  xhr.open("GET", "http://localhost:8080/api/fornecedores?search=" + searchInput, true);
+  xhr.send();
 }
 
-function createTable(responseData) {
-    var nomes = responseData.nomes;
+function showFornecedoresTable(fornecedores) {
+  // Criar uma tabela HTML com os fornecedores
+  var table = "<table border='1'><tr><th>ID</th><th>Nome</th></tr>";
 
-    var table = document.createElement('table');
-
-    var headerRow = table.insertRow(0);
-    var headerCell = headerRow.insertCell(0);
-    headerCell.textContent = 'Nome';
-    var radioCell = headerRow.insertCell(1);
-    radioCell.textContent = 'Selecionar';
-
-    for (var i = 0; i < nomes.length; i++) {
-      var nome = nomes[i];
-
-      var row = table.insertRow(i + 1);
-
-      var cellNome = row.insertCell(0);
-      cellNome.textContent = nome;
-
-      var cellRadio = row.insertCell(1);
-      var radioBtn = document.createElement('input');
-      radioBtn.type = 'radio';
-      radioBtn.name = 'nomeRadio';
-      radioBtn.value = nome;
-      cellRadio.appendChild(radioBtn);
-    }
-
-    var tableContainer = document.getElementById('table-container');
-    tableContainer.innerHTML = ''; // Limpa o conteúdo anterior
-    tableContainer.appendChild(table);
+  for (var i = 0; i < fornecedores.length; i++) {
+      table += "<tr><td>" + fornecedores[i].id + "</td><td>" + fornecedores[i].nome + "</td></tr>";
   }
+
+  table += "</table>";
+
+  // Exibir a tabela na página
+  document.getElementById("resultTable").innerHTML = table;
+}
