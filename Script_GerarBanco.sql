@@ -263,6 +263,11 @@ CREATE TABLE IF NOT EXISTS Parametrizacao (
 	FOREIGN KEY ("end_id") REFERENCES Endereco ("end_id")
 );
 
+CREATE TABLE IF NOT EXISTS Fornecedor (
+  "for_id" SERIAL PRIMARY KEY,
+  "for_nome" VARCHAR(45) NOT NULL
+);
+
 
 -------------------------- Só para caso queiramos reiniciar o banco ---------------------------------
 /*
@@ -295,4 +300,5 @@ DROP TABLE IF EXISTS Item_Compra CASCADE;
 DROP TABLE IF EXISTS Encomenda_Titulo CASCADE;
 DROP TABLE IF EXISTS Parametrizacao CASCADE;
 DROP TABLE IF EXISTS Endereco CASCADE;
+DROP TABLE IF EXISTS Fornecedor CASCADE
 */
