@@ -15,14 +15,17 @@ public class Exemplar {
     private String status;
     @Column(name="exe_data_entrada")
     private LocalDate dataEntrada;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name="titulo_tit_id")
     private Titulo titulo;
+    @OneToOne(fetch = FetchType.LAZY,mappedBy = "exemplar")
+    private Baixa baixa;
 
-    public Exemplar(Long id, String status, LocalDate dataEntrada) {
+    public Exemplar(Long id, String status, LocalDate dataEntrada, Titulo titulo) {
         this.id = id;
         this.status = status;
         this.dataEntrada = dataEntrada;
+        this.titulo = titulo;
     }
 
     public Exemplar() {
@@ -54,5 +57,13 @@ public class Exemplar {
 
     public void setDataEntrada(LocalDate dataEntrada) {
         this.dataEntrada = dataEntrada;
+    }
+
+    public Titulo getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(Titulo titulo) {
+        this.titulo = titulo;
     }
 }
