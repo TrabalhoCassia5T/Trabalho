@@ -9,7 +9,10 @@ import com.example.UnoLibrary.Model.entity.Endereco;
 import com.example.UnoLibrary.Model.repository.CorporacaoRepository;
 import com.example.UnoLibrary.Model.repository.EnderecoRepository;
 
-import org.apache.commons.io.FileUtils;
+
+import jakarta.servlet.http.HttpServletRequest;
+=======
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +23,6 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 
 @RequestMapping(value = "/api")
@@ -32,6 +33,9 @@ public class CorporacaoController
     private final static String LOGOTIPOS_FOLDER="/logotipos";
     @Autowired
     private ResourceLoader resourceLoader;
+
+    @Autowired
+    private HttpServletRequest request;
     @Autowired
     private CorporacaoRepository repository;
     @Autowired
@@ -51,19 +55,24 @@ public class CorporacaoController
                                            @RequestParam ("site") String site, @RequestParam ("uf") String uf)
     {
         Endereco end = new EnderecoControlFacede(endRepository).inserir(
-            new Endereco(0L, rua, numero, bairro, cep, cidade, uf)
+                new Endereco(0L, rua, numero, bairro, cep, cidade, uf)
         );
+
         File logotipo = new File(getStaticPath()+LOGOTIPOS_FOLDER);
         if (!logotipo.exists())
             logotipo.mkdir();
-        String logotipope = getStaticPath()+LOGOTIPOS_FOLDER+"\\"+login+"_"+nomeempresa+"_"+cnpj+".png";
-        String logotipogr = getStaticPath()+LOGOTIPOS_FOLDER+"\\"+login+"_"+nomeempresa+"_"+cnpj+".png";
+        String logotipope = getStaticPath()+LOGOTIPOS_FOLDER+"\\"+nomeempresa+".jpg";
+        System.out.println(logotipope);
         Path root= Paths.get(".");
         try {
-            Files.copy(logotipop.getInputStream(), root.resolve(logotipope));
-            Files.copy(logotipog.getInputStream(), root.resolve(logotipogr));
+            System.out.println("ENTROU NO TRY");
+            System.out.println(root.resolve(logotipope));
+            Files.copy(logotipop.getInputStream(),root.resolve(logotipope));
+            System.out.println("passou copy");
+            String imageP = findImage(logotipop.getName());
+            System.out.println(imageP);
             CorporacaoRequestDTO data = new CorporacaoRequestDTO(login,nomeempresa,cnpj,razaosocial
-                    ,inscricaoestadual,email,site, end.getEnd_id(), senha,logotipogr,logotipope);
+                    ,inscricaoestadual,email,site, end.getEnd_id(), senha,logotipog.getName(),imageP);
             Corporacao dados = new Corporacao(data);
             repo.save(dados);
             return ResponseEntity.ok().body("ok");
@@ -74,20 +83,21 @@ public class CorporacaoController
         }
     }
 
-    public ResponseEntity<Object> findImage (@RequestParam("chave") String chave)
+    public String findImage (@RequestParam("chave") String chave)
     {
         String res = "";
-        Corporacao corp=new Corporacao();
         // busca as imagens na pasta static/musics
         File pastaweb = new File(getStaticPath()+LOGOTIPOS_FOLDER);
+        System.out.println(pastaweb.listFiles());
         for (File file : pastaweb.listFiles()) {
-            if (file.isFile() && file.getName().endsWith("png") && file.getName().toUpperCase().contains(chave.toUpperCase()))
+            if (file.isFile() && file.getName().endsWith(".jpg") && file.getName().toUpperCase().contains(chave.toUpperCase()))
             {
-                return ResponseEntity.ok(corp);
-
+                System.out.println("chegou");
+                res = getHostStatic();
+                System.out.println(res);
             }
         }
-        return ResponseEntity.ok(corp);
+        return res;
     }
 
 
@@ -98,6 +108,11 @@ public class CorporacaoController
             staticPath = resourceLoader.getResource("classpath:static").getFile().getAbsolutePath();
         }catch (Exception e){}
         return staticPath;
+    }
+    /* retorna a url da pasta static/musics*/
+    public String getHostStatic()
+    {
+        return "http://"+request.getServerName().toString()+":"+request.getServerPort()+LOGOTIPOS_FOLDER+"/";
     }
 
     @PostMapping(value = "/verificar-login")
