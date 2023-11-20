@@ -1,32 +1,33 @@
-function searchFornecedores() {
-  // Obter o valor de pesquisa
-  var searchInput = document.getElementById("searchInput").value;
+function buscar() {
+  console.log("oi");
+  buscaTodos()
+    .then(data => {
 
-  // Fazer a requisição AJAX para o Spring
-  var xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function () {
-      if (xhr.readyState == 4 && xhr.status == 200) {
-          // Manipular a resposta do Spring (JSON, por exemplo)
-          var fornecedores = JSON.parse(xhr.responseText);
-          showFornecedoresTable(fornecedores);
-      }
-  };
-  
-  // Substitua a URL abaixo pelo endpoint real do Spring que retorna os fornecedores
-  xhr.open("GET", "http://localhost:8080/api/fornecedores?search=" + searchInput, true);
-  xhr.send();
+      console.log(data);
+      //   let ac = "";
+      // for (let res of data) 
+      // {
+      //   ac += `<tr><td>${res.id}</td> 
+      //           <td>${res.nome}</td>
+      //           </tr>`
+      // }
+    })
+    .catch(error => console.error('Erro:', error));
 }
 
-function showFornecedoresTable(fornecedores) {
-  // Criar uma tabela HTML com os fornecedores
-  var table = "<table border='1'><tr><th>ID</th><th>Nome</th></tr>";
+async function buscaTodos() 
+{
+ 
+  try {
+    const response = await fetch("http://localhost:8080/fornecedor/busca-fornecedores");
+    if (!response.ok) {
+      throw new Error('Não foi possível obter os dados.');
 
-  for (var i = 0; i < fornecedores.length; i++) {
-      table += "<tr><td>" + fornecedores[i].id + "</td><td>" + fornecedores[i].nome + "</td></tr>";
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Ocorreu um erro:', error);
+    throw error;
   }
-
-  table += "</table>";
-
-  // Exibir a tabela na página
-  document.getElementById("resultTable").innerHTML = table;
 }
