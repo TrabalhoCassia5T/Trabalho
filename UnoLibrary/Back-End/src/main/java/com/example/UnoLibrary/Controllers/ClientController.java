@@ -95,9 +95,10 @@ public class ClientController {
             Pessoa pessoa = pes.get();
             Optional<Endereco> end = endRepo.findById(pessoa.getEnd_id());
             Endereco endereco = end.get();
-            System.out.println(f.getFis_cpf());
+            System.out.println("cpf:"+f.getFis_cpf());
+            System.out.println("id:"+f.getFis_id());
             Cliente cli = repository.findByFisicaId(f.getFis_id());
-            System.out.println(cli.getCli_id());
+            System.out.println("Cliente id:"+cli.getCli_id());
             todos.add(new BuscaClienteResponseDTO(cli.getCli_id(),
                     pessoa.getPes_nome(), f.getFis_cpf(), pessoa.getPes_email(),
                     pessoa.getPes_url(), f.getFis_estCivil(), pessoa.getPes_telefone(),
