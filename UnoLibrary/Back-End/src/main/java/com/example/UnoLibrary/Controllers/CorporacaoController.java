@@ -53,25 +53,24 @@ public class CorporacaoController
                                            @RequestParam ("senha") String senha,
                                            @RequestParam ("site") String site, @RequestParam ("uf") String uf)
     {
-        Endereco end = new EnderecoControlFacede(endRepository).inserir(
-                new Endereco(0L, rua, numero, bairro, cep, cidade, uf)
-        );
-
         File logotipo = new File(getStaticPath()+LOGOTIPOS_FOLDER);
         if (!logotipo.exists())
             logotipo.mkdir();
-        String logotipope = getStaticPath()+LOGOTIPOS_FOLDER+"\\"+nomeempresa+".jpg";
+        String logotipope = getStaticPath()+LOGOTIPOS_FOLDER+"\\"+logotipop.getName()+".jpg";
         System.out.println(logotipope);
         Path root= Paths.get(".");
         try {
             System.out.println("ENTROU NO TRY");
             System.out.println(root.resolve(logotipope));
-            Files.copy(logotipop.getInputStream(),root.resolve(logotipope));
-            System.out.println("passou copy");
-            String imageP = findImage(logotipop.getName());
-            System.out.println(imageP);
+//            Files.copy(logotipop.getInputStream(),root.resolve(logotipope));
+//            System.out.println("passou copy");
+//            String imageP = findImage(logotipop.getName());
+//            System.out.println(imageP);
+            Endereco end = new EnderecoControlFacede(endRepository).inserir(
+                    new Endereco(0L, rua, numero, bairro, cep, cidade, uf)
+            );
             CorporacaoRequestDTO data = new CorporacaoRequestDTO(login,nomeempresa,cnpj,razaosocial
-                    ,inscricaoestadual,email,site, end.getEnd_id(), senha,logotipog.getName(),imageP);
+                    ,inscricaoestadual,email,site, end.getEnd_id(), senha,logotipog.getName(),logotipope);
             Corporacao dados = new Corporacao(data);
             repo.save(dados);
             return ResponseEntity.ok().body("ok");
@@ -82,17 +81,20 @@ public class CorporacaoController
         }
     }
 
-    public String findImage (@RequestParam("chave") String chave)
+    @GetMapping(value = "/find-logo")
+    public String findImage ()
     {
         String res = "";
+        System.out.println("busca imagem");
         // busca as imagens na pasta static/musics
         File pastaweb = new File(getStaticPath()+LOGOTIPOS_FOLDER);
         System.out.println(pastaweb.listFiles());
         for (File file : pastaweb.listFiles()) {
-            if (file.isFile() && file.getName().endsWith(".jpg") && file.getName().toUpperCase().contains(chave.toUpperCase()))
+            System.out.println("entrou no for");
+            if (file.isFile() && file.getName().endsWith(".jpg"))
             {
                 System.out.println("chegou");
-                res = getHostStatic();
+                res = getHostStatic()+file.getName();
                 System.out.println(res);
             }
         }

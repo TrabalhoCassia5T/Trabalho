@@ -256,8 +256,8 @@ CREATE TABLE IF NOT EXISTS Parametrizacao (
 	"pam_email" VARCHAR(45) NOT NULL,
 	"pam_cnpj" VARCHAR(45) NOT NULL,
 	"pam_insc_estadual" VARCHAR(45) NOT NULL,
-	"pam_logotipo_grande" VARCHAR(45) NOT NULL,
-	"pam_logotipo_peq" VARCHAR(45) NOT NULL,
+	"pam_logotipo_grande" VARCHAR(999) NOT NULL,
+	"pam_logotipo_peq" VARCHAR(999) NOT NULL,
 	"pam_login" VARCHAR(45) NOT NULL,
 	"pam_senha" VARCHAR(45) NOT NULL,
 	FOREIGN KEY ("end_id") REFERENCES Endereco ("end_id")

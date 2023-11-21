@@ -1,5 +1,4 @@
 function buscar() {
-  console.log("oi");
   buscaTodos()
     .then(data => {
 
