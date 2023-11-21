@@ -1,3 +1,20 @@
+window.addEventListener('load', async function() {
+    try {
+        const response = await fetch("http://localhost:8080/api/find-logo");
+
+        const data = await response.text();
+        console.log(data)
+        const imagem = document.getElementById('image');
+
+        // Define dinamicamente a URL da imagem
+        const urlDaImagem = data;
+        imagem.src = urlDaImagem;
+    } catch (error) {
+        console.error('Ocorreu um erro:', error);
+        throw error;
+    }
+})
+
 function gravar() {
 
     event.preventDefault();
