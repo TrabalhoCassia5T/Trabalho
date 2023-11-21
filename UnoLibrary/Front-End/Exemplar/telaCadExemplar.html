@@ -4,7 +4,7 @@
 <head>
     <script src="../scripts/scriptExemplar.js" type="text/javascript"></script>
     <script src="../scripts/mascaras.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="../assets/css/styleBuscaCliente.css">
+    <link rel="stylesheet" href="../assets/css/styleCadExemplar.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Cliente</title>
@@ -24,12 +24,12 @@
                         <li><a href="../cliente/telaExcluirCliente.html">Excluir Cliente</a></li>
                     </ul>
                 </li>
-                <li><a href="#" class="client">EXEMPLAR</a>
+                <li><a href="#" class="client">EXEMPLARES</a>
                     <ul>
                         <li><a href="../Exemplar/telaCadExemplar.html">Cadastrar Exemplar</a></li>
                         <li><a href="../Exemplar/telaBuscaExemplar.html">Buscar Exemplar</a></li>
-                        <li><a href="">Alterar Exemplar</a></li>
-                        <li><a href="">Excluir Exemplar</a></li>
+                        <li><a href="../Exemplar/telaAlterarExemplar.html">Alterar Exemplar</a></li>
+                        <li><a href="../Exemplar/telaExcluirExemplar.html">Excluir Exemplar</a></li>
                     </ul>
                 </li>
                 <li><a href="../emprestimo/telaCadEmprestimo.html">EMPRÉSTIMO</a></li>
@@ -48,15 +48,15 @@
                 <div class="filtros">
                     <div class="containerInput">
                         <label for="status">Status: </label>
-                        <input type="text" id="status" name="status" placeholder="Novo">
-                    </div>
-                    <div class="containerInput">
-                        <label for="data">Data: </label>
-                        <input type="date" id="data" name="data"  value="2017-06-01" required />
+                        <input type="text" id="status" name="status" >
                     </div>
                     <div class="containerInput">
                         <label for="titulo">Titulo: </label>
                         <input type="text" id="titulo" name="titulo" >
+                    </div>
+                    <div class="containerInput">
+                        <label for="data">Data: </label>
+                        <input type="date" id="data" name="data"  value="2017-06-01">
                     </div>
                     <div>
                         <button class="buttonWrapper" onclick="buscar()">Buscar</button>
@@ -68,7 +68,7 @@
                     <thead>
                         <tr>
                             <th>Id</th>
-                            <th>Nome Completo</th>
+                            <th>Nome</th>
                             <th>Quantidade</th>
                             <th>Edição</th>
                             <th>Genero</th>
