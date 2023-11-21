@@ -11,7 +11,7 @@
 
 <body>
     <header>
-        <img src="../img/img_software.png" class="imgLogo" />
+        <img id="image" class="imgLogo"  />
         <nav>
             <ul class="menu">
                 <li><a href="../home/index.html">HOME</a></li>
@@ -43,15 +43,26 @@
     <div class="container">
         <p class="tittle">Compra de Exemplares</p>
         <div class="containerForm">
-            <form id="searchForm" method="post" enctype="multipart/form-data">
+            <form id="formCompraLivro" method="post" enctype="multipart/form-data" onsubmit="buscar()">
                 <h3>Compra de Exemplares</h3>
                 <div class="filtros">
                     <div class="containerInput">
                         <label for="nome">Digite o nome do livro: </label>
-                        <input type="text" id="searchInput" name="searchInput" placeholder="Nome do Livro" required>
+                        <input type="text" id="nome" name="nome" placeholder="Nome do Livro" required>
                     </div>
-                    <button class="buttonWrapper" onclick="buscar()">Enviar</button>
+
+                    <div class="containerInput">
+                        <label for="genero">Digite o genero: </label>
+                        <input type="text" id="genero" name="genero" placeholder="Nome do genero" required>
+                    </div>
+
+                    <div class="containerInput">
+                        <label for="edicao">Digite a edição: </label>
+                        <input type="text" id="edicao" name="edicao" placeholder="Numero da edição" required>
+                    </div>
+                    <button class="buttonWrapper" >Enviar</button>
                 </div>
+                
             </form>
             <div class="tableWrapper">
                 <table border="2">
@@ -67,8 +78,17 @@
                     </tbody>
                 </table>
             </div>
+            <div class="quantidade-container">
+                <label for="quantidade">Quantidade:</label>
+                <input type="number" id="quantidade" name="quantidade" min="1" required>
+                <br>
+                <br>
+                <button id="confirmarBtn" class="buttonWrapper" onclick="navegarParaOutraPagina()" disabled>Confirmar</button>
+            </div>
         </div>
     </div>
+    
+    
 
 </body>
 

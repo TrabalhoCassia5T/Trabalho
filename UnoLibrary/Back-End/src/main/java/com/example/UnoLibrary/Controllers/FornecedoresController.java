@@ -28,6 +28,7 @@ public class FornecedoresController {
     @Autowired
     private PessoaRepository pesRepo;
 
+    
     @GetMapping(value = "/fornecedor/busca-fornecedores")
     public ResponseEntity<Object> getAllFornecedores() {
         List<BuscaFornecedoresResponseDTO> todos = new ArrayList<>();
