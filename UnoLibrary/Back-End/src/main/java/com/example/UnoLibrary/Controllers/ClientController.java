@@ -56,12 +56,15 @@ public class ClientController {
         Endereco end = new EnderecoControlFacede(endRepo).inserir(
                 new Endereco(0L, rua, numero, bairro, cep, cidade, estado)
         );
+        System.out.println(end.getEnd_id());
         Pessoa pes = new PessoaControlFacede(pesRepo).inserir(
                 new Pessoa(0L, end.getEnd_id(), nome, telefone, email, url)
         );
+        System.out.println(pes.getPes_nome());
         Fisica fis = new FisicaControlFacede(fisRepo).inserir(
                 new Fisica(0L, cpf, new Date(dataNasc), estCivil, sexo, pes.getPes_id())
         );
+        System.out.println(fis.getFis_cpf());
         repository.save(new Cliente(0L, new Date(), fis.getFis_id()));
         return ResponseEntity.ok().body("ok");
     }
@@ -71,6 +74,9 @@ public class ClientController {
     {
         System.out.println(cpf);
         List<Fisica> fis = fisRepo.findByCpf(cpf);
+        if(fis.size() == 0) {
+            return ResponseEntity.badRequest().body("Cliente não existe");
+        }
         Fisica pessoaFisica = fis.get(0);
         Optional<Pessoa> pes = pesRepo.findById(pessoaFisica.getPessoa_pes_id());
         Pessoa pessoa = pes.get();

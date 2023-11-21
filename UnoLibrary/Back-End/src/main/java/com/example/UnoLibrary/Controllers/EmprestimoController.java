@@ -70,18 +70,6 @@ public class EmprestimoController {
         return ResponseEntity.ok().body("ok");
     }
 
-    @PostMapping(value = "/emprestimo/renovar")
-    public ResponseEntity<Object> renovarEmprestimo(@RequestParam("id") Long id) {
-       Optional<Emprestimo> emp = repository.findById(id);
-        if(emp.isEmpty()) {
-            return ResponseEntity.badRequest().body("Id inválido");
-        }
-        Emprestimo emprestimo = emp.get();
-        emprestimo.setEmp_prev_devolucao(generateDateAfterSevenDays());
-        repository.save(emprestimo);
-        return ResponseEntity.ok().body("ok");
-    }
-
     @GetMapping(value = "/emprestimo/verifica/cliente")
     public ResponseEntity<Object> verificaCliente(@RequestParam("id") Long id) {
         System.out.println(id);
