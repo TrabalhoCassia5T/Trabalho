@@ -68,7 +68,6 @@ function buscar() {
                 for (let res of data) {
                     ac += `<tr><td>${res.id}</td> <td>${res.nome}</td>
                     <td>${res.cpf}</td> <td>${res.email}</td>
-                    <td>${res.url}</td>
                     <td>${res.estado_civil}</td>
                     <td>${res.telefone}</td>
                     <td>${res.rua+ ","+ res.numero+"-"+res.cidade}</td></tr>`
@@ -88,7 +87,6 @@ function buscar() {
                     let ac = "";
                         ac += `<tr><td>${data.id}</td> <td>${data.nome}</td>
                         <td>${data.cpf}</td> <td>${data.email}</td>
-                        <td>${data.url}</td>
                         <td>${data.estado_civil}</td>
                         <td>${data.telefone}</td>
                         <td>${data.rua+ ","+ data.numero+"-"+data.cidade}</td></tr>`
@@ -107,7 +105,6 @@ function buscar() {
                     for (let res of data) {
                         ac += `<tr><td>${res.id}</td> <td>${res.nome}</td>
                         <td>${res.cpf}</td> <td>${res.email}</td>
-                        <td>${res.url}</td>
                         <td>${res.estado_civil}</td>
                         <td>${res.telefone}</td>
                         <td>${res.rua+ ","+ res.numero+"-"+res.cidade}</td></tr>`
@@ -126,7 +123,7 @@ async function buscaCpf(cpf) {
     try {
         const response = await fetch(`http://localhost:8080/api/busca-cliente-cpf?cpf=${cpf}`);
         if (!response.ok) {
-            throw new Error('Não foi possível obter os dados.');
+            alert("Cliente não encontrado");
         }
         const data = await response.json();
         return data;
@@ -199,7 +196,7 @@ function exibirAlerta(mensagem) {
     const botao = document.createElement("button");
     botao.textContent = "Ok";
     botao.addEventListener("click", function () {
-        document.body.removeChild(alertDiv); // Remover o alerta
+        document.body.removeChild(alertDiv);// Remover o alerta
     });
 
     div.appendChild(mensagemDiv1);
@@ -260,7 +257,7 @@ function Exclusao() {
         .then(data => {
             if (data !== undefined) {
                 exibirAlertaExclusao(`Certeza que deseja excluir o cliente ${data.nome} da sua 
-            base de dados ?`, data)
+                base de dados ?`, data)
             }
             else {
                 alert(mens);

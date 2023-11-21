@@ -47,7 +47,7 @@ async function buscaCpf(cpf) {
     try {
         const response = await fetch(`http://localhost:8080/api/busca-cliente-cpf?cpf=${cpf}`);
         if (!response.ok) {
-            throw new Error('Não foi possível obter os dados.');
+            alert("Cliente não encontrado");
         }
         const data = await response.json();
         return data;
