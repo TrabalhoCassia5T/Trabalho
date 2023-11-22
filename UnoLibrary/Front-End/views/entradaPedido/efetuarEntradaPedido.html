@@ -53,7 +53,42 @@
         <div class="profile"><a href="#"><img src="../../assets/img/Edit Profile.png" /></a></div>
     </header>
 
-    
+    <section class="container">
+        <p class="tittle">Pesquisar Pedido</p>
+        <div class="containerForm">
+            <form method="post" id="formBuscaCliente" enctype="multipart/form-data">
+                <h3>Pesquisar por:</h3>
+                <div class="filtros">
+                    <div class="containerInput">
+                        <label for="id_ped">Código do pedido: </label>
+                        <input type="text" id="id_ped" name="id_ped" placeholder="0008676-5">
+                    </div>
+                    <div class="containerInput">
+                        <label for="forn">Nome do Fornecedor: </label>
+                        <input type="text" id="forn" name="forn" required placeholder="LIVROS LTDA">
+                    </div>
+                    <div>
+                        <button class="buttonWrapper" onclick="buscar()">Buscar</button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="tableWrapper">
+                <table border="2">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Data do Pedido</th>
+                            <th>Fornecedor</th>
+                            <th>Usuário que fez pedido</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tb">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
 
     <div class="footerLibrary">
         <p>@UNOLIBRARY</p>
