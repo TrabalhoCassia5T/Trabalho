@@ -2,11 +2,12 @@
 <html lang="pt-br">
 
 <head>
-    <script src="../scripts/scriptClient.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="../assets/css/styleHome.css">
+    <script src="../scripts/scriptBaixa.js" type="text/javascript"></script>
+    <script src="../scripts/mascaras.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="../assets/css/styleExcluirBaixa.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Cliente</title>
+    <title>Excluir de Baixa</title>
 </head>
 
 <body>
@@ -20,7 +21,7 @@
                         <li><a href="../cliente/telaCadCliente.html">Cadastrar Cliente</a></li>
                         <li><a href="../cliente/telaBuscaCliente.html">Buscar Cliente</a></li>
                         <li><a href="../cliente/telaAlterarCliente.html">Alterar Cliente</a></li>
-                        <li><a href="../cliente/telaExcluirCliente.html">Excluir Cliente</a></li>
+                        <li><a href="../cliente//telaExcluirCliente.html">Excluir Cliente</a></li>
                     </ul>
                 </li>
                 <li><a href="#" class="client">EXEMPLARES</a>
@@ -48,7 +49,21 @@
     </header>
 
     <div class="container">
-        
+        <p class="tittle">Excluir Baixa</p>
+        <div class="containerForm">
+            <form method="post" id="formExcluirExemplar" enctype="multipart/form-data">
+                <h3>Digite o código da baixa que deseja excluir:</h3>
+                <div class="filtros">
+                    <div class="containerInput">
+                        <label for="cod">COD: </label>
+                        <input type="text" id="cod" name="cod" required >
+                    </div>
+                    <div>
+                        <button class="buttonWrapper" onclick="Exclusao()">Excluir</button>
+                    </div>
+                </div>
+            </form>
+        </div>    
     </div>
     <div class="footerLibrary">
         <p>@UNOLIBRARY</p>
