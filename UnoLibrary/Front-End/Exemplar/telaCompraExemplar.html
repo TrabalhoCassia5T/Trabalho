@@ -1,21 +1,101 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <script src="../scripts/scriptCompraExemplar.js" type="text/javascript"></script>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Compra de Exemplares</title>
-  <link rel="stylesheet" href="../assets/css/styleCompraExemplar.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compra de Exemplares</title>
+    <link rel="stylesheet" href="../assets/css/styleCompraExemplar.css">
 </head>
-<body>
 
-  <form  id="searchForm" method="get" enctype="multipart/form-data" >
-    <h1>Compra de Exemplares</h1>
-    <h3>Digite nome do livro</h3>
-    <input type="text" id="searchInput" name="searchInput" placeholder="Nome do Livro" required>
-    <br>
-    <button type="submit" onclick="buscar()" >Enviar</button>
-  </form>
+<body>
+    <header>
+        <img id="image" class="imgLogo"  />
+        <nav>
+            <ul class="menu">
+                <li><a href="../home/index.html">HOME</a></li>
+                <li><a href="#" class="client">CLIENTE</a>
+                    <ul>
+                        <li><a href="../cliente/telaCadCliente.html">Cadastrar Cliente</a></li>
+                        <li><a href="../cliente/telaBuscaCliente.html">Buscar Cliente</a></li>
+                        <li><a href="../cliente/telaAlterarCliente.html">Alterar Cliente</a></li>
+                        <li><a href="../cliente/telaExcluirCliente.html">Excluir Cliente</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" class="client">EXEMPLARES</a>
+                    <ul>
+                        <li><a href="../Exemplar/telaCadExemplar.html">Cadastrar Exemplar</a></li>
+                        <li><a href="../Exemplar/telaBuscaExemplar.html">Buscar Exemplar</a></li>
+                        <li><a href="">Alterar Exemplar</a></li>
+                        <li><a href="">Excluir Exemplar</a></li>
+                        <li><a href="../Exemplar/telaCompraExemplar.html">Comprar Exemplar</a></li>
+                    </ul>
+                </li>
+                <li><a href="../emprestimo/telaCadEmprestimo.html">EMPRÉSTIMO</a></li>
+                <li><a href="#">BAIXA</a></li>
+                <li><a href="#">EFETUAR ENTRADA</a></li>
+                <li><a href="#">RELATÓRIOS</a></li>
+            </ul>
+        </nav>
+        <div class="profile"><a href="#"><img src="../img/Edit Profile.png" /></a></div>
+    </header>
+    <div class="container">
+        <p class="tittle">Compra de Exemplares</p>
+        <div class="containerForm">
+            <form id="formCompraLivro" method="post" enctype="multipart/form-data">
+                <h3>Compra de Exemplares</h3>
+                <div class="filtros">
+                    <div class="containerInput">
+                        <label for="nome">Digite o nome do livro: </label>
+                        <input type="text" id="nome" name="nome" placeholder="Nome do Livro" required>
+                    </div>
+
+                    <div class="containerInput">
+                        <label for="edicao">Digite a edição: </label>
+                        <input type="number" id="edicao" name="edicao" placeholder="Numero da edição"  onblur="verificaLivro()" required>
+                    </div>
+                    <button class="buttonWrapper" onclick="buscar()" >Enviar</button>
+                </div>
+                
+            </form>
+            <div class="tableWrapper">
+                <table border="2">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nome</th>
+                            <th>CNPJ</th>
+                            <th>Telefone</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tb">
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="quantidade-container">
+                <label for="quantidade">Quantidade:</label>
+                <input type="text" id="quantidade" name="quantidade"  required>
+                <br>
+                <br> 
+            </div>
+
+            <div class="">
+                <label for="metodopagamento">Metodo de pagamento:</label>
+                <select id="metodopagamento" name="metodopagamento">
+                    <option value="aprazo">A PRAZO</option>
+                    <option value="avista">A VISTA</option>
+                </select>
+            </div>
+            <br>
+            <button id="confirmarBtn" class="buttonWrapper" onclick="salvarpedido()">Confirmar</button>
+        </div>
+        </div>
+    </div>
+    
+    
 
 </body>
+
 </html>

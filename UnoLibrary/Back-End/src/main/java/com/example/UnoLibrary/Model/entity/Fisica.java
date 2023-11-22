@@ -19,8 +19,6 @@ public class Fisica {
     private String fis_est_civil;
     @Column(name = "fis_sexo")
     private String fis_sexo;
-//    @ManyToOne
-//    @JoinColumn(name="pes_id", nullable=false)
     @Column(name="pessoa_pes_id")
     private Long pessoa_pes_id;
 

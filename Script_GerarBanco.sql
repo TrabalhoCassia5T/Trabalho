@@ -265,7 +265,9 @@ CREATE TABLE IF NOT EXISTS Parametrizacao (
 
 CREATE TABLE IF NOT EXISTS Fornecedor (
   "for_id" SERIAL PRIMARY KEY,
-  "for_nome" VARCHAR(45) NOT NULL
+  "for_data" DATE NOT NULL,
+  "juridica_jur_id" INT,
+  FOREIGN KEY ("juridica_jur_id") REFERENCES Juridica ("jur_id")
 );
 
 
