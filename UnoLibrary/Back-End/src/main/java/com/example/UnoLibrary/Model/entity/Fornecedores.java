@@ -4,23 +4,28 @@ import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
+import java.util.Date;
+
 @Table(name = "fornecedor")
 @Entity(name = "fornecedor")
-@Getter
-@EqualsAndHashCode(of = "for_id")
 public class Fornecedores
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "for_id")
     private  long for_id;
-    @Column(name = "for_nome")
-    private String nome;
+    @Column(name = "for_data")
+    private Date for_data;
+    @Column(name = "juridica_jur_id")
+    private Long juridica_jur_id;
 
-    public Fornecedores(){}
-    public Fornecedores(long for_id, String nome) {
+    public Fornecedores() {
+    }
+
+    public Fornecedores(long for_id, Date for_data, Long juridica_jur_id) {
         this.for_id = for_id;
-        this.nome = nome;
+        this.for_data = for_data;
+        this.juridica_jur_id = juridica_jur_id;
     }
 
     public long getFor_id() {
@@ -31,11 +36,19 @@ public class Fornecedores
         this.for_id = for_id;
     }
 
-    public String getNome() {
-        return nome;
+    public Date getFor_data() {
+        return for_data;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setFor_data(Date for_data) {
+        this.for_data = for_data;
+    }
+
+    public Long getJuridica_jur_id() {
+        return juridica_jur_id;
+    }
+
+    public void setJuridica_jur_id(Long juridica_jur_id) {
+        this.juridica_jur_id = juridica_jur_id;
     }
 }

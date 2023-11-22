@@ -13,6 +13,10 @@ public class Funcionario {
 
     @Column(name = "func_cargo")
     private String func_cargo;
+
+    @OneToOne(mappedBy = "funcionario")
+    private Usuario usuario;
+
     @ManyToOne
     @JoinColumn(name = "fisica_fis_id", referencedColumnName = "fis_id")
     private Fisica fisica;
