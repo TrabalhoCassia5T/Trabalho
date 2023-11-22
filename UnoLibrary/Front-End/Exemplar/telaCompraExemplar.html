@@ -43,7 +43,7 @@
     <div class="container">
         <p class="tittle">Compra de Exemplares</p>
         <div class="containerForm">
-            <form id="formCompraLivro" method="post" enctype="multipart/form-data" onsubmit="buscar()">
+            <form id="formCompraLivro" method="post" enctype="multipart/form-data">
                 <h3>Compra de Exemplares</h3>
                 <div class="filtros">
                     <div class="containerInput">
@@ -52,15 +52,10 @@
                     </div>
 
                     <div class="containerInput">
-                        <label for="genero">Digite o genero: </label>
-                        <input type="text" id="genero" name="genero" placeholder="Nome do genero" required>
-                    </div>
-
-                    <div class="containerInput">
                         <label for="edicao">Digite a edição: </label>
-                        <input type="text" id="edicao" name="edicao" placeholder="Numero da edição" required>
+                        <input type="number" id="edicao" name="edicao" placeholder="Numero da edição"  onblur="verificaLivro()" required>
                     </div>
-                    <button class="buttonWrapper" >Enviar</button>
+                    <button class="buttonWrapper" onclick="buscar()" >Enviar</button>
                 </div>
                 
             </form>
@@ -78,13 +73,24 @@
                     </tbody>
                 </table>
             </div>
+
             <div class="quantidade-container">
                 <label for="quantidade">Quantidade:</label>
-                <input type="number" id="quantidade" name="quantidade" min="1" required>
+                <input type="text" id="quantidade" name="quantidade"  required>
                 <br>
-                <br>
-                <button id="confirmarBtn" class="buttonWrapper" onclick="navegarParaOutraPagina()" disabled>Confirmar</button>
+                <br> 
             </div>
+
+            <div class="">
+                <label for="metodopagamento">Metodo de pagamento:</label>
+                <select id="metodopagamento" name="metodopagamento">
+                    <option value="aprazo">A PRAZO</option>
+                    <option value="avista">A VISTA</option>
+                </select>
+            </div>
+            <br>
+            <button id="confirmarBtn" class="buttonWrapper" onclick="salvarpedido()">Confirmar</button>
+        </div>
         </div>
     </div>
     
