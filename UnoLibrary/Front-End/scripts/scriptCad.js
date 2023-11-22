@@ -7,6 +7,7 @@ function gravar1() {
         .then(mens => {
             if (mens === "ok") {
                 alert("Cadastrou com Sucesso"); // Exibe o alerta com a mensagem
+                window.location.href = "../index.html";
             }
             else {
                 alert(mens);
@@ -14,8 +15,8 @@ function gravar1() {
             }
         })
         .catch(error => error);
-
 }
+
 function mTel() {
     var tel = event.target.value;
     tel = tel.replace(/\D/g, "")
@@ -34,6 +35,7 @@ function mTel() {
     }
     event.target.value = tel;
 }
+
 function mCEP() {
     var cep = event.target.value;
     cep = cep.replace(/\D/g, "")
@@ -48,7 +50,6 @@ function mascaraMutuario(o, f) {
     v_fun = f
     setTimeout('execmascara()', 1)
 }
-
 
 function execmascara() {
     v_obj.value = v_fun(v_obj.value)
@@ -69,5 +70,4 @@ function cpfCnpj(v) {
     //Coloca um hífen depois do bloco de quatro dígitos
     v = v.replace(/(\d{4})(\d)/, "$1-$2")
     return v
-
 }
