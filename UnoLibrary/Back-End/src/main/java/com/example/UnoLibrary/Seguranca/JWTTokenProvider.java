@@ -1,9 +1,11 @@
 package com.example.UnoLibrary.Seguranca;
 
 import com.example.UnoLibrary.Model.entity.Usuario;
+import com.example.UnoLibrary.Model.repository.UsuarioRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
@@ -13,6 +15,8 @@ import java.time.ZoneId;
 import java.util.Date;
 
 public class JWTTokenProvider {
+    @Autowired
+    static private UsuarioRepository usuarioRepository;
     private static final SecretKey CHAVE = Keys.hmacShaKeyFor(
             "CHAVESECRETA123PROJETOBIBLIOTECA".getBytes(StandardCharsets.UTF_8));
 
@@ -79,5 +83,23 @@ public class JWTTokenProvider {
         }
 
         return nivel;
+    }
+
+    static public Usuario getUsuarioFromToken(String token) {
+        try {
+            Claims claims = Jwts.parserBuilder()
+                    .setSigningKey(CHAVE)
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+
+            String username = claims.getSubject();
+
+            return usuarioRepository.findByUsuLogin(username);
+        } catch (Exception e) {
+            System.out.println("Erro ao recuperar as informações do usuário do token");
+        }
+
+        return null;
     }
 }
