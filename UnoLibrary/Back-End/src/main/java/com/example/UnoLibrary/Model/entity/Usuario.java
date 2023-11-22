@@ -1,7 +1,6 @@
 package com.example.UnoLibrary.Model.entity;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 
 @Entity
@@ -12,6 +11,7 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "funcionario_func_id")
     private Long id;
+
     @Column(name = "usu_login")
     private String usu_login;
 
@@ -27,24 +27,29 @@ public class Usuario {
     @Column(name = "usu_nivel")
     private String usu_nivel;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "funcionario_func_id", referencedColumnName = "func_id")
-    private Funcionario funcionario_func_id;
+    private Funcionario funcionario;
 
     public Usuario() {
     }
 
-    public Usuario(Funcionario funcionario_func_id) {
-        this.funcionario_func_id = funcionario_func_id;
-    }
-
-    public Usuario(String usu_login, String usu_senha, LocalDate usu_data_perm, LocalDate usu_data_desativa, String usu_nivel, Funcionario funcionario_func_id) {
+    public Usuario(Long id, String usu_login, String usu_senha, LocalDate usu_data_perm, LocalDate usu_data_desativa, String usu_nivel, Funcionario funcionario) {
+        this.id = id;
         this.usu_login = usu_login;
         this.usu_senha = usu_senha;
         this.usu_data_perm = usu_data_perm;
         this.usu_data_desativa = usu_data_desativa;
         this.usu_nivel = usu_nivel;
-        this.funcionario_func_id = funcionario_func_id;
+        this.funcionario = funcionario;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUsu_login() {
@@ -87,11 +92,11 @@ public class Usuario {
         this.usu_nivel = usu_nivel;
     }
 
-    public Funcionario getFuncionario_func_id() {
-        return this.funcionario_func_id;
+    public Funcionario getFuncionario() {
+        return funcionario;
     }
 
-    public void setFuncionario_func_id(Funcionario funcionario_func_id) {
-        this.funcionario_func_id = funcionario_func_id;
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
     }
 }

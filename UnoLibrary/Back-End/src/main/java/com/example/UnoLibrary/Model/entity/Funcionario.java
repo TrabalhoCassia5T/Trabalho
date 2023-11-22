@@ -13,9 +13,13 @@ public class Funcionario {
 
     @Column(name = "func_cargo")
     private String func_cargo;
+
     @ManyToOne
     @JoinColumn(name = "fisica_fis_id", referencedColumnName = "fis_id")
     private Fisica fisica;
+
+    @OneToOne(mappedBy = "funcionario")
+    private Usuario usuario;
 
     public Funcionario() {
     }
@@ -49,4 +53,5 @@ public class Funcionario {
     public void setFisica(Fisica fisica) {
         this.fisica = fisica;
     }
+
 }
