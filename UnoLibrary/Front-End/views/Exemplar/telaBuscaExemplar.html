@@ -2,17 +2,17 @@
 <html lang="pt-br">
 
 <head>
-    <script src="../scripts/scriptClient.js" type="text/javascript"></script>
-    <script src="../scripts/mascaras.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="../assets/css/styleExclusaoCliente.css">
+    <script src="../../Controllers/scriptExemplar.js" type="text/javascript"></script>
+    <script src="../../Controllers/mascaras.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="../../assets/css/styleBuscaExemplar.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alteração de Cliente</title>
+    <title>Cadastro de Cliente</title>
 </head>
 
 <body>
     <header>
-        <img id="image" class="imgLogo" />
+        <img src="../../assets/img/img_software.png" class="imgLogo" />
         <nav>
             <ul class="menu">
                 <li><a href="../home/index.html">HOME</a></li>
@@ -39,26 +39,47 @@
                 <li><a href="#">RELATÓRIOS</a></li>
             </ul>
         </nav>
-        <div class="profile"><a href="#"><img src="../img/Edit Profile.png" /></a></div>
+        <div class="profile"><a href="#"><img src="../../assets/img/Edit Profile.png" /></a></div>
     </header>
 
     <div class="container">
-        <p class="tittle">Excluir Cliente</p>
+        <p class="tittle">Busca Exemplar</p>
         <div class="containerForm">
-            <form method="post" id="formExcluirCliente" enctype="multipart/form-data">
-                <h3>Digite o cpf de quem deseja excluir:</h3>
+            <form method="post" id="formBuscarExemplar" enctype="multipart/form-data">
+                <h3>Filtros</h3>
                 <div class="filtros">
                     <div class="containerInput">
-                        <label for="cpf">CPF: </label>
-                        <input type="text" id="cpf" name="cpf" required placeholder="123.456.789-01"
-                            onkeypress="mCpf(this)" maxlength="14" onblur="validarCPF(this)">
+                        <label for="data">Data Inicio: </label>
+                        <input type="date" id="data" name="data"  value="2017-06-01"   />
+                    </div>
+                    <div class="containerInput">
+                        <label for="data2">Data Fim: </label>
+                        <input type="date" id="data2" name="data2"  value="2017-06-01"  />
+                    </div>
+                    <div class="containerInput">
+                        <label for="titulo">Titulo: </label>
+                        <input type="text" id="titulo" name="titulo" >
                     </div>
                     <div>
-                        <button class="buttonWrapper" onclick="Exclusao()">Buscar</button>
+                        <button class="buttonWrapper" onclick="buscar()">Buscar</button>
                     </div>
                 </div>
             </form>
-        </div>    
+            <div class="tableWrapper">
+                <table border="2">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Status</th>
+                            <th>Data Entrada</th>
+                            <th>Titulo</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tb">
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
     <div class="footerLibrary">
         <p>@UNOLIBRARY</p>

@@ -2,28 +2,27 @@
 <html lang="pt-br">
 
 <head>
-    <script src="scripts/script.js" type="text/javascript"></script>
+    <script src="Controllers/script.js" type="text/javascript"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/style.css">
-    <title>Login UnoLibrary</title>
+    <title>LOGIN</title>
 </head>
 
 <body>
     
     <div class="container">
         <div class="form-image">
-            <img src="img/img_3.svg" alt="">
+            <img src="assets/img/img_1.svg" alt="">
         </div>
         <div class="form">
-            <form method="post" id="formlogin"  enctype="multipart/form-data" onsubmit="gravar()">
+            <form method="get" id="formlogin"  enctype="multipart/form-data" onsubmit="gravar()">
                 <div class="form-header">
                     <div class="title">
                         <h1>Login UnoLibrary</h1>
                     </div>
                 </div>
-
                 <div class="input-group">
                     <div class="input-box">
                         <label for="login">Login</label>
@@ -35,11 +34,9 @@
                         <input id="senha" type="password" name="senha" placeholder="Digite sua senha" required>
                     </div>
                 </div>
-
                 <div class="continue-button">
                     <button>Continuar</button>
                 </div>
-
                 <div id="feedback">
 
                 </div>
