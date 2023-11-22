@@ -13,11 +13,12 @@ async function buscar() {
   } catch (error) {
     console.error('Ocorreu um erro:', error);
   }
-
+}
 
 
 
   async function buscaTodos() {
+    event.preventDefault();
     try {
       const response = await fetch("http://localhost:8080/api/fornecedor/busca-fornecedores");
       console.log(response)
@@ -55,8 +56,8 @@ async function buscar() {
     event.preventDefault();
     const nome = document.getElementById("nome").value;
     const edicao = document.getElementById("edicao").value;
-    //const form = new FormData(document.getElementById("formCompraLivro"));
-    //form.append("qtde",document.getElementById("quantidade"));
+    console.log(nome);
+    console.log(edicao)
     const response = await fetch(`http://localhost:8080/api/itempedido/verifica-livro?nome=${nome}&edicao=${edicao}`);
     if (!response.ok)
       exibirAlerta("Livro não encontrado, deseja cadastrar?");
@@ -106,7 +107,7 @@ async function buscar() {
     botao2.textContent = "NÃO";
 
     botao.addEventListener("click", function () {
-      window.location.href = "Exemplar/telaCadExemplar.html"
+      window.location.href = "telaCadExemplar.html"
       // envia para outra tela
     });
     botao2.addEventListener("click", function () {
@@ -179,11 +180,6 @@ async function buscar() {
 
     const botao = document.createElement("button");
     botao.textContent = "OK";
-
-
-
-
-
     botao.addEventListener("click", function () {
       document.body.removeChild(alertDiv);
       limparTabela()
@@ -211,4 +207,3 @@ async function buscar() {
     var TableBody = document.getElementById("tb");
     TableBody.innerHTML = ""; // Limpa o conteúdo da tabela
   }
-}
