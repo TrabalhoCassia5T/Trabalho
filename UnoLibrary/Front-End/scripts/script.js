@@ -12,7 +12,8 @@ function gravar() {
           } 
           else 
           {
-            alert("Login bem sucedido"); // Mensagem de sucesso
+            window.location.href = "home/index.html"
+            // alert("Login bem sucedido"); // Mensagem de sucesso
           }
         })
         .catch(error => document.getElementById("feedback").innerHTML = error);

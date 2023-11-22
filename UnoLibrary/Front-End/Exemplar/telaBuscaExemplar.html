@@ -4,7 +4,7 @@
 <head>
     <script src="../scripts/scriptExemplar.js" type="text/javascript"></script>
     <script src="../scripts/mascaras.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="../assets/css/styleBuscaCliente.css">
+    <link rel="stylesheet" href="../assets/css/style.BuscarExemplar.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Cliente</title>
@@ -28,9 +28,10 @@
                     <ul>
                         <li><a href="../Exemplar/telaCadExemplar.html">Cadastrar Exemplar</a></li>
                         <li><a href="../Exemplar/telaBuscaExemplar.html">Buscar Exemplar</a></li>
-                        <li><a href="">Alterar Exemplar</a></li>
-                        <li><a href="">Excluir Exemplar</a></li>
+                        <li><a href="../Exemplar/telaAlterarExemplar.html">Alterar Exemplar</a></li>
+                        <li><a href="../Exemplar/telaExcluirExemplar.html">Excluir Exemplar</a></li>
                         <li><a href="../Exemplar/telaCompraExemplar.html">Comprar Exemplar</a></li>
+
                     </ul>
                 </li>
                 <li><a href="../emprestimo/telaCadEmprestimo.html">EMPRÉSTIMO</a></li>
@@ -43,18 +44,18 @@
     </header>
 
     <div class="container">
-        <p class="tittle">Cadastro Exemplar</p>
+        <p class="tittle">Busca Exemplar</p>
         <div class="containerForm">
-            <form method="post" id="formCadastaExemplar" enctype="multipart/form-data">
+            <form method="post" id="formBuscarExemplar" enctype="multipart/form-data">
                 <h3>Filtros</h3>
                 <div class="filtros">
                     <div class="containerInput">
                         <label for="data">Data Inicio: </label>
-                        <input type="date" id="data" name="data"  value="2017-06-01" required />
+                        <input type="date" id="data" name="data"  value="2017-06-01"   />
                     </div>
                     <div class="containerInput">
                         <label for="data2">Data Fim: </label>
-                        <input type="date" id="data2" name="data2"  value="2017-06-01" required />
+                        <input type="date" id="data2" name="data2"  value="2017-06-01"  />
                     </div>
                     <div class="containerInput">
                         <label for="titulo">Titulo: </label>

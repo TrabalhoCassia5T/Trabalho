@@ -1,3 +1,4 @@
+
 async function buscar() {
   event.preventDefault();
   try {
@@ -13,7 +14,7 @@ async function buscar() {
     console.error('Ocorreu um erro:', error);
   }
 
-}
+
 
 
 async function buscaTodos() {
