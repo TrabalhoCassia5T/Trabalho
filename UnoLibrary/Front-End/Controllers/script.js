@@ -9,7 +9,7 @@ function gravar() {
     const endp = `http://localhost:8080/security/login/${usuario}/${senha}`;
 
     const token = localStorage.getItem('token');
-    localStorage.setItem('redirectUrl', '../views/home/index.html');
+    localStorage.setItem('redirectUrl', '../Front-End/views/home/index.html');
 
     fetch(endp, { method: 'GET', 
         headers: {

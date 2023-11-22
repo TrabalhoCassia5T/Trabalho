@@ -3,11 +3,7 @@ package com.example.UnoLibrary.Seguranca;
 import java.io.IOException;
 
 
-import jakarta.servlet.Filter;
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.ServletRequest;
-import jakarta.servlet.ServletResponse;
+import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -16,6 +12,8 @@ public class AcessFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
+        HttpServletResponse res = (HttpServletResponse) response;
+
         String token = req.getHeader("Authorization");
 
         if (token != null && JWTTokenProvider.verifyToken(token)) {
@@ -23,16 +21,22 @@ public class AcessFilter implements Filter {
 
             if ("admin".equals(nivelAcesso) || "func".equals(nivelAcesso)) {
                 chain.doFilter(request, response);
+            } else {
+                res.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                res.getWriter().write("Acesso não autorizado");
             }
-            else {
-                ((HttpServletResponse) response).setStatus(HttpServletResponse.SC_FORBIDDEN);
-                response.getOutputStream().write("Acesso não autorizado".getBytes());
-            }
+        } else {
+            res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            res.getWriter().write("Não autorizado");
         }
-        else {
-            ((HttpServletResponse) response).setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            response.getOutputStream().write("Não autorizado".getBytes());
-        }
+    }
+
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+    }
+
+    @Override
+    public void destroy() {
     }
 }
 

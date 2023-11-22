@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/titulo")
+@CrossOrigin(origins = "http://127.0.0.1:5500/UnoLibrary/Front-End")
 public class TituloController {
     @Autowired
     private TituloRepository repo;

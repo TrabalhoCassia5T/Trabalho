@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RequestMapping(value = "/api/exemplar")
 @RestController
+@CrossOrigin(origins = "http://127.0.0.1:5500/UnoLibrary/Front-End")
 public class ExemplarController {
     @Autowired
     private ExemplarRepository repo;

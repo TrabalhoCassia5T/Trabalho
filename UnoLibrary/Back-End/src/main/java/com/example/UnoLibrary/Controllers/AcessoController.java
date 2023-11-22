@@ -40,4 +40,14 @@ public class AcessoController {
         }
         return "default";
     }
+
+    @GetMapping("userinfo")
+    public ResponseEntity<Object> getUserInfo(@RequestHeader("Authorization") String token) {
+        Usuario usuario = JWTTokenProvider.getUsuarioFromToken(token);
+        if (usuario != null) {
+            return ResponseEntity.ok(usuario);
+        } else {
+            return ResponseEntity.badRequest().body("Usuário não encontrado");
+        }
+    }
 }
