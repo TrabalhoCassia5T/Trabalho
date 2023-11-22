@@ -2,17 +2,16 @@
 <html lang="pt-br">
 
 <head>
-    <script src="../scripts/scriptClient.js" type="text/javascript"></script>
-    <script src="../scripts/mascaras.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="../assets/css/styleExclusaoCliente.css">
+    <script src="../../Controllers/scriptClient.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="../../assets/css/styleHome.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alteração de Cliente</title>
+    <title>Cadastro de Cliente</title>
 </head>
 
 <body>
     <header>
-        <img id="image" class="imgLogo" />
+        <img src="../../assets/img/img_software.png" class="imgLogo" />
         <nav>
             <ul class="menu">
                 <li><a href="../home/index.html">HOME</a></li>
@@ -34,31 +33,23 @@
                     </ul>
                 </li>
                 <li><a href="../emprestimo/telaCadEmprestimo.html">EMPRÉSTIMO</a></li>
-                <li><a href="#">BAIXA</a></li>
+                <li><a href="#" class="client">BAIXA</a>
+                    <ul>
+                        <li><a href="../baixa/telaCadBaixa.html">Cadastrar Baixa</a></li>
+                        <li><a href="../baixa/telaBuscaBaixa.html">Buscar Baixa</a></li>
+                        <li><a href="../baixa/telaAlterarBaixa.html">Alterar Baixa</a></li>
+                        <li><a href="../baixa/telaExcluirBaixa.html">Excluir Baixa</a></li>
+                    </ul>
+                </li>
                 <li><a href="#">EFETUAR ENTRADA</a></li>
                 <li><a href="#">RELATÓRIOS</a></li>
             </ul>
         </nav>
-        <div class="profile"><a href="#"><img src="../img/Edit Profile.png" /></a></div>
+        <div class="profile"><a href="../../index.html"><img src="../../assets/img/Edit Profile.png" /></a></div>
     </header>
 
     <div class="container">
-        <p class="tittle">Excluir Cliente</p>
-        <div class="containerForm">
-            <form method="post" id="formExcluirCliente" enctype="multipart/form-data">
-                <h3>Digite o cpf de quem deseja excluir:</h3>
-                <div class="filtros">
-                    <div class="containerInput">
-                        <label for="cpf">CPF: </label>
-                        <input type="text" id="cpf" name="cpf" required placeholder="123.456.789-01"
-                            onkeypress="mCpf(this)" maxlength="14" onblur="validarCPF(this)">
-                    </div>
-                    <div>
-                        <button class="buttonWrapper" onclick="Exclusao()">Buscar</button>
-                    </div>
-                </div>
-            </form>
-        </div>    
+        
     </div>
     <div class="footerLibrary">
         <p>@UNOLIBRARY</p>

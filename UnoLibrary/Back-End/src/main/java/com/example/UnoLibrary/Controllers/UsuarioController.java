@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/usuario")
+@CrossOrigin(origins = "http://127.0.0.1:5500/UnoLibrary/Front-End")
 public class UsuarioController {
     @Autowired
     private UsuarioRepository usuarioRepository;

@@ -2,17 +2,17 @@
 <html lang="pt-br">
 
 <head>
-    <script src="../scripts/scriptBaixa.js" type="text/javascript"></script>
-    <script src="../scripts/mascaras.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="../assets/css/styleBuscaBaixa.css">
+    <script src="../../Controllers/scriptBaixa.js" type="text/javascript"></script>
+    <script src="../../Controllers/mascaras.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="../../assets/css/styleExcluirBaixa.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Busca Baixa</title>
+    <title>Excluir de Baixa</title>
 </head>
 
 <body>
     <header>
-        <img src="../img/img_software.png" class="imgLogo" />
+        <img src="../../assets/img/img_software.png" class="imgLogo" />
         <nav>
             <ul class="menu">
                 <li><a href="../home/index.html">HOME</a></li>
@@ -21,7 +21,7 @@
                         <li><a href="../cliente/telaCadCliente.html">Cadastrar Cliente</a></li>
                         <li><a href="../cliente/telaBuscaCliente.html">Buscar Cliente</a></li>
                         <li><a href="../cliente/telaAlterarCliente.html">Alterar Cliente</a></li>
-                        <li><a href="../cliente/telaExcluirCliente.html">Excluir Cliente</a></li>
+                        <li><a href="../cliente//telaExcluirCliente.html">Excluir Cliente</a></li>
                     </ul>
                 </li>
                 <li><a href="#" class="client">EXEMPLARES</a>
@@ -45,53 +45,25 @@
                 <li><a href="#">RELATÓRIOS</a></li>
             </ul>
         </nav>
-        <div class="profile"><a href="#"><img src="../img/Edit Profile.png" /></a></div>
+        <div class="profile"><a href="#"><img src="../../assets/img/Edit Profile.png" /></a></div>
     </header>
 
     <div class="container">
-        <p class="tittle">Busca Baixa</p>
+        <p class="tittle">Excluir Baixa</p>
         <div class="containerForm">
-            <form method="post" id="formBuscarBaixa" enctype="multipart/form-data">
-                <h3>Filtros</h3>
+            <form method="post" id="formExcluirExemplar" enctype="multipart/form-data">
+                <h3>Digite o código da baixa que deseja excluir:</h3>
                 <div class="filtros">
                     <div class="containerInput">
-                        <label for="data">Data Inicio: </label>
-                        <input type="date" id="data" name="data"  value="2017-06-01"   />
-                    </div>
-                    <div class="containerInput">
-                        <label for="data2">Data Fim: </label>
-                        <input type="date" id="data2" name="data2"  value="2017-06-01"  />
-                    </div>
-                    <div class="containerInput">
-                        <label for="status">Motivo: </label>
-                        <select id="status" name="status" >
-                            <option value="Perda">Perda</option>
-                            <option value="Dano">Dano</option>
-                            <option value="Descontinuidade">Descontinuidade</option>
-                            <option value="Doação">Doação</option>
-                        </select>
+                        <label for="cod">COD: </label>
+                        <input type="text" id="cod" name="cod" required >
                     </div>
                     <div>
-                        <button class="buttonWrapper" onclick="buscar()">Buscar</button>
+                        <button class="buttonWrapper" onclick="Exclusao()">Excluir</button>
                     </div>
                 </div>
             </form>
-            <div class="tableWrapper">
-                <table border="2">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Motivo</th>
-                            <th>Descrição</th>
-                            <th>Data</th>
-                            <th>Exemplar</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tb">
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        </div>    
     </div>
     <div class="footerLibrary">
         <p>@UNOLIBRARY</p>

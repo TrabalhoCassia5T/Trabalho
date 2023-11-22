@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/security")
+@CrossOrigin(origins = "http://127.0.0.1:5500/UnoLibrary/Front-End")
 public class AcessoController {
 
     @Autowired
@@ -38,5 +39,15 @@ public class AcessoController {
             return "func";
         }
         return "default";
+    }
+
+    @GetMapping("userinfo")
+    public ResponseEntity<Object> getUserInfo(@RequestHeader("Authorization") String token) {
+        Usuario usuario = JWTTokenProvider.getUsuarioFromToken(token);
+        if (usuario != null) {
+            return ResponseEntity.ok(usuario);
+        } else {
+            return ResponseEntity.badRequest().body("Usuário não encontrado");
+        }
     }
 }
