@@ -125,6 +125,7 @@ a:active {
     margin-top: 5%;
 }
 
+
 form {
     display: flex;
     justify-content: space-between;
@@ -223,6 +224,4 @@ button:hover {
     padding-left: 6px;
     justify-content: space-around;
 }
-
-
 

@@ -2,6 +2,10 @@ window.addEventListener('load', function () {
     buscar();
 });
 
+window.addEventListener('load', function () {
+    verificarCampoPreenchido();
+});
+
 function buscar() {
 
     const endp = `http://localhost:8080/api/baixa/buscar`;
@@ -206,4 +210,109 @@ function ExclusaoTermina(){
     })
     .catch(error => console.error('Error:', error));
     limparFormulario()
+}
+
+function Cadastra() {
+    event.preventDefault();
+    var status = document.getElementById('desc').value;
+    var tituloNome = document.getElementById('status').value;
+    var data = document.getElementById('data').value;
+    var id_exe = document.getElementById('id_exe').value;
+
+    if(status && tituloNome && data && id_exe){
+        const endp = `http://localhost:8080/api/baixa/cadastrar/${tituloNome}/${status}/${data}/${id_exe}`;
+
+        fetch(endp, {
+            method: 'POST',
+            headers: {
+                'Origin': 'http://127.0.0.1:5500' 
+            },
+        })
+        .then(response => response.text())
+        .then(msg => {
+            alert(msg)
+            if(msg==="Cadastrado com sucesso!"){
+                limparFormularioCad();
+            }
+        })
+        .catch(error => console.error('Erro ao cadastrar livro:', error));
+    }
+    else{
+        alert('Complete o formulário!')
+    }
+    
+}
+
+
+function verificarCampoPreenchido() {
+    var valorCampo = document.getElementById('titulo').value;
+
+    // Verifica se o campo está preenchido
+    if (valorCampo) {
+        const url = `http://localhost:8080/api/exemplar/buscar_titulo/${valorCampo}`;
+            fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Origin': 'http://127.0.0.1:5500' 
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                updateTableExemplar(data);
+            })
+            .catch(error => console.error('Error:', error));
+        
+    } else {
+        const endp = `http://localhost:8080/api/exemplar/buscar`;
+
+        const token = localStorage.getItem('token');
+
+        fetch(endp, {
+            method: 'GET',
+            headers: {
+                'Origin': 'http://127.0.0.1:5500' 
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            updateTableExemplar(data);
+        })
+        .catch(error => console.error('Error:', error));
+    }
+}
+
+function updateTableExemplar(Exemplar) {
+    const tbody = document.getElementById("tbC");
+
+    tbody.innerHTML = '';
+    Exemplar.forEach(exemplar => {
+        const row = document.createElement("tr");
+        const idCell = document.createElement("td");
+        const statusCell = document.createElement("td");
+        const dataEntradaCell = document.createElement("td");
+        const tituloCell = document.createElement("td");
+
+        idCell.textContent = exemplar.id;
+        statusCell.textContent = exemplar.status;
+        const data = new Date(exemplar.dataEntrada);
+        const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+        dataEntradaCell.textContent = data.toLocaleDateString('pt-BR', options);
+        tituloCell.textContent = exemplar.titulo.nome;
+        
+
+        row.appendChild(idCell);
+        row.appendChild(statusCell);
+        row.appendChild(dataEntradaCell);
+        row.appendChild(tituloCell);
+
+        tbody.appendChild(row);
+    });
+}
+
+function limparFormularioCad() {
+    document.getElementById('desc').value = '';
+    document.getElementById('status').value = '';
+    document.getElementById('data').value = '';
+    document.getElementById('id_exe').value = '';
+    document.getElementById('titulo').value = '';
 }
