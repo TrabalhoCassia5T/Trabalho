@@ -11,7 +11,6 @@ function buscar() {
     fetch(endp, {
         method: 'GET',
         headers: {
-            'Authorization': token,
             'Origin': 'http://127.0.0.1:5500' 
         }
     })

@@ -93,7 +93,15 @@ a:active{
 }
 
 .container {
-    padding: 120px 167px 111px 145px;
+    padding: 100px 100px 100px 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imagem_prof {
+    height: 700px;
+    width: 1900px;
 }
 
 .footerLibrary {

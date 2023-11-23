@@ -4,6 +4,7 @@ import com.example.UnoLibrary.Model.entity.Usuario;
 import com.example.UnoLibrary.Model.repository.UsuarioRepository;
 import com.example.UnoLibrary.Seguranca.JWTTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,9 +23,9 @@ public class AcessoController {
 
         if (usuarioAutenticado != null) {
             String token = JWTTokenProvider.getToken(usuarioAutenticado);
-            return ResponseEntity.ok(token);
+            return new ResponseEntity<>(token, HttpStatus.OK);
         } else {
-            return ResponseEntity.badRequest().body("Usuário não autenticado");
+            return new ResponseEntity<>("ACESSO NAO PERMITIDO",HttpStatus.NOT_ACCEPTABLE);
         }
     }
 
@@ -35,18 +36,21 @@ public class AcessoController {
     private String determinarNivelDoUsuario(String usuario) {
         if (usuario.startsWith("admin")) {
             return "admin";
-        } else if (usuario.startsWith("func")) {
-            return "func";
         }
+        else
+            if (usuario.startsWith("func")) {
+                return "func";
+            }
         return "default";
     }
 
-    @GetMapping("userinfo")
+    @GetMapping("userInfo")
     public ResponseEntity<Object> getUserInfo(@RequestHeader("Authorization") String token) {
         Usuario usuario = JWTTokenProvider.getUsuarioFromToken(token);
         if (usuario != null) {
             return ResponseEntity.ok(usuario);
-        } else {
+        }
+        else {
             return ResponseEntity.badRequest().body("Usuário não encontrado");
         }
     }

@@ -21,11 +21,13 @@ public class AcessFilter implements Filter {
 
             if ("admin".equals(nivelAcesso) || "func".equals(nivelAcesso)) {
                 chain.doFilter(request, response);
-            } else {
+            }
+            else {
                 res.setStatus(HttpServletResponse.SC_FORBIDDEN);
                 res.getWriter().write("Acesso não autorizado");
             }
-        } else {
+        }
+        else {
             res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             res.getWriter().write("Não autorizado");
         }
