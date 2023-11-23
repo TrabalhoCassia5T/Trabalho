@@ -73,11 +73,13 @@ public class EmprestimoController {
     @GetMapping(value = "/emprestimo/verifica/cliente")
     public ResponseEntity<Object> verificaCliente(@RequestParam("id") Long id) {
         System.out.println(id);
-        Optional<Emprestimo> emp = repository.findByClienteId(id);
-        if(emp.isPresent()){
-            Optional<Recebimento> rec = recRepo.findByEmpId(emp.get().getEmp_id());
-            if(rec.isPresent() && rec.get().getRec_data() == null) {
-                return ResponseEntity.badRequest().body("Pagamento em aberto");
+        List<Emprestimo> emp = repository.findByClienteId(id);
+        if(emp.size() > 0){
+            for(Emprestimo e : emp) {
+                Optional<Recebimento> rec = recRepo.findByEmpId(e.getEmp_id());
+                if(rec.isPresent() && rec.get().getRec_data() == null) {
+                    return ResponseEntity.badRequest().body("Pagamento em aberto");
+                }
             }
         }
         return ResponseEntity.ok().body("ok");

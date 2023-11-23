@@ -17,9 +17,9 @@ public class BuscaClienteResponseDTO {
     private String cep;
     private String uf;
     private String sexo;
-    private Date data_nasc;
+    private String data_nasc;
 
-    public BuscaClienteResponseDTO(Long id, String nome, String cpf, String email, String url, String estado_civil, String telefone, String rua, String numero, String bairro, String cidade, String cep, String uf, String sexo, Date data_nasc) {
+    public BuscaClienteResponseDTO(Long id, String nome, String cpf, String email, String url, String estado_civil, String telefone, String rua, String numero, String bairro, String cidade, String cep, String uf, String sexo, String data_nasc) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
@@ -149,11 +149,11 @@ public class BuscaClienteResponseDTO {
         this.sexo = sexo;
     }
 
-    public Date getData_nasc() {
+    public String getData_nasc() {
         return data_nasc;
     }
 
-    public void setData_nasc(Date data_nasc) {
+    public void setData_nasc(String data_nasc) {
         this.data_nasc = data_nasc;
     }
 }

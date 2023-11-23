@@ -7,7 +7,7 @@ function gravar1() {
         .then(mens => {
             if (mens === "ok") {
                 alert("Cadastrou com Sucesso"); // Exibe o alerta com a mensagem
-                window.location.href = "../index.html";
+                window.location.href = "../home/index.html";
             }
             else {
                 alert(mens);
