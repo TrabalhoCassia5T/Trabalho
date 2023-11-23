@@ -1,13 +1,14 @@
 package com.example.UnoLibrary.Seguranca;
 
-import java.io.IOException;
-
-
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.http.HttpStatus;
 
-public class  AcessFilter implements Filter {
+import java.io.IOException;
+
+public class AcessFilter implements Filter {
+
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
@@ -16,15 +17,19 @@ public class  AcessFilter implements Filter {
 
         String token = req.getHeader("Authorization");
 
-        if (token != null && JWTTokenProvider.verifyToken(token)) {
-            String nivelAcesso = JWTTokenProvider.getNivelAcessoFromToken(token);
+        if (token != null) {
+            if(token.startsWith("Bearer ")){
+                token = token.substring(7).trim();
+            }
 
-            if ("admin".equals(nivelAcesso) || "func".equals(nivelAcesso)) {
+            boolean isValid = JWTTokenProvider.verifyToken(token);
+
+            if (isValid) {
                 chain.doFilter(request, response);
             }
             else {
-                res.setStatus(HttpServletResponse.SC_FORBIDDEN);
-                res.getWriter().write("Acesso não autorizado");
+                res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                res.getWriter().write("Token inválido");
             }
         }
         else {
@@ -41,5 +46,3 @@ public class  AcessFilter implements Filter {
     public void destroy() {
     }
 }
-
-

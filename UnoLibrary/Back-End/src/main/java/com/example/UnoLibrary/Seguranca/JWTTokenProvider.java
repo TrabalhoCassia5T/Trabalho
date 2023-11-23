@@ -43,6 +43,10 @@ public class JWTTokenProvider {
 
     static public boolean verifyToken(String token) {
         try {
+            if (token.startsWith("Bearer ")) {
+                token = token.substring(7).trim();
+            }
+
             Jwts.parserBuilder()
                     .setSigningKey(CHAVE)
                     .build()
@@ -56,7 +60,12 @@ public class JWTTokenProvider {
 
     static public Claims getAllClaimsFromToken(String token) {
         Claims claims = null;
+
         try {
+            if (token.startsWith("Bearer ")) {
+                token = token.substring(7).trim();
+            }
+
             claims = Jwts.parserBuilder()
                     .setSigningKey(CHAVE)
                     .build()
@@ -65,12 +74,18 @@ public class JWTTokenProvider {
         } catch (Exception e) {
             System.out.println("Erro ao recuperar as informações (claims)");
         }
+
         return claims;
     }
 
     public static String getNivelAcessoFromToken(String token) {
         String nivel = null;
+
         try {
+            if (token.startsWith("Bearer ")) {
+                token = token.substring(7).trim();
+            }
+
             Claims claims = Jwts.parserBuilder()
                     .setSigningKey(CHAVE)
                     .build()
@@ -78,7 +93,9 @@ public class JWTTokenProvider {
                     .getBody();
 
             nivel = claims.get("nivel", String.class);
-        } catch (Exception e) {
+
+        }
+        catch (Exception e) {
             System.out.println("Erro ao recuperar as informações (claims)");
         }
 
@@ -87,6 +104,10 @@ public class JWTTokenProvider {
 
     static public Usuario getUsuarioFromToken(String token) {
         try {
+            if (token.startsWith("Bearer ")) {
+                token = token.substring(7).trim();
+            }
+
             Claims claims = Jwts.parserBuilder()
                     .setSigningKey(CHAVE)
                     .build()

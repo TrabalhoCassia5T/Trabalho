@@ -19,18 +19,29 @@ public class AcessoController {
     @GetMapping("login/{usuario}/{senha}")
     public ResponseEntity<Object> login(@PathVariable("usuario") String usuario,
                                         @PathVariable("senha") String senha) {
+
         Usuario usuarioAutenticado = autenticarUsuario(usuario, senha);
 
         if (usuarioAutenticado != null) {
             String token = JWTTokenProvider.getToken(usuarioAutenticado);
             return new ResponseEntity<>(token, HttpStatus.OK);
-        } else {
+        }
+        else {
             return new ResponseEntity<>("ACESSO NAO PERMITIDO",HttpStatus.NOT_ACCEPTABLE);
         }
     }
 
     private Usuario autenticarUsuario(String usu_login, String usu_senha) {
         return usuarioRepository.findByUsuLoginAndUsuSenha(usu_login, usu_senha);
+    }
+
+    @PostMapping("/validar-token")
+    public ResponseEntity<Object> validarToken(@RequestHeader("Authorization") String token) {
+        if (JWTTokenProvider.verifyToken(token)) {
+            return ResponseEntity.ok("Token válido");
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Token inválido");
+        }
     }
 
     private String determinarNivelDoUsuario(String usuario) {
