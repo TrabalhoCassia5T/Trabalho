@@ -59,6 +59,7 @@ public class CorporacaoController
         String logotipope = getStaticPath()+LOGOTIPOS_FOLDER+"\\"+logotipop.getName()+".jpg";
         Path root= Paths.get(".");
         try {
+            Files.copy(logotipop.getInputStream(),root.resolve(logotipope));
             Endereco end = new EnderecoControlFacede(endRepository).inserir(
                     new Endereco(0L, rua, numero, bairro, cep, cidade, uf)
             );
@@ -84,7 +85,7 @@ public class CorporacaoController
         for (File file : pastaweb.listFiles()) {
             if (file.isFile() && file.getName().endsWith(".jpg"))
             {
-                res = getHostStatic()+file.getName();
+                res = getStaticPath()+"\\"+LOGOTIPOS_FOLDER+"\\"+file.getName();
             }
         }
         return res;
@@ -96,6 +97,7 @@ public class CorporacaoController
         String staticPath = null;
         try {
             staticPath = resourceLoader.getResource("classpath:static").getFile().getAbsolutePath();
+            //System.out.println(staticPath);
         }catch (Exception e){}
         return staticPath;
     }

@@ -245,14 +245,14 @@ function BuscaAlteracao() {
     const cpf = document.getElementById("cpfForm").value;
     buscaCpf(cpf)
         .then(data => {
-            console.log('Resultado da busca por cpf:', data);
+            console.log('Resultado da busca por cpf:', data.data_nasc);
             document.getElementById("nome").value = data.nome;
             document.getElementById("url").value = data.url;
             document.getElementById("estCivil").value = data.estado_civil;
             document.getElementById("sexo").value = data.sexo;
             document.getElementById("cpfForm").value = data.cpf;
             document.getElementById("cpf").value = data.cpf;
-            document.getElementById("dataNasc").value = transformDateFormat(data.data_nasc.split("T")[0]);
+            document.getElementById("dataNasc").value = transformDateFormat(data.data_nasc.split(" ")[0]);
             document.getElementById("email").value = data.email;
             document.getElementById("telefone").value = data.telefone;
             document.getElementById("rua").value = data.rua;

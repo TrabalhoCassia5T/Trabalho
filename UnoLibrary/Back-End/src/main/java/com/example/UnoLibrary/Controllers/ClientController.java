@@ -4,14 +4,8 @@ import com.example.UnoLibrary.Facede.EnderecoControlFacede;
 import com.example.UnoLibrary.Facede.FisicaControlFacede;
 import com.example.UnoLibrary.Facede.PessoaControlFacede;
 import com.example.UnoLibrary.Model.DTOs.BuscaClienteResponseDTO;
-import com.example.UnoLibrary.Model.entity.Cliente;
-import com.example.UnoLibrary.Model.entity.Endereco;
-import com.example.UnoLibrary.Model.entity.Fisica;
-import com.example.UnoLibrary.Model.entity.Pessoa;
-import com.example.UnoLibrary.Model.repository.ClientRepository;
-import com.example.UnoLibrary.Model.repository.EnderecoRepository;
-import com.example.UnoLibrary.Model.repository.FisicaRepository;
-import com.example.UnoLibrary.Model.repository.PessoaRepository;
+import com.example.UnoLibrary.Model.entity.*;
+import com.example.UnoLibrary.Model.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -36,6 +30,10 @@ public class ClientController {
     private PessoaRepository pesRepo;
     @Autowired
     private FisicaRepository fisRepo;
+    @Autowired
+    private EmprestimoRepository empRepo;
+    @Autowired
+    private  EmprestimoExemplarRepository emprestimoExemplarRepo;
 
     @PostMapping(value = "/cadastro-cliente")
     public ResponseEntity<Object> saveClient(@RequestParam("nome") String nome,
@@ -88,7 +86,7 @@ public class ClientController {
                 pessoa.getPes_url(), pessoaFisica.getFis_estCivil(), pessoa.getPes_telefone(),
                 endereco.getEnd_rua(), endereco.getEnd_numero(), endereco.getEnd_bairro(),
                 endereco.getEnd_cidade(), endereco.getEnd_cep(), endereco.getEnd_uf(),
-                pessoaFisica.getFis_sexo(), pessoaFisica.getFis_dataNasc()));
+                pessoaFisica.getFis_sexo(), pessoaFisica.getFis_dataNasc().toString()));
     }
 
     @GetMapping(value = "/busca-clientes")
@@ -104,13 +102,15 @@ public class ClientController {
             System.out.println("cpf:"+f.getFis_cpf());
             System.out.println("id:"+f.getFis_id());
             Cliente cli = repository.findByFisicaId(f.getFis_id());
-            System.out.println("Cliente id:"+cli.getCli_id());
-            todos.add(new BuscaClienteResponseDTO(cli.getCli_id(),
-                    pessoa.getPes_nome(), f.getFis_cpf(), pessoa.getPes_email(),
-                    pessoa.getPes_url(), f.getFis_estCivil(), pessoa.getPes_telefone(),
-                    endereco.getEnd_rua(), endereco.getEnd_numero(), endereco.getEnd_bairro(),
-                    endereco.getEnd_cidade(), endereco.getEnd_cep(), endereco.getEnd_uf(),
-                    f.getFis_sexo(), f.getFis_dataNasc()));
+            if( cli != null) {
+                System.out.println("Cliente id:"+cli.getCli_id());
+                todos.add(new BuscaClienteResponseDTO(cli.getCli_id(),
+                        pessoa.getPes_nome(), f.getFis_cpf(), pessoa.getPes_email(),
+                        pessoa.getPes_url(), f.getFis_estCivil(), pessoa.getPes_telefone(),
+                        endereco.getEnd_rua(), endereco.getEnd_numero(), endereco.getEnd_bairro(),
+                        endereco.getEnd_cidade(), endereco.getEnd_cep(), endereco.getEnd_uf(),
+                        f.getFis_sexo(), f.getFis_dataNasc().toString()));
+            }
         }
 
         return ResponseEntity.ok(todos);
@@ -131,7 +131,7 @@ public class ClientController {
                     p.getPes_url(), fis.getFis_estCivil(), p.getPes_telefone(),
                     endereco.getEnd_rua(), endereco.getEnd_numero(), endereco.getEnd_bairro(),
                     endereco.getEnd_cidade(), endereco.getEnd_cep(), endereco.getEnd_uf(),
-                    fis.getFis_sexo(), fis.getFis_dataNasc()));
+                    fis.getFis_sexo(), fis.getFis_dataNasc().toString()));
         }
         return ResponseEntity.ok(todos);
     }
@@ -187,6 +187,13 @@ public class ClientController {
         Fisica fisica = fis.get();
         Optional<Pessoa> pes = pesRepo.findById(fisica.getPessoa_pes_id());
         Pessoa pessoa = pes.get();
+        List<Emprestimo> emp = empRepo.findByClienteId(id);
+        if(emp.size() > 0) {
+            for (Emprestimo e : emp){
+                emprestimoExemplarRepo.deleteById(e.getEmp_id());
+                empRepo.delete(e);
+            }
+        }
         repository.deleteById(id);
         fisRepo.deleteById(fisica.getFis_id());
         pesRepo.deleteById(pessoa.getPes_id());
