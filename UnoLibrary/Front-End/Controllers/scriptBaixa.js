@@ -316,3 +316,82 @@ function limparFormularioCad() {
     document.getElementById('id_exe').value = '';
     document.getElementById('titulo').value = '';
 }
+
+
+
+function limparFormularioAlter(){
+    document.getElementById('codigo').value ='';
+    document.getElementById('motivo').value = 'Perda';
+    document.getElementById('data').value = '';
+    document.getElementById('desc').value = '';
+    document.getElementById('exemplarid').value = '';
+}
+
+function BuscaAlteracao(){
+    event.preventDefault();
+    var codigo = document.getElementById("codigo").value;
+
+    if(codigo != ""){
+        const url = `http://localhost:8080/api/baixa/buscarId/${codigo}`;
+
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Origin': 'http://127.0.0.1:5500'
+            }
+        })
+        .then(response => {
+            if(!response.ok){
+                alert('Baixa nao cadastrado!')
+            }
+            return response.json();
+        })
+        .then(exemplar => {
+            const dataFormatada = new Date(exemplar.data).toISOString().split('T')[0];
+            document.getElementById('motivo').value = exemplar.motivo;
+            document.getElementById('data').value =  dataFormatada;
+            document.getElementById('desc').value =  exemplar.desc;
+            document.getElementById('exemplarid').value = exemplar.exemplar.id;
+        })
+        .catch(error => {
+            // Ocorreu um erro ou o exemplar não foi encontrado
+            console.error('Erro:', error.message);
+            console.log("errro 1")
+        });
+    }
+}
+
+function gravarAlteracao(){
+    event.preventDefault();
+    var cod = document.getElementById('codigo').value;
+    var status = document.getElementById('motivo').value;
+    var data = document.getElementById('data').value;
+    var desc = document.getElementById('desc').value;
+    var tituloid = document.getElementById('exemplarid').value;
+
+    if(cod!='' && status!='' && data!='' && tituloid!='' && desc!=''){
+        const url = `http://localhost:8080/api/baixa/alterar/${cod}/${status}/${desc}/${data}/${tituloid}`;
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Origin': 'http://127.0.0.1:5500'
+            }
+        })
+        .then(response => {
+            return response.text();
+        })
+        .then(exemplar => {
+            alert(exemplar)
+            if(exemplar==="Alteracao realizada com sucesso!") limparFormularioAlter();
+        })
+        .catch(error => {
+            // Ocorreu um erro ou o exemplar não foi encontrado
+            console.error('Erro:', error.message);
+            console.log("errro 1")
+        });
+
+    }
+    else{
+        alert('Complete Formulario')
+    }
+}
