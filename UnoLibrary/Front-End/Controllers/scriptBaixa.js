@@ -197,7 +197,7 @@ function ExclusaoTermina(){
     fetch(endp, {
         method: 'GET',
         headers: {
-            'Origin': 'http://127.0.0.1:5500' 
+            'Origin': 'http://127.0.0.1:5500'
         }
     })
     .then(response => response.text())

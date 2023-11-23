@@ -22,6 +22,10 @@ public class TituloController {
     public ResponseEntity<Object> buscarTodos() {
         return ResponseEntity.ok(repo.findAll());
     }
+    @GetMapping("buscar_titulo/{titulo}")
+    public ResponseEntity<Object> buscarTitulo(@PathVariable("titulo") String titulo) {
+        return ResponseEntity.ok(repo.findByTitulo(titulo));
+    }
     @PostMapping("alterar")
     public ResponseEntity<Object> alterar(@RequestBody Titulo titulo) {
         return ResponseEntity.ok(repo.save(titulo));

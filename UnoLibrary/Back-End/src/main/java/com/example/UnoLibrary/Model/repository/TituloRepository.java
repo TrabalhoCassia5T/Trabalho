@@ -10,6 +10,6 @@ import java.util.List;
 
 public interface TituloRepository extends JpaRepository<Titulo, Long>
 {
-    @Query(value="select * from titulo where tit_nome like %:chave%",nativeQuery = true)
+    @Query(value="select * from titulo where lower(tit_nome) like %:chave%",nativeQuery = true)
     public List<Titulo> findByTitulo(String chave);
 }

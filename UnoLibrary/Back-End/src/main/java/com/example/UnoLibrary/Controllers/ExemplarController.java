@@ -1,15 +1,20 @@
 package com.example.UnoLibrary.Controllers;
 
 import com.example.UnoLibrary.Model.entity.Baixa;
+import com.example.UnoLibrary.Model.entity.Cliente;
 import com.example.UnoLibrary.Model.entity.Exemplar;
+import com.example.UnoLibrary.Model.entity.Titulo;
 import com.example.UnoLibrary.Model.repository.BaixaRepository;
 import com.example.UnoLibrary.Model.repository.ExemplarRepository;
+import com.example.UnoLibrary.Model.repository.TituloRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
 
 @RequestMapping(value = "/api/exemplar")
 @RestController
@@ -17,9 +22,31 @@ import java.time.LocalDate;
 public class ExemplarController {
     @Autowired
     private ExemplarRepository repo;
-    @PostMapping("cadastrar")
-    public ResponseEntity<Object> incluir(@RequestBody Exemplar exemplar) {
-        return ResponseEntity.ok(repo.save(exemplar));
+    @Autowired
+    private TituloRepository repoT;
+    @PostMapping("cadastrar/{status}/{data}/{titulo}")
+    public ResponseEntity<Object> incluir(@PathVariable("status") String status,
+                                          @PathVariable("data") LocalDate data,
+                                          @PathVariable("titulo") String titulo) {
+        Exemplar exemplar = new Exemplar();
+        exemplar.setStatus(status);
+        exemplar.setDataEntrada(data);
+        List<Titulo> tit = repoT.findByTitulo(titulo);
+        if(tit.size()>0){
+            try{
+                exemplar.setTitulo(tit.get(0));
+                System.out.println(exemplar.getDataEntrada());
+                System.out.println(exemplar.getTitulo().getNome());
+                repo.save(exemplar);
+                return ResponseEntity.ok().body("Cadastrado com sucesso!");
+            } catch (Exception e) {
+                // Outras exceções podem ocorrer
+                return ResponseEntity.ok().body("Erro durante a exclusao!");
+            }
+        }
+        else {
+            return ResponseEntity.status(500).body("Titulo nao encontrado!");
+        }
     }
     @GetMapping("buscar")
     public ResponseEntity<Object> buscarTodos() {
