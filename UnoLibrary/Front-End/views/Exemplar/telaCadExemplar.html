@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../../assets/css/styleCadExemplar.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Cliente</title>
+    <title>Cadastro de Exemplar</title>
 </head>
 
 <body>
@@ -51,7 +51,7 @@
     <div class="container">
         <p class="tittle">Cadastro Exemplar</p>
         <div class="containerForm">
-            <form method="post" id="formCadastaExemplar" enctype="multipart/form-data">
+            <form id="formCadastaExemplar" enctype="multipart/form-data">
                 <div class="filtros">
                     <div class="containerInput">
                         <label for="status">Status: </label>
@@ -59,14 +59,14 @@
                     </div>
                     <div class="containerInput">
                         <label for="titulo">Titulo: </label>
-                        <input type="text" id="titulo" name="titulo" >
+                        <input type="text" id="titulo" name="titulo" oninput="verificarCampoPreenchido()" >
                     </div>
                     <div class="containerInput">
                         <label for="data">Data: </label>
-                        <input type="date" id="data" name="data"  value="2017-06-01">
+                        <input type="date" id="data" name="data">
                     </div>
                     <div>
-                        <button class="buttonWrapper" onclick="buscar()">Buscar</button>
+                        <button class="buttonWrapper" onclick="cadastrarLivro()">Cadastrar</button>
                     </div>
                 </div>
             </form>
@@ -81,7 +81,7 @@
                             <th>Genero</th>
                         </tr>
                     </thead>
-                    <tbody id="tb">
+                    <tbody id="tbC">
                     </tbody>
                 </table>
             </div>

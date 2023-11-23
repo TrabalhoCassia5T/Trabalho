@@ -2,6 +2,10 @@ window.addEventListener('load', function () {
     buscar();
 });
 
+window.addEventListener('load', function () {
+    verificarCampoPreenchido();
+});
+
 function buscar() {
 
     const endp = `http://localhost:8080/api/exemplar/buscar`;
@@ -31,6 +35,7 @@ function updateTable(exemplars) {
         const statusCell = document.createElement("td");
         const dataEntradaCell = document.createElement("td");
         const tituloCell = document.createElement("td");
+        const generoCell = document.createElement("td")
 
         idCell.textContent = exemplar.id;
         statusCell.textContent = exemplar.status;
@@ -38,11 +43,14 @@ function updateTable(exemplars) {
         const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
         dataEntradaCell.textContent = dataEntrada.toLocaleDateString('pt-BR', options);
         tituloCell.textContent = exemplar.titulo.nome;
+        generoCell.textContent = exemplar.titulo.genero;
+        
 
         row.appendChild(idCell);
         row.appendChild(statusCell);
         row.appendChild(dataEntradaCell);
         row.appendChild(tituloCell);
+        row.appendChild(generoCell);
 
         tbody.appendChild(row);
     });
@@ -195,4 +203,99 @@ function ExclusaoTermina(){
     })
     .catch(error => console.error('Error:', error));
     limparFormulario()
+}
+
+
+function cadastrarLivro() {
+    event.preventDefault();
+    var status = document.getElementById('status').value;
+    var tituloNome = document.getElementById('titulo').value;
+    var data = document.getElementById('data').value;
+
+    if(status && tituloNome && data){
+        const endp = `http://localhost:8080/api/exemplar/cadastrar/${status}/${data}/${tituloNome}`;
+
+        fetch(endp, {
+            method: 'POST',
+            headers: {
+                'Origin': 'http://127.0.0.1:5500' 
+            },
+        })
+        .then(response => response.text())
+        .then(msg => {
+            alert(msg)
+        })
+        .catch(error => console.error('Erro ao cadastrar livro:', error));
+    }
+    else{
+        alert('Complete o formulário!')
+    }
+    
+}
+
+
+function verificarCampoPreenchido() {
+    var valorCampo = document.getElementById('titulo').value;
+
+    // Verifica se o campo está preenchido
+    if (valorCampo) {
+        const url = `http://localhost:8080/api/titulo/buscar_titulo/${valorCampo}`;
+            fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Origin': 'http://127.0.0.1:5500' 
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                updateTableTitulo(data);
+            })
+            .catch(error => console.error('Error:', error));
+        
+    } else {
+        const endp = `http://localhost:8080/api/titulo/buscar`;
+
+        const token = localStorage.getItem('token');
+
+        fetch(endp, {
+            method: 'GET',
+            headers: {
+                'Origin': 'http://127.0.0.1:5500' 
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            updateTableTitulo(data);
+        })
+        .catch(error => console.error('Error:', error));
+    }
+}
+
+function updateTableTitulo(Titulo) {
+    const tbody = document.getElementById("tbC");
+
+    tbody.innerHTML = '';
+    Titulo.forEach(titulo => {
+        const row = document.createElement("tr");
+        const idCell = document.createElement("td");
+        const statusCell = document.createElement("td");
+        const dataEntradaCell = document.createElement("td");
+        const tituloCell = document.createElement("td");
+        const generoCell = document.createElement("td")
+
+        idCell.textContent = titulo.id;
+        statusCell.textContent = titulo.nome;
+        dataEntradaCell.textContent = titulo.qtde;
+        tituloCell.textContent = titulo.edicao;
+        generoCell.textContent = titulo.genero;
+        
+
+        row.appendChild(idCell);
+        row.appendChild(statusCell);
+        row.appendChild(dataEntradaCell);
+        row.appendChild(tituloCell);
+        row.appendChild(generoCell);
+
+        tbody.appendChild(row);
+    });
 }
