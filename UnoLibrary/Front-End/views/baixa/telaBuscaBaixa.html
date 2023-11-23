@@ -62,15 +62,16 @@
                 <div class="filtros">
                     <div class="containerInput">
                         <label for="data">Data Inicio: </label>
-                        <input type="date" id="data" name="data"  value="2017-06-01"   />
+                        <input type="date" id="data" name="data"   />
                     </div>
                     <div class="containerInput">
                         <label for="data2">Data Fim: </label>
-                        <input type="date" id="data2" name="data2"  value="2017-06-01"  />
+                        <input type="date" id="data2" name="data2"  />
                     </div>
                     <div class="containerInput">
-                        <label for="status">Motivo: </label>
-                        <select id="status" name="status" >
+                        <label for="motivo">Motivo: </label>
+                        <select id="motivo" name="motivo" >
+                            <option value="Todas">Todas</option>
                             <option value="Perda">Perda</option>
                             <option value="Dano">Dano</option>
                             <option value="Descontinuidade">Descontinuidade</option>
@@ -78,7 +79,7 @@
                         </select>
                     </div>
                     <div>
-                        <button class="buttonWrapper" onclick="buscar()">Buscar</button>
+                        <button class="buttonWrapper" onclick="buscarBtn()">Buscar</button>
                     </div>
                 </div>
             </form>

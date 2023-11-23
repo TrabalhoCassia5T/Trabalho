@@ -5,6 +5,7 @@ import com.example.UnoLibrary.Model.entity.Exemplar;
 import com.example.UnoLibrary.Model.repository.BaixaRepository;
 import com.example.UnoLibrary.Model.repository.ExemplarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,7 +39,7 @@ public class ExemplarController {
     }
 
     @GetMapping("buscar_data/{datI}/{datF}")
-    public ResponseEntity<Object> buscarTituloData(@PathVariable("datI") LocalDate dataI,
+    public ResponseEntity<Object> buscarData(@PathVariable("datI") LocalDate dataI,
                                                    @PathVariable("datF") LocalDate dataF) {
         return ResponseEntity.ok(repo.findByChave3(dataI,dataF));
     }
@@ -47,7 +48,18 @@ public class ExemplarController {
         return ResponseEntity.ok(repo.save(exemplar));
     }
     @GetMapping("excluir/{id}")
-    public void apagar(@PathVariable Long id) {
-        repo.deleteById(id);
+    public ResponseEntity<Object> apagar(@PathVariable Long id) {
+        try {
+            repo.deleteById(id);
+            return ResponseEntity.ok().body("Exclusão realizada com sucesso");
+        } catch (Exception e) {
+            // Outras exceções podem ocorrer durante a exclusão
+            return ResponseEntity.ok().body("Erro durante a exclusão!");
+        }
+    }
+
+    @GetMapping("buscar_id/{id}")
+    public ResponseEntity<Object> buscarId(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(repo.findById(id));
     }
 }

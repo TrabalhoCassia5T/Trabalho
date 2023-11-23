@@ -120,3 +120,79 @@ function buscarBtn() {
         
     
 }
+
+function Exclusao(){
+    event.preventDefault();
+
+    var codigoExemplar = document.getElementById("cod").value;
+
+    const endp = `http://localhost:8080/api/exemplar/buscar_id/${codigoExemplar}`;
+
+    const token = localStorage.getItem('token');
+
+    fetch(endp, {
+        method: 'GET',
+        headers: {
+            'Origin': 'http://127.0.0.1:5500' 
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data) {
+            preencherDiv(data);
+        } else {
+            alert('Exemplar não encontrado. Verifique o código e tente novamente.');
+        }
+    })
+    .catch(error => console.error('Error:', error));
+    
+}
+
+function preencherDiv(dado) {
+    document.getElementById("lstatus").textContent = 'Status:'
+    document.getElementById("status").textContent =  dado.status;
+    document.getElementById("ldata").textContent = 'Data:'
+    document.getElementById("data").textContent = formatarData(dado.dataEntrada);
+    document.getElementById("ltitulo").textContent = 'Titulo:'
+    document.getElementById("titulo").textContent = dado.titulo.nome;
+    document.getElementById("btnSim").style.display = 'block';
+    document.getElementById("btnNao").style.display = 'block';
+}
+
+function formatarData(data) {
+    var options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+    return new Date(data).toLocaleDateString('pt-BR', options);
+}
+
+function limparFormulario() {
+    document.getElementById("cod").value = '';
+    document.getElementById("lstatus").textContent = ''
+    document.getElementById("status").textContent =  '';
+    document.getElementById("ldata").textContent = ''
+    document.getElementById("data").textContent = '';
+    document.getElementById("ltitulo").textContent = ''
+    document.getElementById("titulo").textContent = '';
+    document.getElementById("btnSim").style.display = 'none';
+    document.getElementById("btnNao").style.display = 'none';
+}
+
+function ExclusaoTermina(){
+    var codigoExemplar = document.getElementById("cod").value;
+
+    const endp = `http://localhost:8080/api/exemplar/excluir/${codigoExemplar}`;
+
+    const token = localStorage.getItem('token');
+
+    fetch(endp, {
+        method: 'GET',
+        headers: {
+            'Origin': 'http://127.0.0.1:5500' 
+        }
+    })
+    .then(response => response.text())
+    .then(mens => {
+        alert(mens)
+    })
+    .catch(error => console.error('Error:', error));
+    limparFormulario()
+}

@@ -2,9 +2,9 @@
 <html lang="pt-br">
 
 <head>
-    <script src="../../Controllers/scriptClient.js" type="text/javascript"></script>
+    <script src="../../Controllers/scriptExemplar.js" type="text/javascript"></script>
     <script src="../../Controllers/mascaras.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="../../assets/css/styleExclusaoCliente.css">
+    <link rel="stylesheet" href="../../assets/css/styleExcluirExemplar.css  ">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alteração de Cliente</title>
@@ -63,7 +63,27 @@
                     </div>
                 </div>
             </form>
-        </div>    
+            <div class="formContent">
+                <div class="divContent">
+                    <div class="containerInputAlt">
+                        <label id="lstatus" for="status"></label>
+                        <p id="status"> </p>
+                    </div>
+                    <div class="containerInputAlt">
+                        <label id="ldata" for="data"></label>
+                        <p id="data"> </p>
+                    </div>
+                    <div class="containerInputAlt">
+                        <label id="ltitulo" for="titulo"></label>
+                        <p id="titulo"> </p>
+                    </div>
+                    <div class="containerInputAlt">
+                        <button id = "btnSim" class="buttonWrapper" onclick="ExclusaoTermina()">Excluir</button>
+                        <button id = "btnNao" class="buttonWrapper" onclick="limparFormulario()">Não</button>
+                    </div>
+                </div>
+            </div>  
+        </div> 
     </div>
     <div class="footerLibrary">
         <p>@UNOLIBRARY</p>

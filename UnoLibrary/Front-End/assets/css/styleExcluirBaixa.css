@@ -190,3 +190,34 @@ button:hover {
     justify-content: space-around;
     padding-bottom: 10%;
 }
+
+.formContent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.containerInputAlt {
+    display: flex;
+    flex-direction: row;
+    align-items: center ;
+    padding-top: 15px;
+}
+
+.divContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    margin-right: 2rem;
+}
+
+#btnSim{
+    margin-right: 5%;
+    display: none;
+}
+#btnNao{
+    display: none;
+}
