@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+
 @RequestMapping(value = "/api/baixa")
 @RestController
 public class BaixaController {
@@ -20,6 +22,24 @@ public class BaixaController {
     @GetMapping("buscar")
     public ResponseEntity<Object> buscarTodos() {
         return ResponseEntity.ok(repo.findAll());
+    }
+
+    @GetMapping("buscar_motivo/{motivo}")
+    public ResponseEntity<Object> buscarMotivo(@PathVariable("motivo") String chave) {
+        return ResponseEntity.ok(repo.findByChave(chave));
+    }
+
+    @GetMapping("buscar_motivo_data/{motivo}/{datI}/{datF}")
+    public ResponseEntity<Object> buscarMotivoData(@PathVariable("motivo") String chave,
+                                                   @PathVariable("datI") LocalDate dataI,
+                                                   @PathVariable("datF") LocalDate dataF) {
+        return ResponseEntity.ok(repo.findByChave2(chave,dataI,dataF));
+    }
+
+    @GetMapping("buscar_data/{datI}/{datF}")
+    public ResponseEntity<Object> buscarData(@PathVariable("datI") LocalDate dataI,
+                                                   @PathVariable("datF") LocalDate dataF) {
+        return ResponseEntity.ok(repo.findByChave3(dataI,dataF));
     }
     @PostMapping("alterar")
     public ResponseEntity<Object> alterar(@RequestBody Baixa baixa) {
