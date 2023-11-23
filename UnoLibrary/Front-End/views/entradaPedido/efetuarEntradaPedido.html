@@ -2,21 +2,23 @@
 <html lang="pt-br">
 
 <head>
-    <script src="../../Controllers/scriptClient.js" type="text/javascript"></script>
     <script src="../../Controllers/mascaras.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="../../assets/css/styleExclusaoCliente.css">
+    <link rel="stylesheet" href="../../assets/css/styleCadastroEntradaPedido.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alteração de Cliente</title>
+    <title>Efetuar Entrada de Pedidos</title>
 </head>
 
 <body>
     <header>
-        <img id="image" class="imgLogo" />
+        <img src="../../assets/img/img_software.png" class="imgLogo" />
         <nav>
             <ul class="menu">
-                <li><a href="../home/index.html">HOME</a></li>
-                <li><a href="#" class="client">CLIENTE</a>
+                <li>
+                    <a href="../home/index.html">HOME</a>
+                </li>
+                <li>
+                    <a href="#" class="client">CLIENTE</a>
                     <ul>
                         <li><a href="../cliente/telaCadCliente.html">Cadastrar Cliente</a></li>
                         <li><a href="../cliente/telaBuscaCliente.html">Buscar Cliente</a></li>
@@ -24,7 +26,8 @@
                         <li><a href="../cliente/telaExcluirCliente.html">Excluir Cliente</a></li>
                     </ul>
                 </li>
-                <li><a href="#" class="client">EXEMPLARES</a>
+                <li>
+                    <a href="#" class="client">EXEMPLARES</a>
                     <ul>
                         <li><a href="../Exemplar/telaCadExemplar.html">Cadastrar Exemplar</a></li>
                         <li><a href="../Exemplar/telaBuscaExemplar.html">Buscar Exemplar</a></li>
@@ -38,9 +41,11 @@
                 <li>
                     <a href="#">EFETUAR ENTRADA</a>
                     <ul>
-                        <li><a href="../entradaPedido/cadastroEntradaPedido.html">Cadastrar Pedido</a></li>
-                        <li><a href="../entradaPedido/efetuarEntradaPedido.html">Efetuar Entrada de Pedido</a></li>
+                        <li><a href="cadastroEntradaPedido.html">Cadastrar Pedido</a></li>
+                        <li><a href="efetuarEntradaPedido.html">Efetuar Entrada de Pedido</a></li>
                     </ul>
+                </li>
+                <li><a href="#">RELATÓRIOS</a></li>
                 </li>
                 <li><a href="#">RELATÓRIOS</a></li>
             </ul>
@@ -48,24 +53,43 @@
         <div class="profile"><a href="../../index.html"><img src="../../assets/img/Edit Profile.png" /></a></div>
     </header>
 
-    <div class="container">
-        <p class="tittle">Excluir Cliente</p>
+    <section class="container">
+        <p class="tittle">Pesquisar Pedido</p>
         <div class="containerForm">
-            <form method="post" id="formExcluirCliente" enctype="multipart/form-data">
-                <h3>Digite o cpf de quem deseja excluir:</h3>
+            <form method="post" id="formBuscaCliente" enctype="multipart/form-data">
+                <h3>Pesquisar por:</h3>
                 <div class="filtros">
                     <div class="containerInput">
-                        <label for="cpf">CPF: </label>
-                        <input type="text" id="cpf" name="cpf" required placeholder="123.456.789-01"
-                            onkeypress="mCpf(this)" maxlength="14" onblur="validarCPF(this)">
+                        <label for="id_ped">Código do pedido: </label>
+                        <input type="text" id="id_ped" name="id_ped" placeholder="0008676-5">
+                    </div>
+                    <div class="containerInput">
+                        <label for="forn">Nome do Fornecedor: </label>
+                        <input type="text" id="forn" name="forn" required placeholder="LIVROS LTDA">
                     </div>
                     <div>
-                        <button class="buttonWrapper" onclick="Exclusao()">Buscar</button>
+                        <button class="buttonWrapper" onclick="buscar()">Buscar</button>
                     </div>
                 </div>
             </form>
-        </div>    
-    </div>
+
+            <div class="tableWrapper">
+                <table border="2">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Data do Pedido</th>
+                            <th>Fornecedor</th>
+                            <th>Usuário que fez pedido</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tb">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
     <div class="footerLibrary">
         <p>@UNOLIBRARY</p>
     </div>
