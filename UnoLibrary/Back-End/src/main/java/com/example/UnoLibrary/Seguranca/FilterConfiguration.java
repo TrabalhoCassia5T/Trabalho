@@ -11,7 +11,7 @@ public class FilterConfiguration {
         FilterRegistrationBean<AcessFilter> register = new FilterRegistrationBean<>();
         register.setFilter(new AcessFilter());
 
-        register.addUrlPatterns("/api/*");
+        register.addUrlPatterns("/apii/*");
         return register;
     }
 }
