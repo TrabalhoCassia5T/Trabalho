@@ -224,6 +224,9 @@ function cadastrarLivro() {
         .then(response => response.text())
         .then(msg => {
             alert(msg)
+            if(msg==="Cadastrado com sucesso!"){
+                limparFormularioCadastro()
+            }
         })
         .catch(error => console.error('Erro ao cadastrar livro:', error));
     }
@@ -298,4 +301,10 @@ function updateTableTitulo(Titulo) {
 
         tbody.appendChild(row);
     });
+}
+
+function limparFormularioCadastro(){
+    document.getElementById('status').value = '';
+    document.getElementById('titulo').value = '';
+    document.getElementById('data').value = '';
 }

@@ -57,7 +57,7 @@
     <div class="container">
         <p class="tittle">Cadastro Baixa</p>
         <div class="containerForm">
-            <form method="post" id="formCadastaExemplar" enctype="multipart/form-data">
+            <form id="formCadastaExemplar" enctype="multipart/form-data">
                 <div class="filtros">
                     <div class="containerInput">
                         <label for="desc">Descrição: </label>
@@ -74,10 +74,18 @@
                     </div>
                     <div class="containerInput">
                         <label for="data">Data: </label>
-                        <input type="date" id="data" name="data"  value="2017-06-01">
+                        <input type="date" id="data" name="data">
+                    </div>
+                    <div class="containerInput">
+                        <label for="id_exe">Id Exemplar: </label>
+                        <input type="text" id="id_exe" name="id_exe">
+                    </div>
+                    <div class="containerInput">
+                        <label for="cod">Titulo: </label>
+                        <input type="text" id="titulo" name="titulo" oninput="verificarCampoPreenchido()" >
                     </div>
                     <div>
-                        <button class="buttonWrapper" onclick="buscar()">Confirmar</button>
+                        <button class="buttonWrapper" onclick="Cadastra()">Confirmar</button>
                     </div>
                 </div>
             </form>
@@ -91,7 +99,7 @@
                             <th>Titulo</th>
                         </tr>
                     </thead>
-                    <tbody id="tb">
+                    <tbody id="tbC">
                     </tbody>
                 </table>
             </div>
