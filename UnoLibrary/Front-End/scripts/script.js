@@ -11,7 +11,7 @@ function gravar() {
             window.location.href = "empresa/telaCadEmpresa.html" // Exibe o alerta com a mensagem
           } 
           else 
-          {
+          { 
             window.location.href = "home/index.html"
           }
         })
