@@ -51,10 +51,10 @@ public class ExemplarController {
     public ResponseEntity<Object> apagar(@PathVariable Long id) {
         try {
             repo.deleteById(id);
-            return ResponseEntity.ok().body("Exclusão realizada com sucesso");
+            return ResponseEntity.ok().body("Exclusao realizada com sucesso!");
         } catch (Exception e) {
             // Outras exceções podem ocorrer durante a exclusão
-            return ResponseEntity.ok().body("Erro durante a exclusão!");
+            return ResponseEntity.ok().body("Erro durante a exclusao!");
         }
     }
 

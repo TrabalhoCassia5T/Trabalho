@@ -46,7 +46,18 @@ public class BaixaController {
         return ResponseEntity.ok(repo.save(baixa));
     }
     @GetMapping("excluir/{id}")
-    public void apagar(@PathVariable Long id) {
-        repo.deleteById(id);
+    public ResponseEntity<Object> apagar(@PathVariable Long id) {
+        try {
+            repo.deleteById(id);
+            return ResponseEntity.ok().body("Exclusao realizada com sucesso!");
+        } catch (Exception e) {
+            // Outras exceções podem ocorrer durante a exclusão
+            return ResponseEntity.ok().body("Erro durante a exclusao!");
+        }
+    }
+
+    @GetMapping("buscar_id/{id}")
+    public ResponseEntity<Object> buscarId(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(repo.findById(id));
     }
 }
