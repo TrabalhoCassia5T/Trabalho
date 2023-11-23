@@ -12,6 +12,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.parser.Entity;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -70,9 +71,41 @@ public class ExemplarController {
                                                    @PathVariable("datF") LocalDate dataF) {
         return ResponseEntity.ok(repo.findByChave3(dataI,dataF));
     }
-    @PostMapping("alterar")
-    public ResponseEntity<Object> alterar(@RequestBody Exemplar exemplar) {
-        return ResponseEntity.ok(repo.save(exemplar));
+
+    @GetMapping("buscarId/{id}")
+    public ResponseEntity<Object> buscarid(@PathVariable("id") Long id){
+        Optional<Exemplar> olivro=repo.findById(id);
+
+        if(olivro.isEmpty())
+            return ResponseEntity.badRequest().body("Exemplar nao encontrado!");
+        else
+            return ResponseEntity.ok(olivro.get());
+    }
+
+    @PostMapping("alterar/{id}/{status}/{data}/{tit_id}")
+    public ResponseEntity<Object> alterar(@PathVariable("id") Long id,
+                                          @PathVariable("status") String status,
+                                          @PathVariable("data") LocalDate data,
+                                          @PathVariable("tit_id") Long tit_id) {
+        System.out.println("Entro");
+        Optional<Titulo> tit = repoT.findById(tit_id);
+        if(tit.isEmpty()){
+            return ResponseEntity.ok().body("Titulo nao cadastrado!");
+        }
+        else{
+            Exemplar exe = new Exemplar();
+            exe.setId(id);
+            exe.setStatus(status);
+            exe.setDataEntrada(data);
+            exe.setTitulo(tit.get());
+            try {
+                repo.save(exe);
+                return ResponseEntity.ok().body("Alteracao realizada com sucesso!");
+            } catch (Exception e) {
+                // Outras exceções podem ocorrer durante a exclusão
+                return ResponseEntity.ok().body("Erro durante a alteracao!");
+            }
+        }
     }
     @GetMapping("excluir/{id}")
     public ResponseEntity<Object> apagar(@PathVariable Long id) {

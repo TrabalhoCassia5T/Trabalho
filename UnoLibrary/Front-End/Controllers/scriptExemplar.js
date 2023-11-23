@@ -308,3 +308,79 @@ function limparFormularioCadastro(){
     document.getElementById('titulo').value = '';
     document.getElementById('data').value = '';
 }
+
+function limparFormularioAlter(){
+    document.getElementById('codigo').value = '';
+    document.getElementById('status').value = '';
+    document.getElementById('tituloid').value = '';
+    document.getElementById('data').value = '';
+}
+
+function BuscaAlteracao(){
+    event.preventDefault();
+    var codigo = document.getElementById("codigo").value;
+
+    if(codigo != ""){
+        const url = `http://localhost:8080/api/exemplar/buscarId/${codigo}`;
+
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Origin': 'http://127.0.0.1:5500'
+            }
+        })
+        .then(response => {
+            if(!response.ok){
+                alert('Exemplar nao cadastrado!')
+            }
+            return response.json();
+        })
+        .then(exemplar => {
+            const dataFormatada = new Date(exemplar.dataEntrada).toISOString().split('T')[0];
+
+            document.getElementById('status').value = exemplar.status;
+            document.getElementById('data').value =  dataFormatada;
+            document.getElementById('tituloid').value = exemplar.titulo.id;
+        })
+        .catch(error => {
+            // Ocorreu um erro ou o exemplar não foi encontrado
+            console.error('Erro:', error.message);
+            console.log("errro 1")
+        });
+
+    }
+}
+
+function gravarAlteracao(){
+    event.preventDefault();
+    var cod = document.getElementById('codigo').value;
+    var status = document.getElementById('status').value;
+    var data = document.getElementById('data').value;
+    var tituloid = document.getElementById('tituloid').value;
+
+    if(cod!='' && status!='' && data!='' && tituloid!=''){
+        const url = `http://localhost:8080/api/exemplar/alterar/${cod}/${status}/${data}/${tituloid}`;
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Origin': 'http://127.0.0.1:5500'
+            }
+        })
+        .then(response => {
+            return response.text();
+        })
+        .then(exemplar => {
+            alert(exemplar)
+            if(exemplar==="Alteracao realizada com sucesso!") limparFormularioAlter();
+        })
+        .catch(error => {
+            // Ocorreu um erro ou o exemplar não foi encontrado
+            console.error('Erro:', error.message);
+            console.log("errro 1")
+        });
+
+    }
+    else{
+        alert('Complete Formulario')
+    }
+}

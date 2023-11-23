@@ -2,6 +2,7 @@ package com.example.UnoLibrary.Controllers;
 
 import com.example.UnoLibrary.Model.entity.Baixa;
 import com.example.UnoLibrary.Model.entity.Exemplar;
+import com.example.UnoLibrary.Model.entity.Titulo;
 import com.example.UnoLibrary.Model.repository.BaixaRepository;
 import com.example.UnoLibrary.Model.repository.ExemplarRepository;
 import com.example.UnoLibrary.Model.repository.UsuarioRepository;
@@ -70,14 +71,46 @@ public class BaixaController {
         return ResponseEntity.ok(repo.findByChave2(chave,dataI,dataF));
     }
 
+    @GetMapping("buscarId/{id}")
+    public ResponseEntity<Object> buscarid(@PathVariable("id") Long id){
+        Optional<Baixa> olivro=repo.findById(id);
+
+        if(olivro.isEmpty())
+            return ResponseEntity.badRequest().body("Baixa nao encontrado!");
+        else
+            return ResponseEntity.ok(olivro.get());
+    }
     @GetMapping("buscar_data/{datI}/{datF}")
     public ResponseEntity<Object> buscarData(@PathVariable("datI") LocalDate dataI,
                                                    @PathVariable("datF") LocalDate dataF) {
         return ResponseEntity.ok(repo.findByChave3(dataI,dataF));
     }
-    @PostMapping("alterar")
-    public ResponseEntity<Object> alterar(@RequestBody Baixa baixa) {
-        return ResponseEntity.ok(repo.save(baixa));
+    @PostMapping("alterar/{id}/{motivo}/{desc}/{data}/{exe_id}")
+    public ResponseEntity<Object> alterar(@PathVariable("id") Long id,
+                                          @PathVariable("motivo") String motivo,
+                                          @PathVariable("desc") String desc,
+                                          @PathVariable("data") LocalDate data,
+                                          @PathVariable("exe_id") Long exe_id) {
+        Optional<Exemplar> tit = repoExe.findById(exe_id);
+        if(tit.isEmpty()){
+            return ResponseEntity.ok().body("Titulo nao cadastrado!");
+        }
+        else{
+            Baixa exe = new Baixa();
+            exe.setId(id);
+            exe.setData(data);
+            exe.setMotivo(motivo);
+            exe.setExemplar(tit.get());
+            exe.setDesc(desc);
+            exe.setUsuario(repoU.findById(1L).get());
+            try {
+                repo.save(exe);
+                return ResponseEntity.ok().body("Alteracao realizada com sucesso!");
+            } catch (Exception e) {
+                // Outras exceções podem ocorrer durante a exclusão
+                return ResponseEntity.ok().body("Erro durante a alteracao!");
+            }
+        }
     }
     @GetMapping("excluir/{id}")
     public ResponseEntity<Object> apagar(@PathVariable Long id) {

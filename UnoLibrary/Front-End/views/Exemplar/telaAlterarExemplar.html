@@ -2,12 +2,12 @@
 <html lang="pt-br">
 
 <head>
-    <script src="../../Controllers/scriptClient.js" type="text/javascript"></script>
+    <script src="../../Controllers/scriptExemplar.js" type="text/javascript"></script>
     <script src="../../Controllers/mascaras.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="../../assets/css/styleAltCliente.css">
+    <link rel="stylesheet" href="../../assets/css/styleAltExemplar.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alteração de Cliente</title>
+    <title>Alteração de Exemplar</title>
 </head>
 
 <body>
@@ -56,14 +56,14 @@
     </header>
 
     <div class="container">
-        <p class="tittle">Alterar Cliente</p>
+        <p class="tittle">Alterar Exemplar</p>
         <div class="containerForm">
-            <form method="post" id="formBuscaCliente" enctype="multipart/form-data" class="formBusca">
-                <h3>Pesquisa:</h3>
+            <form id="formBuscaCliente" enctype="multipart/form-data" class="formBusca">
+                <h3></h3>
                 <div class="filtros">
                     <div class="containerInput">
                         <label for="codigo">Código: </label>
-                        <input type="text" id="codigo" name="codigo" required>
+                        <input type="text" id="codigo" name="codigo">
                     </div>
                     <div>
                         <button class="buttonWrapper" onclick="BuscaAlteracao()">Buscar</button>
@@ -71,26 +71,26 @@
                 </div>
             </form>
             <div class="tableWrapper">
-                <form method="post" id="formAltCliente" enctype="multipart/form-data" onsubmit="" class="formAlt">
+                <form method="post" id="formAltCliente" enctype="multipart/form-data"  class="formAlt">
                     <div class="formContent">
                         <div class="divContent">
                             <div class="containerInputAlt">
                                 <label for="status">Status:</label>
-                                <input type="text" id="status" name="status" required>
+                                <input type="text" id="status" name="status">
                             </div>
                             <div class="containerInputAlt">
                                 <label for="data">Data:</label>
-                                <input type="date" id="data" name="data" required>
+                                <input type="date" id="data" name="data" >
                             </div>
                             <div class="containerInputAlt">
-                                <label for="titulo">Titulo:</label>
-                                <input type="text" id="titulo" name="titulo">
+                                <label for="tituloid">Titulo:</label>
+                                <input type="text" id="tituloid" name="titulo">
                             </div>
                         </div>
                     </div>
                     <div class="buttons">
-                        <button type="button" class="btnCancelar" onclick="limparForm()">Cancelar</button>
-                        <input type="submit" value="Confirmar" class="btnConfirmar" onclick="gravarAlteracao()">
+                        <button type="button" class="btnCancelar" onclick="limparFormularioAlter()">Cancelar</button>
+                        <button type="button" class="btnConfirmar" onclick="gravarAlteracao()">Confirmar</button>
                     </div>
                 </form>
             </div>
