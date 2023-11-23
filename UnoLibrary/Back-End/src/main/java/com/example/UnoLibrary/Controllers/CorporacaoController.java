@@ -105,14 +105,14 @@ public class CorporacaoController
         return "http://"+request.getServerName().toString()+":"+request.getServerPort()+LOGOTIPOS_FOLDER+"/";
     }
 
-    @GetMapping(value = "/verificar")
+    @GetMapping(value = "verificar")
     public String verificalogin()
     {
         List<CorporacaoResponseDTO> userlist = repository.findAll().stream().map(CorporacaoResponseDTO::new).toList();
         if(userlist.size() > 0) {
             return "Existe Cadastro";
         }
-        return "Não existe Cadastro";
+        return "Nao existe Cadastro";
     }
 
 

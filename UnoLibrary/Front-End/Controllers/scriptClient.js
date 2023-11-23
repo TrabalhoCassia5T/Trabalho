@@ -1,4 +1,5 @@
 window.addEventListener('load', async function() {
+    event.preventDefault();
     try {
         const response = await fetch("http://localhost:8080/api/find-logo");
 

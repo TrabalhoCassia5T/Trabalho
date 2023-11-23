@@ -1,5 +1,6 @@
 window.addEventListener('load', async function() {
-    try {
+  event.preventDefault();
+  try {
         const response = await fetch("http://localhost:8080/api/find-logo");
   
         const data = await response.text();
@@ -17,13 +18,14 @@ window.addEventListener('load', async function() {
   
   
   window.addEventListener('load', async function() {
+    event.preventDefault();
     try {
         const response = await fetch("http://localhost:8080/api/verificar");
   
         const data = await response.text();
         console.log(data)
-        if(data === 'Não existe Cadastro') {
-          window.location.href = "empresa/telaCadEmpresa.html" // MUDAR O CAMINHO
+        if(data === 'Nao existe Cadastro') {
+          window.location.href = "../empresa/telaCadEmpresa.html"
         }
     } catch (error) {
         console.error('Ocorreu um erro:', error);
