@@ -49,7 +49,7 @@ public class PedidoController
     @PostMapping(value = "/itempedido/salvarpedido")
     public ResponseEntity<Object> salvarPedido(@RequestParam("nome")String nome,@RequestParam("edicao")int edicao, @RequestParam("quantidade")int quantidade)
     {
-        System.out.println("entrou no salva");
+
         Titulo titulo = new Titulo();
 
         List<Titulo> tit = this.tituloRepository.findByTitulo(nome);

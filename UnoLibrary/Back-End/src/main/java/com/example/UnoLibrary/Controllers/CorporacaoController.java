@@ -57,15 +57,8 @@ public class CorporacaoController
         if (!logotipo.exists())
             logotipo.mkdir();
         String logotipope = getStaticPath()+LOGOTIPOS_FOLDER+"\\"+logotipop.getName()+".jpg";
-        System.out.println(logotipope);
         Path root= Paths.get(".");
         try {
-            System.out.println("ENTROU NO TRY");
-            System.out.println(root.resolve(logotipope));
-//            Files.copy(logotipop.getInputStream(),root.resolve(logotipope));
-//            System.out.println("passou copy");
-//            String imageP = findImage(logotipop.getName());
-//            System.out.println(imageP);
             Endereco end = new EnderecoControlFacede(endRepository).inserir(
                     new Endereco(0L, rua, numero, bairro, cep, cidade, uf)
             );
@@ -85,17 +78,13 @@ public class CorporacaoController
     public String findImage ()
     {
         String res = "";
-        System.out.println("busca imagem");
+
         // busca as imagens na pasta static/musics
         File pastaweb = new File(getStaticPath()+LOGOTIPOS_FOLDER);
-        System.out.println(pastaweb.listFiles());
         for (File file : pastaweb.listFiles()) {
-            System.out.println("entrou no for");
             if (file.isFile() && file.getName().endsWith(".jpg"))
             {
-                System.out.println("chegou");
                 res = getHostStatic()+file.getName();
-                System.out.println(res);
             }
         }
         return res;
@@ -116,22 +105,12 @@ public class CorporacaoController
         return "http://"+request.getServerName().toString()+":"+request.getServerPort()+LOGOTIPOS_FOLDER+"/";
     }
 
-    @PostMapping(value = "/verificar-login")
-    public String verificalogin(@RequestParam("login")String login,@RequestParam("senha")String senha)
+    @GetMapping(value = "/verificar")
+    public String verificalogin()
     {
-        System.out.println("teste1");
         List<CorporacaoResponseDTO> userlist = repository.findAll().stream().map(CorporacaoResponseDTO::new).toList();
-        System.out.println("teste2");
-        for(int i = 0; i< userlist.size();i++)
-        {
-            System.out.println("dentro do for");
-            if(userlist.get(i).pam_login().equals(login)) // compara login
-                if(userlist.get(i).pam_senha().equals(senha)) // compara senha
-                    return "Login bem sucedido";
-                else
-                    return "Não existe Cadastro";
-            else
-                return "Não existe Cadastro";
+        if(userlist.size() > 0) {
+            return "Existe Cadastro";
         }
         return "Não existe Cadastro";
     }
@@ -142,7 +121,6 @@ public class CorporacaoController
     {
 
         List<CorporacaoResponseDTO> userlist = repository.findAll().stream().map(CorporacaoResponseDTO::new).toList();
-
         return userlist;
     }
 
