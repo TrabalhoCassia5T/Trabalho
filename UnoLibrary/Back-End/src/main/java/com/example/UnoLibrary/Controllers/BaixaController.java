@@ -1,23 +1,57 @@
 package com.example.UnoLibrary.Controllers;
 
-import com.example.UnoLibrary.Model.entity.Autor;
 import com.example.UnoLibrary.Model.entity.Baixa;
-import com.example.UnoLibrary.Model.repository.AutorRepository;
+import com.example.UnoLibrary.Model.entity.Exemplar;
 import com.example.UnoLibrary.Model.repository.BaixaRepository;
+import com.example.UnoLibrary.Model.repository.ExemplarRepository;
+import com.example.UnoLibrary.Model.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 @RequestMapping(value = "/api/baixa")
 @RestController
 public class BaixaController {
     @Autowired
     private BaixaRepository repo;
-    @PostMapping("cadastrar")
-    public ResponseEntity<Object> incluir(@RequestBody Baixa baixa) {
-        return ResponseEntity.ok(repo.save(baixa));
+    @Autowired
+    private ExemplarRepository repoExe;
+    @Autowired
+    private UsuarioRepository repoU;
+    @PostMapping("cadastrar/{motivo}/{desc}/{data}/{id_exe}")
+    public ResponseEntity<Object> incluir(@PathVariable("motivo") String motivo,
+                                          @PathVariable("desc") String desc,
+                                          @PathVariable("data")LocalDate data,
+                                          @PathVariable("id_exe") Long id_exe) {
+        Baixa baixa = repo.findByExemplar(id_exe);
+        if(baixa!=null){
+            return ResponseEntity.ok().body("Baixa ja realizada nesse exemplar!");
+        }
+        else{
+            Optional<Exemplar> exe = repoExe.findById(id_exe);
+            if(!exe.isPresent()){
+                return ResponseEntity.ok().body("Exemplar nao cadastrado!");
+            }
+            else{
+                try{
+                    Baixa baixaObj = new Baixa();
+                    baixaObj.setMotivo(motivo);
+                    baixaObj.setDesc(desc);
+                    baixaObj.setData(data);
+                    baixaObj.setExemplar(exe.get());
+                    baixaObj.setUsuario(repoU.findById(1L).get());
+                    repo.save(baixaObj);
+                    return ResponseEntity.ok().body("Cadastrado com sucesso!");
+                } catch (Exception e) {
+                    // Outras exceções podem ocorrer
+                    return ResponseEntity.ok().body("Erro durante o Cadastro!");
+                }
+            }
+        }
     }
     @GetMapping("buscar")
     public ResponseEntity<Object> buscarTodos() {

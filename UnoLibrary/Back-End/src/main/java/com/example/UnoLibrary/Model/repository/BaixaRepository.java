@@ -20,4 +20,7 @@ public interface BaixaRepository extends JpaRepository<Baixa, Long> {
     @Query(value="select * from baixa" +
             " where baix_data  BETWEEN :dataI AND :dataF",nativeQuery = true)
     public List<Baixa> findByChave3(LocalDate dataI, LocalDate dataF);
+
+    @Query(value = "select * from baixa where exemplar_exe_id = :id_exe", nativeQuery = true)
+    public Baixa findByExemplar(Long id_exe);
 }
