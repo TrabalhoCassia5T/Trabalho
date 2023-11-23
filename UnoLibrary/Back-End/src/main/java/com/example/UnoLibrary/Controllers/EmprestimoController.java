@@ -60,12 +60,12 @@ public class EmprestimoController {
             titulo.setQtde(titulo.getQtde()-1); // atualiza o acervo
             titRepo.save(titulo);
         }
-        Emprestimo emprestimo = repository.save(new Emprestimo(0L, cliente.getCli_id(), new Date(), data, (long) func_id, status));
+        Emprestimo emprestimo = repository.save(new Emprestimo(0L, cliente.getCli_id(), new Date(), generateDateAfterSevenDays(), (long) func_id, status));
         System.out.println(emprestimo.getEmp_id());
         for (String exemplarCod : codigos){
             System.out.println("aqui ??");
             Exemplar exemplar = exempRepo.findById(Long.parseLong(exemplarCod)).get(); // preenche a tabela de junção
-            emprestimoExemplarRepo.save(new EmprestimoExemplar(emprestimo.getEmp_id(), exemplar.getId(), data));
+            emprestimoExemplarRepo.save(new EmprestimoExemplar(emprestimo.getEmp_id(), exemplar.getId(), generateDateAfterSevenDays()));
         }
         return ResponseEntity.ok().body("ok");
     }
