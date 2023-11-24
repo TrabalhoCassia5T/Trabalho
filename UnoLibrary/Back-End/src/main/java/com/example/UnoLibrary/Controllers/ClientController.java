@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @RequestMapping(value = "/api")
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://127.0.0.1:5500/UnoLibrary/Front-End")
 @Controller
 public class ClientController {
 

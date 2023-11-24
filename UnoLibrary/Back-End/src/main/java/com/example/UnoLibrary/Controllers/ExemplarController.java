@@ -32,7 +32,7 @@ public class ExemplarController {
         Exemplar exemplar = new Exemplar();
         exemplar.setStatus(status);
         exemplar.setDataEntrada(data);
-        List<Titulo> tit = repoT.findByTitulo(titulo);
+        List<Titulo> tit = repoT.findByTitulo(titulo.toLowerCase());
         if(tit.size()>0){
             try{
                 exemplar.setTitulo(tit.get(0));
@@ -56,14 +56,14 @@ public class ExemplarController {
 
     @GetMapping("buscar_titulo/{titulo}")
     public ResponseEntity<Object> buscarTitulo(@PathVariable("titulo") String chave) {
-        return ResponseEntity.ok(repo.findByChave(chave));
+        return ResponseEntity.ok(repo.findByChave(chave.toLowerCase()));
     }
 
     @GetMapping("buscar_titulo_data/{titulo}/{datI}/{datF}")
     public ResponseEntity<Object> buscarTituloData(@PathVariable("titulo") String chave,
                                                    @PathVariable("datI") LocalDate dataI,
                                                    @PathVariable("datF") LocalDate dataF) {
-        return ResponseEntity.ok(repo.findByChave2(chave,dataI,dataF));
+        return ResponseEntity.ok(repo.findByChave2(chave.toLowerCase(),dataI,dataF));
     }
 
     @GetMapping("buscar_data/{datI}/{datF}")

@@ -29,7 +29,7 @@ import java.util.List;
 @CrossOrigin
 public class CorporacaoController
 {
-    private final static String LOGOTIPOS_FOLDER="/logotipos";
+    private final static String LOGOTIPOS_FOLDER="logotipos";
     @Autowired
     private ResourceLoader resourceLoader;
 
@@ -81,11 +81,14 @@ public class CorporacaoController
         String res = "";
 
         // busca as imagens na pasta static/musics
-        File pastaweb = new File(getStaticPath()+LOGOTIPOS_FOLDER);
+        File pastaweb = new File(getStaticPath()+"\\"+LOGOTIPOS_FOLDER);
+        System.out.println(pastaweb);
         for (File file : pastaweb.listFiles()) {
             if (file.isFile() && file.getName().endsWith(".jpg"))
             {
-                res = getStaticPath()+"\\"+LOGOTIPOS_FOLDER+"\\"+file.getName();
+                res = getStaticPath()+"\\"+file.getName();
+                System.out.println(res);
+                //res = getHostStatic()+file.getName();
             }
         }
         return res;
