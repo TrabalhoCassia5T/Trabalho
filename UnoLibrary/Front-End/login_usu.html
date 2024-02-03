@@ -11,8 +11,25 @@
 </head>
 
 <body>
-    <section>
-
+    <section class="container">
+        <img class="img_user" src="../assets/img/user.png" alt="">
+        <div class="form_box">
+            <form method="get" id="formUsu"  enctype="multipart/form-data" onsubmit="gravar()">
+                <div class="form_fields">
+                    <div class="field">
+                        <label for="login">Login</label>
+                        <input id="login" type="text" name="login" placeholder="Digite seu login" required>
+                    </div>
+                    <div class="field">
+                        <label for="senha">Senha</label>
+                        <input id="senha" type="password" name="senha" placeholder="Digite sua senha" required>
+                    </div>
+                </div>
+                <div class="log_button">
+                    <button>LOGAR</button>
+                </div>
+            </form>
+        </div>
     </section>
 </body>
 

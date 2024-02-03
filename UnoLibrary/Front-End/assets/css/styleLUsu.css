@@ -1,0 +1,206 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&family=Open+Sans:wght@300;400;500;600&display=swap');
+* {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Reset */
+
+body,
+h1, h2, h3, h4, h5, h6,
+p,
+ul, ol,
+li,
+figure,
+blockquote,
+dl,
+dd,
+fieldset,
+legend,
+button,
+input,
+textarea,
+pre,
+blockquote,
+address {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    line-height: 1.6;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+button {
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+/* Estilização */
+
+body {
+    background-image: linear-gradient(#9ab5cb,#709dc3, #4f95cf);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    height: 100vh;
+}
+
+.container {
+    background-color: white;
+
+    width: 80%;
+    height: 80vh;
+    max-width: 1200px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+}
+
+.form_box {
+    width: 80%;
+    height: auto;
+}
+
+#formUsu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.img_user {
+    width: 20%;
+    height: auto;
+}
+
+.form_fields {
+    display: flex;
+    flex-direction: column;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 3%;
+}
+
+.field input {
+    width: 100%;
+    background-color: #c4d7e6;
+    
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 3px 3px 6px #0000001c;
+    font-size: 0.8rem;
+}
+
+.field label {
+    font-size: 0.75rem;
+    font-weight: 600;
+
+    color: #000000c0;
+}
+
+.field input:hover {
+    background-color: #eeeeee75;
+}
+
+.field input:focus-visible {
+    outline: 1px solid #6c63ff;
+}
+
+.log_button {
+    margin-top: 5%;
+    margin-bottom: 3%;
+    padding: 1.5%;
+
+    text-align: center;
+    border-radius: 10px;
+}
+
+button {
+    width: 100%;
+    background-color: #afc7d4;
+    border-radius: 10px;
+
+    padding: 2% 30%;
+    box-shadow: 3px 3px 6px #0000001c;
+}
+
+.log_button button:hover {
+    background-color: #6b63fff1;
+}
+
+
+
+@media screen and (max-height: 500px) {
+    .img_user {
+        width: 10%;
+        height: 20%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        width: 90%;
+        height: 40vh;
+    }
+
+    .field {
+        margin-top: 3%;
+
+        width: 90%;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1277px) {
+    .container {
+        width: 70%;
+        height: 60vh;
+    }
+
+    .field {
+        width: 95%;
+    }
+
+    .field input {
+        margin-top: 3%;
+        padding: 1rem 1.2rem;
+    }
+
+    .log_button button {
+        width: 85%;
+    }
+}
+
+@media screen and (min-width: 1278px) {
+    .img_user {
+        width: 15%;
+        height: 20vh;
+    }
+
+    .field {
+        width: 95%;
+    }
+
+    .field input {
+        padding: 1rem 0.5rem;
+    }
+
+    .log_button button {
+        width: 85%;
+    }
+}
