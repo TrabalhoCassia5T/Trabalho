@@ -7,29 +7,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/style.css">
-    <title>LOGIN</title>
+    <title>LOGIN_EMP</title>
 </head>
 
 <body>
-    
-    <div class="container">
-        <div class="form-image">
-            <img src="assets/img/img_1.svg" alt="">
+    <section class="container">
+        <div class="img_box">
+            <img class="img_log_emp" src="assets/img/img_1.svg" alt="">
         </div>
-        <div class="form">
-            <form method="get" id="formlogin"  enctype="multipart/form-data" onsubmit="gravar()">
-                <div class="form-header">
-                    <div class="title">
-                        <h1>Login UnoLibrary</h1>
-                    </div>
+        <div class="form_box">
+            <form method="get" id="formEmp"  enctype="multipart/form-data" onsubmit="gravar()">
+                <div class="form_title">
+                    <h1 class="title_1">Login Empresarial</h1>
                 </div>
-                <div class="input-group">
-                    <div class="input-box">
+                <div class="form_fields">
+                    <div class="field">
                         <label for="login">Login</label>
                         <input id="login" type="text" name="login" placeholder="Digite seu login" required>
                     </div>
-
-                    <div class="input-box">
+                    <div class="field">
                         <label for="senha">Senha</label>
                         <input id="senha" type="password" name="senha" placeholder="Digite sua senha" required>
                     </div>
@@ -42,7 +38,7 @@
                 </div>
             </form>
         </div>
-    </div>
+    </section>
 </body>
 
 </html>
