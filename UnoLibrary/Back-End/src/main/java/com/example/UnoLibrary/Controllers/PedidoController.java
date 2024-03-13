@@ -18,18 +18,7 @@ import static java.lang.Integer.parseInt;
 @RequestMapping(value = "/api")
 @RestController
 @CrossOrigin(origins = "http://127.0.0.1:5500/UnoLibrary/Front-End")
-public class PedidoController
-{
-
-    @Autowired
-    private TituloRepository tituloRepository;
-    @Autowired
-    private ItemPedidoRepository itemRepository;
-    @Autowired
-    private PedidoRepository repository;
-    @Autowired
-    private JuridicaRepository juridicoRepository;
-
+public class PedidoController {
 
     @GetMapping(value = "/itempedido/verifica-livro")
     public ResponseEntity<Object> verificaLivro(@RequestParam("nome")String nome, @RequestParam("edicao")int edicao)
