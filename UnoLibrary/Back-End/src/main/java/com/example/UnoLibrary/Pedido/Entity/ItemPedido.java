@@ -4,8 +4,8 @@ import com.example.UnoLibrary.Pedido.DAL.ItemPedidoDAL;
 
 public class ItemPedido
 {
-    private Long ped_id;
-    private Long pedido_tit_id;
+    private Long ped_id; // private Pedido ped;
+    private Long pedido_tit_id; // private Titulo tit;
     private int ped_qtde;
     public ItemPedido(Long tit_id, int quantidade) {
         this.pedido_tit_id = tit_id;
