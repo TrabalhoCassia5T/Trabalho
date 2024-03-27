@@ -3,12 +3,12 @@ package com.example.UnoLibrary.Pedido.Entity;
 import com.example.UnoLibrary.Pedido.DAL.PedidoDAL;
 
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.List;
 
 public class Pedido
-{
+{   private List<ItemPedido> LI;
     private Long ped_id;
-    private Long juridica_jur_id;
+    private Long juridica_jur_id; // objeto pessoa
     private LocalDate ped_data;
     private LocalDate ped_data_entrega;
 

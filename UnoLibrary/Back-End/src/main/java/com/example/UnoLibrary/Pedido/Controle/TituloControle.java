@@ -1,8 +1,6 @@
 package com.example.UnoLibrary.Pedido.Controle;
 
-import com.example.UnoLibrary.Pedido.DBSingleton;
 import com.example.UnoLibrary.Pedido.Entity.Titulo;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 

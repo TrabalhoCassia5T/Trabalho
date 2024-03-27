@@ -2,7 +2,6 @@ package com.example.UnoLibrary.Pedido.DAL;
 
 import com.example.UnoLibrary.Pedido.DBSingleton;
 import com.example.UnoLibrary.Pedido.Entity.Pedido;
-import com.example.UnoLibrary.Pedido.Entity.Titulo;
 
 import java.util.List;
 

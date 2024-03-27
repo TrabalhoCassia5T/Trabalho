@@ -5,8 +5,6 @@ import com.example.UnoLibrary.Pedido.Entity.Pedido;
 import com.example.UnoLibrary.Pedido.Entity.Titulo;
 
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
 
 
 public class PedidoControle {
@@ -15,6 +13,8 @@ public class PedidoControle {
         return currentDate.plusDays(7); // Adiciona 7 dias à data atual
     }
     public boolean salvarTitulo(String nome, int edicao, int quantidade) {
+      //conectar
+      //inicio transação
         TituloControle tituloControle = new TituloControle();
         Titulo titi = tituloControle.buscaTitulo(nome, edicao);
         Pedido pedido = new Pedido(0L,1L,LocalDate.now(),generateDateAfterSevenDays());
@@ -22,12 +22,14 @@ public class PedidoControle {
         if(titi!=null){
             itemPedido = new ItemPedido(titi.getId(),quantidade);
             if(pedido.salvarPedido()){
-                itemPedido.setPed_id(pedido.getUltimo());
+                itemPedido.setPed_id(pedido.getUltimo()); //loop para os itens
                 if(itemPedido.salvarItemPedido()){
                     return true;
+                    //commit;
                 }
                 else{
                     return  false;
+                    //rollback
                 }
             }
             else{
