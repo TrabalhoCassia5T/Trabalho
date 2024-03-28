@@ -6,7 +6,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class Pedido
-{   private List<ItemPedido> LI;
+{
+    private List<ItemPedido> LI;
     private Long ped_id;
     private Long juridica_jur_id; // objeto pessoa
     private LocalDate ped_data;

@@ -1,6 +1,6 @@
 package com.example.UnoLibrary.Pedido.DAL;
 
-import com.example.UnoLibrary.Pedido.DBSingleton;
+import com.example.UnoLibrary.Pedido.Conexao;
 import com.example.UnoLibrary.Pedido.Entity.Titulo;
 
 import java.sql.ResultSet;
@@ -28,12 +28,12 @@ public class TituloDAL implements  IDAL<Titulo>  {
         return null;
     }
     @Override
-    public List<Titulo> get(String filtro) {
+    public List<Titulo> get(String filtro, Conexao conexao) {
         List<Titulo> clientes = new ArrayList<>();
         String sql="select * from titulo";
         if(!filtro.isEmpty())
             sql+=" where "+filtro;
-        ResultSet rs= DBSingleton.getCon().consultar(sql);
+        ResultSet rs= conexao.consultar(sql);
         try {
             while (rs.next()) {
                 clientes.add(new Titulo(rs.getLong("tit_id"),rs.getString("tit_nome"),
@@ -43,7 +43,6 @@ public class TituloDAL implements  IDAL<Titulo>  {
         }catch(Exception e){
             System.out.println(e);
         }
-        System.out.println(clientes.size());
         return clientes;
     }
 }

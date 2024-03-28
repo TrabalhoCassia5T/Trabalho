@@ -1,6 +1,6 @@
 package com.example.UnoLibrary.Pedido.DAL;
 
-import com.example.UnoLibrary.Pedido.DBSingleton;
+import com.example.UnoLibrary.Pedido.Conexao;
 import com.example.UnoLibrary.Pedido.Entity.Pedido;
 
 import java.util.List;
@@ -12,8 +12,7 @@ public class PedidoDAL implements  IDAL<Pedido>{
         sql=sql.replace("#2",entidade.getJuridica_jur_id().toString());
         sql=sql.replace("#3",""+ entidade.getPed_data().toString());
         sql=sql.replace("#4",""+entidade.getPed_data_entrega().toString());
-        System.out.println(sql);
-        if(DBSingleton.getCon().manipular(sql)){
+        if(){
             return true;
         }
         else{
@@ -37,12 +36,12 @@ public class PedidoDAL implements  IDAL<Pedido>{
     }
 
     @Override
-    public List<Pedido> get(String filtro) {
+    public List<Pedido> get(String filtro, Conexao conexao) {
         return null;
     }
 
     public Long ultimoPedido(){
-        Long codOp= (long) DBSingleton.getCon().getMaxPK("pedido","ped_id");
+        Long codOp;
         return codOp;
     }
 }

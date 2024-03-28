@@ -8,14 +8,13 @@ import java.sql.Statement;
 
 public class Conexao
 {
-    private Connection connect;
-    private String erro;
-    public Conexao()
-    {   erro="";
-        connect=null;
-    }
-    public boolean conectar(String local,String banco,String usuario,String senha)
-    {   boolean conectado=false;
+    private static Conexao instance = null;
+    private Connection connect = null;
+    private String erro="";
+
+    private  boolean conectado=false;
+    private Conexao(String local,String banco,String usuario,String senha)
+    {
         try {
             //Class.forName(driver); "org.postgresql.Driver");
             String url = local+banco; //"jdbc:postgresql://localhost/"+banco;
@@ -26,7 +25,14 @@ public class Conexao
         { erro="Impossivel conectar com a base de dados: " + sqlex.toString(); }
         catch ( Exception ex )
         { erro="Outro erro: " + ex.toString(); }
-        return conectado;
+    }
+    public static Conexao getInstance()
+    {
+        if (instance == null) {
+            instance = new Conexao("jdbc:postgresql://localhost:5432/",
+                    "operacoes","postgres","postgres123");
+        }
+        return instance;
     }
     public String getMensagemErro() {
         return erro;

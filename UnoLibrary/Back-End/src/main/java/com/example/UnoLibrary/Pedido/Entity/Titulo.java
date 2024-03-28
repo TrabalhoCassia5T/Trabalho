@@ -1,5 +1,6 @@
 package com.example.UnoLibrary.Pedido.Entity;
 
+import com.example.UnoLibrary.Pedido.Conexao;
 import com.example.UnoLibrary.Pedido.DAL.TituloDAL;
 
 import java.util.List;
@@ -62,8 +63,8 @@ public class Titulo{
         this.genero = genero;
     }
 
-    public List<Titulo> buscaTitulo(String nome, int edicao) {
+    public List<Titulo> buscaTitulo(String nome, int edicao, Conexao conexao) {
         TituloDAL tituloDAL = new TituloDAL();
-        return tituloDAL.get("tit_nome = '"+nome + "'and tit_edicao="+edicao);
+        return tituloDAL.get("tit_nome = '"+nome + "'and tit_edicao="+edicao,conexao);
     }
 }
